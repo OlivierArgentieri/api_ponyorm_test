@@ -8,14 +8,13 @@ description = \
     """
 
 requires = [
-    "python",
-    "SQLAlchemy",
+    "python-3.7.7",
+    "pony",
     "psycopg2",
-    "psycopg2_binary-2.8.6",
 ]
 
 vcs = "git"
 
 def commands():
-    env.PYTHONPATH.append("{root}/alchemy")
+    env.PYTHONPATH.append("{root}/src")
 
