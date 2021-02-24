@@ -13,8 +13,13 @@ requires = [
     "psycopg2",
 ]
 
+tools = [
+    "bdd"
+]
+
 vcs = "git"
 
 def commands():
+    env.PATH.append("{root}/src")
     env.PYTHONPATH.append("{root}/src")
 
