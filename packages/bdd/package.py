@@ -11,6 +11,8 @@ requires = [
     "python-3.7.7",
     "pony",
     "psycopg2",
+    "PyYAML",
+    "os"
 ]
 
 tools = [

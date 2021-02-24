@@ -12,7 +12,7 @@ db.drop_table("person", if_exists=True, with_all_data=True)
 
 
 db.generate_mapping(create_tables=True)
-orm.set_sql_debug(True)
+
 
 # fill data
 # db_session are needed for bd action
