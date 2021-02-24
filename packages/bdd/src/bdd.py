@@ -1,22 +1,14 @@
 from pony import orm
 
-db = orm.Database()
+from bdd.models.person import Person
+from bdd.models.car import Car
 
-db.bind(provider='postgres', user='postgres', password='toor', host='192.168.30.131', database='test')
+from bdd.server.server import db
 
 
-
-db.drop_table("person", if_exists=True, with_all_data=True)
-class Person(db.Entity):
-    name = orm.Required(str)
-    age = orm.Required(int)
-    cars = orm.Set('Car')
 
 db.drop_table("car", if_exists=True, with_all_data=True)
-class Car(db.Entity):
-    make = orm.Required(str)
-    model = orm.Required(str)
-    owner = orm.Required(Person)
+db.drop_table("person", if_exists=True, with_all_data=True)
 
 
 db.generate_mapping(create_tables=True)
@@ -24,9 +16,9 @@ orm.set_sql_debug(True)
 
 # fill data
 # db_session are needed for bd action
-
+# drop table if exist with data
 @orm.db_session()
-def fill_data() :
+def fill_data():
     p1 = Person(name='John', age=20)
     p2 = Person(name='May', age=22)
     p3 = Person(name='Bob', age=30)
