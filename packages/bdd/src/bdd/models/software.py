@@ -4,7 +4,7 @@ import datetime
 
 class Software(db.Entity):
     name = Required(str)
-    extensions = Set("Extension")
+    extensions = Set("ExtensionSoftware")
 
     createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="created_at")
     updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="updated_at")

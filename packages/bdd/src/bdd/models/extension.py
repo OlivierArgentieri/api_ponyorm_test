@@ -7,9 +7,10 @@ import datetime
 class Extension(db.Entity):
     name = Required(str)
     description = Required(str)
-    file = Set("File")
-    softwares = Set(Software)
+    softwares = Set("ExtensionSoftware")
 
     createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="created_at")
     updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="updated_at")
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
+
+
