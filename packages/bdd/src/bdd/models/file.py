@@ -2,11 +2,11 @@ from bdd.server.server import db
 from pony.orm import Required, Set, Optional
 import datetime
 from bdd.models.tag_file import TagFile
-
+from bdd.models.extension import Extension
 
 class File(db.Entity):
     name = Required(str)
-    ext = Required(str)
+    ext = Required(Extension)
     state = Optional(str)
     iteration = Required(int)
     tag = Required(TagFile)

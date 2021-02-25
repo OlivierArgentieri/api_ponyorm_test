@@ -1,22 +1,32 @@
 from pony import orm
 from bdd.models.file import File
 from bdd.models.tag_file import TagFile
+from bdd.models.extension import Extension
+from bdd.models.software import Software
 
 
 def clearStructure(db):
     db.drop_table("tagfile", if_exists=True, with_all_data=True)
     db.drop_table("file", if_exists=True, with_all_data=True)
     db.drop_table("file_references", if_exists=True, with_all_data=True)
-
+    db.drop_table("extension", if_exists=True, with_all_data=True)
+    db.drop_table("software", if_exists=True, with_all_data=True)
+    db.drop_table("extension_software", if_exists=True, with_all_data=True)
+    
 
 @orm.db_session()
 def fillDatas():
 
     tag01 = TagFile(name="test_tag", description="test_tab_desc")
 
-    file01 = File(name="scene001", ext=".ma", iteration=1,  tag=tag01)
-    file02 = File(name="scene002", ext=".ma", iteration=1,  tag=tag01)
-    file03 = File(name="scene003", ext=".ma", iteration=1,  tag=tag01)
-    file04 = File(name="scene004", ext=".ma", iteration=1,  tag=tag01, references=[file01, file02])
+    ma = Extension(name=".ma", description="Maya ascii file")
+    mb = Extension(name=".mb", description="Maya binary file")
+
+    file01 = File(name="scene001", ext=ma, iteration=1,  tag=tag01)
+    file02 = File(name="scene002", ext=ma, iteration=1,  tag=tag01)
+    file03 = File(name="scene003", ext=mb, iteration=1,  tag=tag01)
+    file04 = File(name="scene004", ext=mb, iteration=1,  tag=tag01, references=[file01, file02])
+
+    maya = Software(name="maya", extensions=[ma, mb])
 
 
