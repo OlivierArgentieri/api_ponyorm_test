@@ -1,6 +1,7 @@
 from bdd.models.tag_file import TagFile
 from pony import orm
 
+
 class TagFileRepository:
 
     @staticmethod

@@ -18,3 +18,4 @@ def some_queries():
 some_queries()
 
 print("Sum of tags : " + str(TagFileRepository.getSumOfTag()))
+

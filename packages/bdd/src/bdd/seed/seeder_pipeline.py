@@ -6,7 +6,11 @@ from bdd.models.software import Software
 from bdd.models.extension_software import ExtensionSoftware
 from bdd.models.task import Task
 from bdd.models.substask import Subtask
+from bdd.models.variant import Variant
+from bdd.models.asset import Asset
+from bdd.models.shot import Shot
 
+from bdd.repositories.task_repository import TaskRepository
 
 def clearStructure(db):
     db.drop_table("tagfile", if_exists=True, with_all_data=True)
@@ -18,11 +22,16 @@ def clearStructure(db):
     db.drop_table("subtask", if_exists=True, with_all_data=True)
     db.drop_table("task", if_exists=True, with_all_data=True)
     db.drop_table("task_tasks", if_exists=True, with_all_data=True)
+    db.drop_table("shot", if_exists=True, with_all_data=True)
+    db.drop_table("asset", if_exists=True, with_all_data=True)
 
 
 @orm.db_session()
 def fillDatas():
 
+    # create trigger on task
+    TaskRepository.SetTriggerConstraintOnInsert()
+    
     tag01 = TagFile(name="test_tag", description="test_tab_desc")
 
     ma = Extension(name=".ma", description="Maya ascii file")
