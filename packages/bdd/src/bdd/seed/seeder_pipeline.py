@@ -27,11 +27,11 @@ def clearStructure(db):
 
 
 @orm.db_session()
-def fillDatas():
+def fillDatas(db):
 
     # create trigger on task
-    TaskRepository.SetTriggerConstraintOnInsert()
-    
+    TaskRepository.SetTriggerConstraintOnInsert(db)
+
     tag01 = TagFile(name="test_tag", description="test_tab_desc")
 
     ma = Extension(name=".ma", description="Maya ascii file")

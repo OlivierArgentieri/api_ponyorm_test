@@ -27,7 +27,7 @@ def loadSchema(db):
     createStructure(db)
 
     seeder_basicschema.fillDatas()
-    seeder_pipeline.fillDatas()
+    seeder_pipeline.fillDatas(db)
 
 def load(db):
     """
