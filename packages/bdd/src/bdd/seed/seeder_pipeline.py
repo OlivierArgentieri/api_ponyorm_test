@@ -9,6 +9,8 @@ from bdd.models.substask import Subtask
 from bdd.models.variant import Variant
 from bdd.models.asset import Asset
 from bdd.models.shot import Shot
+from bdd.models.project import Project
+from bdd.models.user import User
 
 from bdd.repositories.task_repository import TaskRepository
 
@@ -24,6 +26,8 @@ def clearStructure(db):
     db.drop_table("task_tasks", if_exists=True, with_all_data=True)
     db.drop_table("shot", if_exists=True, with_all_data=True)
     db.drop_table("asset", if_exists=True, with_all_data=True)
+    db.drop_table("project", if_exists=True, with_all_data=True)
+    db.drop_table("user", if_exists=True, with_all_data=True)
 
 
 @orm.db_session()
@@ -42,7 +46,9 @@ def fillDatas(db):
     maya_ma = ExtensionSoftware(extension=ma, software=maya)
     maya_mb = ExtensionSoftware(extension=mb, software=maya)
 
-    shot01 = Shot(duration=100)
+    project01 = Project(name="test", short_name="test", year_start=0, year_end=0)
+
+    shot01 = Shot(duration=100, project=project01)
 
     task01 = Task(name="task01", shot=shot01)
 
