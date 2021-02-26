@@ -42,7 +42,9 @@ def fillDatas(db):
     maya_ma = ExtensionSoftware(extension=ma, software=maya)
     maya_mb = ExtensionSoftware(extension=mb, software=maya)
 
-    task01 = Task(name="task01")
+    shot01 = Shot(duration=100)
+
+    task01 = Task(name="task01", shot=shot01)
 
     subtask01 = Subtask(name="subtask01", task=task01)
 
