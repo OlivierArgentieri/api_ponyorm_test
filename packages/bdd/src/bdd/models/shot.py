@@ -16,3 +16,7 @@ class Shot(db.Entity):
     updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="updated_at")
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
+    @staticmethod
+    def CreateShot(_duration,_project, _complexity=0, _value='', _render='', _task=''):
+        return Shot(duration=_duration, complexity=_complexity, value=_value, render=_render, task=_task, project=_project)
+

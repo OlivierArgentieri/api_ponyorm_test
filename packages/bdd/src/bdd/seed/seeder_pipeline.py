@@ -48,7 +48,7 @@ def fillDatas(db):
 
     project01 = Project(name="test", short_name="test", year_start=0, year_end=0)
 
-    shot01 = Shot(duration=100, project=project01)
+    shot01 = Shot.CreateShot(100, project01)
 
     task01 = Task(name="task01", shot=shot01)
 

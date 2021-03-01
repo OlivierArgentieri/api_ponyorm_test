@@ -1,0 +1,124 @@
+{
+    "append_sys_path": true,
+    "arch": "AMD64",
+    "building": true,
+    "caching": true,
+    "created": 1614604494,
+    "default_patch_lock": "no_lock",
+    "failure_description": null,
+    "from_cache": false,
+    "graph": "{'nodes': [((('fillcolor', '#FFFFAA'), ('fontsize', 10), ('style', 'filled,dashed')), [('_1', 'python-3.7.7'), ('_2', 'pony'), ('_3', 'psycopg2'), ('_4', 'PyYAML'), ('_5', 'os==windows-10'), ('_6', '~platform==windows'), ('_7', '~arch==AMD64')]), ((('fillcolor', '#AAFFAA'), ('fontsize', 10), ('style', 'filled')), [('_8', 'platform-windows[]'), ('_9', 'arch-AMD64[]'), ('_10', 'os-windows-10[]'), ('_11', 'python-3.7.7[0]'), ('_12', 'pony-0.7.14[0]'), ('_13', 'psycopg2-2.8.6[0]'), ('_14', 'PyYAML-5.4.1[0]')]), ((('fillcolor', '#F6F6F6'), ('fontsize', 10), ('style', 'filled,dashed')), [('_15', 'platform-windows'), ('_16', 'arch-AMD64'), ('_17', 'os-windows-10'), ('_18', 'python-3.7')])], 'edges': [((('arrowsize', '0.5'),), [('_1', '_11'), ('_2', '_12'), ('_3', '_13'), ('_4', '_14'), ('_5', '_10'), ('_6', '_8'), ('_7', '_9'), ('_10', '_16'), ('_10', '_15'), ('_11', '_16'), ('_11', '_17'), ('_11', '_15'), ('_12', '_18'), ('_13', '_16'), ('_13', '_15'), ('_13', '_18'), ('_14', '_16'), ('_14', '_15'), ('_14', '_18'), ('_15', '_8'), ('_16', '_9'), ('_17', '_10'), ('_18', '_11')])]}",
+    "host": "DESKTOP-61MDPFG",
+    "implicit_packages": [
+        "~platform==windows",
+        "~arch==AMD64",
+        "~os==windows-10"
+    ],
+    "load_time": 0.0,
+    "num_loaded_packages": 7,
+    "os": "windows-10",
+    "package_caching": false,
+    "package_filter": [],
+    "package_orderers": null,
+    "package_paths": [
+        "C:\\rez\\packages",
+        "C:\\rez\\packages\\artfx",
+        "C:\\rez\\packages\\build",
+        "C:\\rez\\packages\\build\\default",
+        "C:\\rez\\packages\\softwares",
+        "D:\\Projet\\PullGithub_Artfx\\rez_pipeline_artfx\\rez_pipeline_artfx\\packages",
+        "D:\\Projet\\PullGithub_Artfx\\api_sqlAlchemy_test\\packages"
+    ],
+    "package_requests": [
+        "python-3.7.7",
+        "pony",
+        "psycopg2",
+        "PyYAML",
+        "os"
+    ],
+    "parent_suite_path": null,
+    "patch_locks": {},
+    "platform": "windows",
+    "requested_timestamp": null,
+    "resolved_ephemerals": [],
+    "resolved_packages": [
+        {
+            "key": "filesystem.variant",
+            "variables": {
+                "index": null,
+                "location": "c:\\rez\\packages\\build\\default",
+                "name": "platform",
+                "repository_type": "filesystem",
+                "version": "windows"
+            }
+        },
+        {
+            "key": "filesystem.variant",
+            "variables": {
+                "index": null,
+                "location": "c:\\rez\\packages\\build\\default",
+                "name": "arch",
+                "repository_type": "filesystem",
+                "version": "AMD64"
+            }
+        },
+        {
+            "key": "filesystem.variant",
+            "variables": {
+                "index": null,
+                "location": "c:\\rez\\packages\\build\\default",
+                "name": "os",
+                "repository_type": "filesystem",
+                "version": "windows-10"
+            }
+        },
+        {
+            "key": "filesystem.variant",
+            "variables": {
+                "index": 0,
+                "location": "c:\\rez\\packages\\build\\default",
+                "name": "python",
+                "repository_type": "filesystem",
+                "version": "3.7.7"
+            }
+        },
+        {
+            "key": "filesystem.variant",
+            "variables": {
+                "index": 0,
+                "location": "c:\\rez\\packages\\build\\default",
+                "name": "pony",
+                "repository_type": "filesystem",
+                "version": "0.7.14"
+            }
+        },
+        {
+            "key": "filesystem.variant",
+            "variables": {
+                "index": 0,
+                "location": "c:\\rez\\packages\\build\\default",
+                "name": "psycopg2",
+                "repository_type": "filesystem",
+                "version": "2.8.6"
+            }
+        },
+        {
+            "key": "filesystem.variant",
+            "variables": {
+                "index": 0,
+                "location": "c:\\rez\\packages\\build\\default",
+                "name": "PyYAML",
+                "repository_type": "filesystem",
+                "version": "5.4.1"
+            }
+        }
+    ],
+    "rez_path": "c:\\rez\\__install__\\rez-2.72.3\\lib\\site-packages\\rez",
+    "rez_version": "2.72.3",
+    "serialize_version": "4.6",
+    "solve_time": 0.003968000411987305,
+    "status": "solved",
+    "suite_context_name": null,
+    "timestamp": 1614604494,
+    "user": "olivi"
+}

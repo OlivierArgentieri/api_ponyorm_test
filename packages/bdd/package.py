@@ -11,7 +11,7 @@ requires = [
     "python-3.7.7",
     "pony",
     "psycopg2",
-    "PyYAML",
+    "PyYAML-5.4.1",
     "os"
 ]
 
@@ -20,6 +20,9 @@ tools = [
 ]
 
 vcs = "git"
+
+build_command = False
+
 
 def commands():
     env.PATH.append("{root}/src")
