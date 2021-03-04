@@ -22,9 +22,16 @@ tools = [
 vcs = "git"
 
 build_command = False
+timestamp = 0
 
 
 def commands():
     env.PATH.append("{root}/src")
     env.PYTHONPATH.append("{root}/src")
 
+
+tests = {
+    "unit": {
+        "command": "python -c print('test')"
+    }
+}
