@@ -1,8 +1,8 @@
 from pony import orm
 
 import unittest
-from bdd.tests import main
-db = main.db
+from bdd.server.server import db
+
 
 from bdd.models.person import Person
 from bdd.models.car import Car
