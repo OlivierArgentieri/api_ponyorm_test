@@ -7,6 +7,8 @@ def clearStructure(db):
     db.drop_table("car", if_exists=True, with_all_data=True)
     db.drop_table("person", if_exists=True, with_all_data=True)
 
+def createSchema(db):
+    db.generate_mapping(create_tables=True)
 
 @orm.db_session()
 def fillDatas():

@@ -8,10 +8,18 @@ db_port: 5432
 db_driver: postgres
 
 
+# Postgres Test
+db_host_test: 192.168.1.57
+db_user_test: postgres
+db_password_test: toor
+db_name_test: test
+db_port_test: 5432
+db_driver_test: postgres
+
 # Postgres pro - todo
 #db_host: 192.168.30.131
 #db_user: postgres
 #db_password: toor
-#db_name: test
+#db_name: tests
 #db_port: 5432
 #db_driver: postgres

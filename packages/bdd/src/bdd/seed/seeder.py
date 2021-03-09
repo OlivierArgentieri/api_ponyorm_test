@@ -29,6 +29,7 @@ def loadSchema(db):
     seeder_basicschema.fillDatas()
     seeder_pipeline.fillDatas(db)
 
+
 def load(db):
     """
     Entrypoint of Seeder structure

@@ -11,9 +11,9 @@ from bdd.models.asset import Asset
 from bdd.models.shot import Shot
 from bdd.models.project import Project
 from bdd.models.user import User
-
 from bdd.repositories.task_repository import TaskRepository
-import datetime
+
+
 def clearStructure(db):
     db.drop_table("tagfile", if_exists=True, with_all_data=True)
     db.drop_table("file", if_exists=True, with_all_data=True)
@@ -46,7 +46,7 @@ def fillDatas(db):
     maya_ma = ExtensionSoftware(extension=ma, software=maya)
     maya_mb = ExtensionSoftware(extension=mb, software=maya)
 
-    project01 = Project(name="test", short_name="test", year_start=0, year_end=0)
+    project01 = Project(name="tests", short_name="tests", year_start=0, year_end=0)
 
     shot01, _ = Shot.CreateShot(100, project01)
 
@@ -60,10 +60,10 @@ def fillDatas(db):
     file04 = File(name="scene004", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01, references=[file01, file02])
 
 
-    # test select
+    # tests select
 
     shot01.duration += 5
-    #test, e = Shot.UpdateShotById(1, shot01)
+    #tests, e = Shot.UpdateShotById(1, shot01)
     print(shot01.value)
     #print(e)
 
