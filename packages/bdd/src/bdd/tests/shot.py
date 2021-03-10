@@ -60,7 +60,7 @@ class TestShot(unittest.TestCase):
     def find_shot(self):
         self.reset(db)
 
-        # 1.1 find shot from db
+        # 1. find shot from db
         with orm.db_session:
             temp_shot, _ = Shot.find_shot_by_id(self.shot.id)
 
@@ -83,6 +83,7 @@ class TestShot(unittest.TestCase):
             temp_shot.duration += 20  # auto update to but not updatedAt datetime in this way
             temp_shot, _ = Shot.update_shot_by_id(temp_shot.id, temp_shot)
 
+            # 2. assert
             self.assertEqual("test_project", temp_shot.project.name)
             self.assertEqual("test", temp_shot.project.short_name)
             self.assertEqual(2020, temp_shot.project.year_start)
@@ -91,9 +92,24 @@ class TestShot(unittest.TestCase):
             self.assertEqual(30, temp_shot.duration)
             self.assertEqual(self.project.id, temp_shot.project.id)
 
-    def main(self):
+    def remove_shot(self):
         self.reset(db)
+        with orm.db_session:
+            # 1. find shot from db
+            temp_shot, _ = Shot.find_shot_by_id(self.shot.id)
 
+            # 2. remove
+            Shot.remove_shot_by_id(temp_shot.id)
+
+            # 3. re-get
+            temp_shot, err = Shot.find_shot_by_id(self.shot.id)
+
+            # 4. assert
+            self.assertEqual(temp_shot, None)
+            self.assertEqual("Shot Not Found !", err)
+
+    def main(self):
         self.create_shot()
         self.find_shot()
         self.update_shot()
+        self.remove_shot()

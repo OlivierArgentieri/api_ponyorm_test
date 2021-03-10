@@ -82,7 +82,7 @@ class Shot(db.Entity):
 
 
     @staticmethod
-    def delete_shot_by_id(_shotId):
+    def remove_shot_by_id(_shotId):
         """
         Delete a shot
         :param _shotId: id of shot
