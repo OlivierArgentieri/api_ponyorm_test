@@ -35,8 +35,19 @@ class TestShot(unittest.TestCase):
         TestShot.generate_structure(db)
         self.fill_datas(db)
 
+    def assert_value(self, shot_test):
+        self.assertTrue(shot_test)
+
+        self.assertEqual("test_project", shot_test.project.name)
+        self.assertEqual("test", shot_test.project.short_name)
+        self.assertEqual(2020, shot_test.project.year_start)
+        self.assertEqual(2021, shot_test.project.year_end)
+
+        self.assertEqual(10, shot_test.duration)
+        self.assertEqual(self.project.id, shot_test.project.id)
+
     # Test CRUD
-    def test_create_shot(self):
+    def create_shot(self):
         self.reset(db)  # create default object in fill_datas function
 
         # 1. get object in bdd with ponyorm function (get will be tested lately)
@@ -44,19 +55,27 @@ class TestShot(unittest.TestCase):
             temp_shot = Shot[self.shot.id]
 
             # 2. assert on default value and getted value
-            self.assertTrue(temp_shot)
+            self.assert_value(temp_shot)
 
-            self.assertEqual("test_project", temp_shot.project.name)
-            self.assertEqual("test",  temp_shot.project.short_name)
-            self.assertEqual(2020,  temp_shot.project.year_start)
-            self.assertEqual(2021,  temp_shot.project.year_end)
+    def find_shot(self):
+        self.reset(db)
 
-            self.assertEqual(10,  temp_shot.duration)
-            self.assertEqual(self.project.id,  temp_shot.project.id)
+        # 1.1 find shot from db
+        with orm.db_session:
+            temp_shot, _ = Shot.find_shot_by_id(self.shot.id)
 
+            # 2. test value
+            self.assert_value(temp_shot)
 
+            # 3. find_all shot from db
+            temp_shots = Shot.find_all_shot()
+
+            # 4. test value
+            self.assertEqual(len(temp_shots), 1)
+            self.assert_value(temp_shots[0])
 
     def test_main(self):
         self.reset(db)
 
-        self.test_create_shot()
+        self.create_shot()
+        self.find_shot()

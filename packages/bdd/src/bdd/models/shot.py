@@ -38,7 +38,7 @@ class Shot(db.Entity):
         find all shot, without deleted entities
         :return: lists of shot
         """
-        return Shot.select(lambda s: s.deletedAt is None)
+        return Shot.select(lambda s: s.deletedAt is None)[:]
 
     @staticmethod
     def find_shot_by_id(_shotId):
