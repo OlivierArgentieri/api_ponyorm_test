@@ -17,7 +17,7 @@ class Shot(db.Entity):
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
-    def CreateShot(_duration, _project, _complexity=0, _value='', _render='', _task=''):
+    def create_shot(_duration, _project, _complexity=0, _value='', _render='', _task=''):
         """
         Register shot in bdd
         :param _duration:
@@ -33,7 +33,7 @@ class Shot(db.Entity):
                     project=_project), ""
 
     @staticmethod
-    def FindAllShot():
+    def find_all_shot():
         """
         find all shot, without deleted entities
         :return: lists of shot
@@ -41,7 +41,7 @@ class Shot(db.Entity):
         return Shot.select(lambda s: s.deletedAt is None)
 
     @staticmethod
-    def FindShotByID(_shotId):
+    def find_shot_by_id(_shotId):
         """
         find shot by id, without deleted entities
         :return: (shot, string) shot object found and string for potential error
@@ -55,7 +55,7 @@ class Shot(db.Entity):
 
 
     @staticmethod
-    def UpdateShotById(_shotId, _shotUpdated):
+    def update_shot_by_id(_shotId, _shotUpdated):
         """
         Update shot by id
         :param _shotId: id of shot target
@@ -82,7 +82,7 @@ class Shot(db.Entity):
 
 
     @staticmethod
-    def DeleteShotById(_shotId):
+    def delete_shot_by_id(_shotId):
         """
         Delete a shot
         :param _shotId: id of shot

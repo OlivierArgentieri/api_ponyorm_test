@@ -10,25 +10,27 @@ class TestUser(unittest.TestCase):
 
     user = None
 
-    def clearStructure(self, db):
+    @staticmethod
+    def clear_structure(db):
         print("Clear user structure")
         db.drop_table("user", if_exists=True, with_all_data=True)
 
-    def generateStructure(self, db):
+    @staticmethod
+    def generate_structure(db):
         print("Create user structure")
         db.create_tables()
 
     @orm.db_session()
-    def fillDatas(self, db):
+    def fill_datas(self):
         print("Fill user data")
         self.user = User(name="test", email="test@mail.com", createdAt=datetime.datetime.utcnow(), year_start=2020, year_end=2022, updatedAt=datetime.datetime.utcnow())
 
     def reset(self, db):
-        self.clearStructure(db)
-        self.generateStructure(db)
-        self.fillDatas(db)
+        TestUser.clear_structure(db)
+        TestUser.generate_structure(db)
+        self.fill_datas()
 
-    def testCreateUser(self):
+    def test_create_user(self):
         self.reset(db)
 
         self.assertEqual("test", self.user.name)
@@ -36,9 +38,3 @@ class TestUser(unittest.TestCase):
         self.assertEqual(2020, self.user.year_start)
         self.assertEqual(2022, self.user.year_end)
 
-        # tests create
-        # temp_shot = Shot(duration=100, complexity=0, value='', render='', task='', project=TestShot.project)
-        #
-        # self.assertEqual(temp_shot.duration, TestShot.shot.duration)
-        # self.assertEqual(temp_shot.complexity, TestShot.shot.complexity)
-        # self.assertEqual(temp_shot.project, TestShot.shot.project)

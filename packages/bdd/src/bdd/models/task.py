@@ -18,7 +18,3 @@ class Task(db.Entity):
     createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="created_at")
     updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="updated_at")
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
-
-    def before_insert(self):
-        #raise NameError("eeee")
-        pass

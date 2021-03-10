@@ -6,7 +6,7 @@ class TagFileRepository:
 
     @staticmethod
     @orm.db_session()
-    def getSumOfTag():
+    def get_sum_of_tag():
         """
         Return Numberof tagFile in database
         :return int: number of tagFile

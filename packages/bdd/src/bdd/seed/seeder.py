@@ -6,7 +6,7 @@ This is made to fill Bdd with template data
 '''
 
 
-def createStructure(db):
+def create_structure(db):
     """
     Same method for all entities -> Map all tables to generates database
     :param db:
@@ -15,19 +15,19 @@ def createStructure(db):
     db.generate_mapping(create_tables=True)
 
 
-def loadSchema(db):
+def load_schema(db):
     """
     Call all seeder file, to drop, recreate and fill each entities in database
     :param db:
     """
 
-    seeder_basicschema.clearStructure(db)
-    seeder_pipeline.clearStructure(db)
+    seeder_basicschema.clear_structure(db)
+    seeder_pipeline.clear_structure(db)
 
-    createStructure(db)
+    create_structure(db)
 
-    seeder_basicschema.fillDatas()
-    seeder_pipeline.fillDatas(db)
+    seeder_basicschema.fill_datas()
+    seeder_pipeline.fill_datas(db)
 
 
 def load(db):
@@ -35,4 +35,4 @@ def load(db):
     Entrypoint of Seeder structure
     :param db:
     """
-    loadSchema(db)
+    load_schema(db)

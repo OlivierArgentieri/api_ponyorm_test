@@ -3,15 +3,17 @@ from bdd.models.car import Car
 from bdd.models.person import Person
 
 
-def clearStructure(db):
+def clear_structure(db):
     db.drop_table("car", if_exists=True, with_all_data=True)
     db.drop_table("person", if_exists=True, with_all_data=True)
 
-def createSchema(db):
+
+def create_schema(db):
     db.generate_mapping(create_tables=True)
 
+
 @orm.db_session()
-def fillDatas():
+def fill_datas():
     p1 = Person(name='John', age=20)
     p2 = Person(name='May', age=22)
     p3 = Person(name='Bob', age=30)

@@ -2,7 +2,7 @@ from pony import orm
 from bdd.conf import conf
 import os
 
-conf = conf.getConfigFile()
+conf = conf.get_config_file()
 db = orm.Database()
 
 if os.getenv("IS_UNIT_TEST", 0):

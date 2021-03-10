@@ -5,7 +5,7 @@ class TaskRepository:
 
     @staticmethod
     @orm.db_session()
-    def SetTriggerConstraintOnInsert(db):
+    def set_trigger_contraint_on_insert(db):
         """
         Set Trigger for exclusive or between project and asset tables foreign key
 

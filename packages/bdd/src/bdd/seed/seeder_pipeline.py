@@ -14,7 +14,7 @@ from bdd.models.user import User
 from bdd.repositories.task_repository import TaskRepository
 
 
-def clearStructure(db):
+def clear_structure(db):
     db.drop_table("tagfile", if_exists=True, with_all_data=True)
     db.drop_table("file", if_exists=True, with_all_data=True)
     db.drop_table("file_references", if_exists=True, with_all_data=True)
@@ -31,10 +31,10 @@ def clearStructure(db):
 
 
 @orm.db_session()
-def fillDatas(db):
+def fill_datas(db):
 
     # create trigger on task
-    TaskRepository.SetTriggerConstraintOnInsert(db)
+    TaskRepository.set_trigger_contraint_on_insert(db)
 
     tag01 = TagFile(name="test_tag", description="test_tab_desc")
 
@@ -58,12 +58,4 @@ def fillDatas(db):
     file02 = File(name="scene002", ext=maya_ma, iteration=1,  tag=tag01, subtask=subtask01)
     file03 = File(name="scene003", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01)
     file04 = File(name="scene004", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01, references=[file01, file02])
-
-
-    # tests select
-
-    shot01.duration += 5
-    #tests, e = Shot.UpdateShotById(1, shot01)
-    print(shot01.value)
-    #print(e)
 

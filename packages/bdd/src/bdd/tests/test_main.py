@@ -7,17 +7,19 @@ from bdd.server.server import db
 from bdd.tests.user import TestUser
 from bdd.tests.shot import TestShot
 
+
 class TestMain(unittest.TestCase):
 
-    def generateStructure(self):
+    @staticmethod
+    def generate_structure():
         db.generate_mapping(create_tables=True)
 
     def test_main(self):
         # init ddb
-        self.generateStructure()
+        TestMain.generate_structure()
 
         test_user = TestUser()
-        test_user.testCreateUser()
+        test_user.test_create_user()
 
         test_shot = TestShot()
-        test_shot.testCreateShot()
+        test_shot.test_create_shot()

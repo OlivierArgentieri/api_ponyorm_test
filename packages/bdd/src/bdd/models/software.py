@@ -2,6 +2,7 @@ from bdd.server.server import db
 from pony.orm import Required, Set, Optional
 import datetime
 
+
 class Software(db.Entity):
     name = Required(str)
     extensions = Set("ExtensionSoftware")
