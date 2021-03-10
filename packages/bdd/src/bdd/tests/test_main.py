@@ -35,4 +35,4 @@ class TestMain(unittest.TestCase):
         test_user.test_create_user()
 
         test_shot = TestShot()
-        test_shot.test_main()
+        test_shot.main()

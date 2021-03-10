@@ -74,8 +74,26 @@ class TestShot(unittest.TestCase):
             self.assertEqual(len(temp_shots), 1)
             self.assert_value(temp_shots[0])
 
-    def test_main(self):
+    def update_shot(self):
+        self.reset(db)
+        with orm.db_session:
+            # 1. find shot from db
+            temp_shot, _ = Shot.find_shot_by_id(self.shot.id)
+
+            temp_shot.duration += 20  # auto update to but not updatedAt datetime in this way
+            temp_shot, _ = Shot.update_shot_by_id(temp_shot.id, temp_shot)
+
+            self.assertEqual("test_project", temp_shot.project.name)
+            self.assertEqual("test", temp_shot.project.short_name)
+            self.assertEqual(2020, temp_shot.project.year_start)
+            self.assertEqual(2021, temp_shot.project.year_end)
+
+            self.assertEqual(30, temp_shot.duration)
+            self.assertEqual(self.project.id, temp_shot.project.id)
+
+    def main(self):
         self.reset(db)
 
         self.create_shot()
         self.find_shot()
+        self.update_shot()
