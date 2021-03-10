@@ -68,7 +68,7 @@ class TestShot(unittest.TestCase):
             self.assert_value(temp_shot)
 
             # 3. find_all shot from db
-            temp_shots = Shot.find_all_shot()
+            temp_shots = Shot.find_all_shots()
 
             # 4. test value
             self.assertEqual(len(temp_shots), 1)

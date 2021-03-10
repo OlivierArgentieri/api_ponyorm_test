@@ -32,7 +32,7 @@ class TestMain(unittest.TestCase):
         TestMain.generate_structure()
 
         test_user = TestUser()
-        test_user.test_create_user()
+        test_user.main()
 
         test_shot = TestShot()
         test_shot.main()

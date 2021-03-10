@@ -33,7 +33,7 @@ class Shot(db.Entity):
                     project=_project), ""
 
     @staticmethod
-    def find_all_shot():
+    def find_all_shots():
         """
         find all shot, without deleted entities
         :return: lists of shot
@@ -52,7 +52,6 @@ class Shot(db.Entity):
             return _shot, "Shot Not Found !"
 
         return _shot, ""
-
 
     @staticmethod
     def update_shot_by_id(_shotId, _shotUpdated):
@@ -79,7 +78,6 @@ class Shot(db.Entity):
         _targetShot.updatedAt = datetime.datetime.utcnow()
 
         return _targetShot, ""
-
 
     @staticmethod
     def remove_shot_by_id(_shotId):
