@@ -4,37 +4,59 @@ import unittest
 from bdd.server.server import db
 
 
-from bdd.models.car import Car
-from bdd.models.person import Person
+from bdd.models.project import Project
+from bdd.models.shot import Shot
 
 
 class TestShot(unittest.TestCase):
 
-    car = None
+    shot = None
+    project = None
 
-    def clear_structure(self, db):
+    @staticmethod
+    def clear_structure(db):
         print("Clear structure")
-        db.drop_table("car", if_exists=True, with_all_data=True)
-        db.drop_table("person", if_exists=True, with_all_data=True)
+        db.drop_table("project", if_exists=True, with_all_data=True)
+        db.drop_table("shot", if_exists=True, with_all_data=True)
 
-    def generate_structure(self, db):
+    @staticmethod
+    def generate_structure(db):
         print("Create structure")
         db.create_tables()
 
-    @orm.db_session()
+    @orm.db_session
     def fill_datas(self, db):
         print("Fill data")
-        self.person = Person(name="test", age=10)
-        self.car = Car(make="test", model="test_model", owner=self.person)
+        self.project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
+        self.shot, _ = Shot.create_shot(10, self.project)
 
     def reset(self, db):
-        self.clear_structure(db)
-        self.generate_structure(db)
+        TestShot.clear_structure(db)
+        TestShot.generate_structure(db)
         self.fill_datas(db)
-        pass
 
+    # Test CRUD
     def test_create_shot(self):
+        self.reset(db)  # create default object in fill_datas function
+
+        # 1. get object in bdd with ponyorm function (get will be tested lately)
+        with orm.db_session:
+            temp_shot = Shot[self.shot.id]
+
+            # 2. assert on default value and getted value
+            self.assertTrue(temp_shot)
+
+            self.assertEqual("test_project", temp_shot.project.name)
+            self.assertEqual("test",  temp_shot.project.short_name)
+            self.assertEqual(2020,  temp_shot.project.year_start)
+            self.assertEqual(2021,  temp_shot.project.year_end)
+
+            self.assertEqual(10,  temp_shot.duration)
+            self.assertEqual(self.project.id,  temp_shot.project.id)
+
+
+
+    def test_main(self):
         self.reset(db)
 
-        self.assertEqual("test", self.car.make)
-        self.assertEqual("test_model", self.car.model)
+        self.test_create_shot()
