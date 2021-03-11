@@ -14,28 +14,50 @@ class TestShot(unittest.TestCase):
     project = None
 
     @staticmethod
-    def clear_structure(db):
-        print("Clear structure")
-        db.drop_table("project", if_exists=True, with_all_data=True)
-        db.drop_table("shot", if_exists=True, with_all_data=True)
+    def clear_structure(_db):
+        """
+        Drop each needed entities tables
+        :param _db: db object
+        :return:
+        """
+        _db.drop_table("project", if_exists=True, with_all_data=True)
+        _db.drop_table("shot", if_exists=True, with_all_data=True)
 
     @staticmethod
-    def generate_structure(db):
-        print("Create structure")
-        db.create_tables()
+    def generate_structure(_db):
+        """
+        Create each needed entities tables
+        :param _db: db object
+        :return:
+        """
+        _db.create_tables()
 
     @orm.db_session
-    def fill_datas(self, db):
-        print("Fill data")
+    def fill_datas(self, _db):
+        """
+        Fill tables with test data
+        :param _db:
+        :return:
+        """
         self.project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
         self.shot, _ = Shot.create_shot(10, self.project)
 
-    def reset(self, db):
-        TestShot.clear_structure(db)
-        TestShot.generate_structure(db)
-        self.fill_datas(db)
+    def reset(self, _db):
+        """
+        Execute: clear, generate_structure and fill_data
+        :param _db: db object
+        :return:
+        """
+        TestShot.clear_structure(_db)
+        TestShot.generate_structure(_db)
+        self.fill_datas(_db)
 
     def assert_value(self, shot_test):
+        """
+        Asserts with test value
+        :param shot_test: shot object
+        :return:
+        """
         self.assertTrue(shot_test)
 
         self.assertEqual("test_project", shot_test.project.name)
@@ -48,6 +70,10 @@ class TestShot(unittest.TestCase):
 
     # Test CRUD
     def create_shot(self):
+        """
+        Test create_shot, CRUD method
+        :return:
+        """
         self.reset(db)  # create default object in fill_datas function
 
         # 1. get object in bdd with ponyorm function (get will be tested lately)
@@ -58,6 +84,10 @@ class TestShot(unittest.TestCase):
             self.assert_value(temp_shot)
 
     def find_shot(self):
+        """
+        Test find_shot, CRUD method
+        :return:
+        """
         self.reset(db)
 
         # 1. find shot from db
@@ -67,14 +97,24 @@ class TestShot(unittest.TestCase):
             # 2. test value
             self.assert_value(temp_shot)
 
-            # 3. find_all shot from db
+            temp_shot, err = Shot.find_shot_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "Shot Not Found !")
+            self.assertEqual(temp_shot, None)
+
+            # 4. find_all shot from db
             temp_shots = Shot.find_all_shots()
 
-            # 4. test value
+            # 5. test value
             self.assertEqual(len(temp_shots), 1)
             self.assert_value(temp_shots[0])
 
     def update_shot(self):
+        """
+        Test update_shot, CRUD method
+        :return:
+        """
         self.reset(db)
         with orm.db_session:
             # 1. find shot from db
@@ -92,7 +132,16 @@ class TestShot(unittest.TestCase):
             self.assertEqual(30, temp_shot.duration)
             self.assertEqual(self.project.id, temp_shot.project.id)
 
+            # 3. assert on error
+            temp_shot, err = Shot.update_shot_by_id(-1, temp_shot)
+            self.assertEqual(err, "Shot Not Found !")
+            self.assertEqual(temp_shot, None)
+
     def remove_shot(self):
+        """
+        Test remove_shot, CRUD method
+        :return:
+        """
         self.reset(db)
         with orm.db_session:
             # 1. find shot from db
@@ -109,6 +158,10 @@ class TestShot(unittest.TestCase):
             self.assertEqual("Shot Not Found !", err)
 
     def main(self):
+        """
+        Entry point
+        :return:
+        """
         self.create_shot()
         self.find_shot()
         self.update_shot()
