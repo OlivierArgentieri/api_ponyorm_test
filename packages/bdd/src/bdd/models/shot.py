@@ -26,11 +26,11 @@ class Shot(db.Entity):
         :param _value:
         :param _render:
         :param _task:
-        :return: (shot, string) shot object created and string for potential error
+        :return: shot object created
         """
 
         return Shot(duration=_duration, complexity=_complexity, value=_value, render=_render, task=_task,
-                    project=_project), ""
+                    project=_project)
 
     @staticmethod
     def find_all_shots():

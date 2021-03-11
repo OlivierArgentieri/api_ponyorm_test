@@ -33,14 +33,13 @@ class TestShot(unittest.TestCase):
         _db.create_tables()
 
     @orm.db_session
-    def fill_datas(self, _db):
+    def fill_datas(self):
         """
         Fill tables with test data
-        :param _db:
         :return:
         """
         self.project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
-        self.shot, _ = Shot.create_shot(10, self.project)
+        self.shot = Shot.create_shot(10, self.project)
 
     def reset(self, _db):
         """
@@ -50,7 +49,7 @@ class TestShot(unittest.TestCase):
         """
         TestShot.clear_structure(_db)
         TestShot.generate_structure(_db)
-        self.fill_datas(_db)
+        self.fill_datas()
 
     def assert_value(self, shot_test):
         """

@@ -21,10 +21,10 @@ class User(db.Entity):
         :param _email:
         :param _year_start:
         :param _year_end:
-        :return: (user, string) user object created and string for potential error
+        :return: user user object created
         """
 
-        return User(name=_name, email=_email, year_start=_year_start, year_end=_year_end), ""
+        return User(name=_name, email=_email, year_start=_year_start, year_end=_year_end)
 
     @staticmethod
     def find_all_users():
