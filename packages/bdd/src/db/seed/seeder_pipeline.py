@@ -1,17 +1,17 @@
 from pony import orm
-from bdd.models.file import File
-from bdd.models.tag_file import TagFile
-from bdd.models.extension import Extension
-from bdd.models.software import Software
-from bdd.models.extension_software import ExtensionSoftware
-from bdd.models.task import Task
-from bdd.models.substask import Subtask
-from bdd.models.variant import Variant
-from bdd.models.asset import Asset
-from bdd.models.shot import Shot
-from bdd.models.project import Project
-from bdd.models.user import User
-from bdd.repositories.task_repository import TaskRepository
+from db.models.file import File
+from db.models.tag_file import TagFile
+from db.models.extension import Extension
+from db.models.software import Software
+from db.models.extension_software import ExtensionSoftware
+from db.models.task import Task
+from db.models.substask import Subtask
+from db.models.variant import Variant
+from db.models.asset import Asset
+from db.models.shot import Shot
+from db.models.project import Project
+from db.models.user import User
+from db.repositories.task_repository import TaskRepository
 
 
 def clear_structure(db):
@@ -48,7 +48,7 @@ def fill_datas(db):
 
     project01 = Project(name="tests", short_name="tests", year_start=0, year_end=0)
 
-    shot01, _ = Shot.CreateShot(100, project01)
+    shot01 = Shot.create_shot(100, project01)
 
     task01 = Task(name="task01", shot=shot01)
 
@@ -59,3 +59,8 @@ def fill_datas(db):
     file03 = File(name="scene003", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01)
     file04 = File(name="scene004", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01, references=[file01, file02])
 
+
+    # todo : remove (test repositories):
+    from db.repositories.tag_file_repository import TagFileRepository
+
+    print("Sum of tags : " + str(TagFileRepository.get_sum_of_tag()))

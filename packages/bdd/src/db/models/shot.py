@@ -1,6 +1,6 @@
-from bdd.server.server import db
+from db.server.server import db
 from pony.orm import Required, Set, Optional
-from bdd.models.project import Project
+from db.models.project import Project
 import datetime
 
 """
@@ -30,7 +30,7 @@ class Shot(db.Entity):
 
     @staticmethod
     def create_shot(_duration, _project, _complexity=0, _value='', _render='', _task=''):
-        """Register shot in bdd
+        """Register shot in db
 
         :param _duration: duration
         :type _duration: int

@@ -1,4 +1,4 @@
-from bdd.server.server import db
+from db.server.server import db
 from pony.orm import Required, Set
 
 

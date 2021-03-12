@@ -2,8 +2,8 @@ from pony import orm
 
 import unittest
 import datetime
-from bdd.server.server import db
-from bdd.models.user import User
+from db.server.server import db
+from db.models.user import User
 
 
 class TestUser(unittest.TestCase):
@@ -66,7 +66,7 @@ class TestUser(unittest.TestCase):
         """
         self.reset(db)  # create default object in fill_datas function
 
-        # 1. get object in bdd with ponyorm function (get will be tested lately)
+        # 1. get object in db with ponyorm function (get will be tested lately)
         with orm.db_session:
             temp_shot = User[self.user.id]
 

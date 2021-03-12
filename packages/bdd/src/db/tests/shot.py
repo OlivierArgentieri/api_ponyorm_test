@@ -1,11 +1,11 @@
 from pony import orm
 
 import unittest
-from bdd.server.server import db
+from db.server.server import db
 
 
-from bdd.models.project import Project
-from bdd.models.shot import Shot
+from db.models.project import Project
+from db.models.shot import Shot
 
 
 class TestShot(unittest.TestCase):
@@ -75,7 +75,7 @@ class TestShot(unittest.TestCase):
         """
         self.reset(db)  # create default object in fill_datas function
 
-        # 1. get object in bdd with ponyorm function (get will be tested lately)
+        # 1. get object in db with ponyorm function (get will be tested lately)
         with orm.db_session:
             temp_shot = Shot[self.shot.id]
 

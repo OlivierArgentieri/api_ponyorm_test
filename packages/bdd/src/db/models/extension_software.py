@@ -1,7 +1,7 @@
-from bdd.server.server import db
+from db.server.server import db
 from pony.orm import Required, PrimaryKey, Set
-from bdd.models.extension import Extension
-from bdd.models.software import Software
+from db.models.extension import Extension
+from db.models.software import Software
 
 
 class ExtensionSoftware(db.Entity):

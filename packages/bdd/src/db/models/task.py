@@ -1,15 +1,19 @@
-from bdd.server.server import db
+from db.server.server import db
 from pony.orm import Required, Set, Optional
 import datetime
 
+from db.models.asset import Asset
+from db.models.shot import Shot
 
-class Project(db.Entity):
+
+class Task(db.Entity):
     name = Required(str)
-    short_name = Required(str)
-    year_start = Required(int)
-    year_end = Required(int)
-    assets = Set("Asset")
-    shots = Set("Shot")
+    progress = Optional(str)
+    tasks = Set("Task", reverse="tasks")
+    subtask = Set("Subtask")
+    variant = Set("Variant")
+    asset = Optional(Asset)
+    shot = Optional(Shot)
 
     createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="created_at")
     updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="updated_at")

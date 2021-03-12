@@ -1,5 +1,5 @@
 from pony import orm
-from bdd.conf import conf
+from db.conf import conf
 import os
 
 conf = conf.get_config_file()
@@ -19,5 +19,5 @@ orm.set_sql_debug(True)  # to debug request
 
 
 def run():
-    from bdd.seed import seeder  # to avoid circular include in entites->db>seeder->enties->db->seeder ...
+    from db.seed import seeder  # to avoid circular include in entites->db>seeder->enties->db->seeder ...
     seeder.load(db)

@@ -1,5 +1,5 @@
 from pony import orm
-from bdd.seed import seeder_basicschema, seeder_pipeline
+from db.seed import seeder_basicschema, seeder_pipeline
 
 '''
 This is made to fill Bdd with template data

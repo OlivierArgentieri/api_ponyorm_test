@@ -5,7 +5,7 @@ version = "0.0.0"
 
 description = \
     """
-    bdd ORM
+    db ORM
     """
 
 requires = [
@@ -21,7 +21,7 @@ requires = [
 
 
 tools = [
-    "bdd"
+    "db"
     "doc_md",
     "doc_html",
 ]
@@ -49,6 +49,6 @@ def pre_test_commands():
 
 tests = {
     "unit": {
-        "command": "python -m unittest discover -s {root}/src/bdd/tests"
+        "command": "python -m unittest discover -s {root}/src/db/tests"
     }
 }

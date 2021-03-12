@@ -1,4 +1,4 @@
-from bdd.server.server import db
+from db.server.server import db
 from pony.orm import Required, Set, Optional
 import datetime
 
@@ -10,6 +10,7 @@ class User(db.Entity):
     email = Required(str, unique=True)
     year_start = Required(int)
     year_end = Required(int)
+    projects = Set("Project")
 
     createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="created_at")
     updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="updated_at")
@@ -17,7 +18,7 @@ class User(db.Entity):
 
     @staticmethod
     def create_user(_name, _email, _year_start, _year_end):
-        """Register user in bdd
+        """Register user in db
 
         :param str _name: name
         :param str _email: name

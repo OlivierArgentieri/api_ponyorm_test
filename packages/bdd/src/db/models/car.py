@@ -1,6 +1,6 @@
-from bdd.server.server import db
+from db.server.server import db
 from pony.orm import Required
-from bdd.models.person import Person
+from db.models.person import Person
 
 
 class Car(db.Entity):

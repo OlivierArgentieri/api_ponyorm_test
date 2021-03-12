@@ -1,9 +1,9 @@
-from bdd.server.server import db
+from db.server.server import db
 from pony.orm import Required, Set, Optional
 import datetime
-from bdd.models.tag_file import TagFile
-from bdd.models.extension_software import ExtensionSoftware
-from bdd.models.substask import Subtask
+from db.models.tag_file import TagFile
+from db.models.extension_software import ExtensionSoftware
+from db.models.substask import Subtask
 
 
 class File(db.Entity):

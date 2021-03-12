@@ -1,6 +1,6 @@
 from pony import orm
-from bdd.models.car import Car
-from bdd.models.person import Person
+from db.models.car import Car
+from db.models.person import Person
 
 
 def clear_structure(db):

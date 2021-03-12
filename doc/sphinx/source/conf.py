@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('D:/Projet/PullGithub_Artfx/api_sqlAlchemy_test/packages/bdd/src'))
+sys.path.insert(0, os.path.abspath('../../../packages/bdd/src'))
 
 
 # -- Project information -----------------------------------------------------

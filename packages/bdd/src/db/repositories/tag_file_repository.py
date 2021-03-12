@@ -1,4 +1,4 @@
-from bdd.models.tag_file import TagFile
+from db.models.tag_file import TagFile
 from pony import orm
 
 

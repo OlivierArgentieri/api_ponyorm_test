@@ -1,5 +1,5 @@
 from pony import orm
-from bdd.models.task import Task
+from db.models.task import Task
 
 class TaskRepository:
 

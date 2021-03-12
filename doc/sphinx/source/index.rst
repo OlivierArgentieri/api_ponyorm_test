@@ -25,15 +25,15 @@ PackageBdd models
 
 Entity shot
 """"""""""""""""""
-.. automodule:: bdd.models.shot
+.. automodule:: db.models.shot
    :members:
    
 Entity user
 """"""""""""""""""
-.. automodule:: bdd.models.user
+.. automodule:: db.models.user
    :members:
    
 PackageBdd test
 ===================
-.. automodule:: bdd.tests
+.. automodule:: db.tests
    :members:
