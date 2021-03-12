@@ -9,9 +9,9 @@ from db.models.shot import Shot
 class Task(db.Entity):
     name = Required(str)
     progress = Optional(str)
-    tasks = Set("Task", reverse="tasks")
-    subtask = Set("Subtask")
-    variant = Set("Variant")
+    need = Set("Task", reverse="need")
+    subtask = Set("Subtask", cascade_delete=False)
+    variant = Set("Variant", cascade_delete=False)
     asset = Optional(Asset)
     shot = Optional(Shot)
 

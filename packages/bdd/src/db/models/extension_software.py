@@ -9,5 +9,5 @@ class ExtensionSoftware(db.Entity):
     extension = Required(Extension)
     software = Required(Software)
     PrimaryKey(extension, software)
-    file = Set("File")
+    file = Set("File", cascade_delete=True)
 

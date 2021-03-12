@@ -7,6 +7,6 @@ import datetime
 class Extension(db.Entity):
     name = Required(str)
     description = Required(str)
-    softwares = Set("ExtensionSoftware")
+    softwares = Set("ExtensionSoftware", cascade_delete=True)
 
 

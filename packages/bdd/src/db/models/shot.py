@@ -21,7 +21,7 @@ class Shot(db.Entity):
     complexity = Optional(int)
     value = Optional(str)
     render = Optional(str)
-    task = Set("Task")
+    task = Set("Task", cascade_delete=False)
     project = Required(Project)
 
     createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="created_at")
