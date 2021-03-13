@@ -1,7 +1,6 @@
 from pony import orm
 
 import unittest
-import datetime
 from db.server.server import db
 from db.models.user import User
 
