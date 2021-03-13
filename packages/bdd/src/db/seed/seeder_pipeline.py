@@ -16,23 +16,39 @@ from db.repositories.task_repository import TaskRepository
 
 def clear_structure(db):
     db.drop_table("tagfile", if_exists=True, with_all_data=True)
-    db.drop_table("file", if_exists=True, with_all_data=True)
     db.drop_table("file_references", if_exists=True, with_all_data=True)
+    db.drop_table("extension_software", if_exists=True, with_all_data=True)
     db.drop_table("extension", if_exists=True, with_all_data=True)
     db.drop_table("software", if_exists=True, with_all_data=True)
-    db.drop_table("extension_software", if_exists=True, with_all_data=True)
     db.drop_table("subtask", if_exists=True, with_all_data=True)
-    db.drop_table("task", if_exists=True, with_all_data=True)
-    db.drop_table("task_tasks", if_exists=True, with_all_data=True)
-    db.drop_table("shot", if_exists=True, with_all_data=True)
-    db.drop_table("asset", if_exists=True, with_all_data=True)
-    db.drop_table("project", if_exists=True, with_all_data=True)
+    db.drop_table("file", if_exists=True, with_all_data=True)
+
+    db.drop_table("task_need", if_exists=True, with_all_data=True)
+    db.drop_table("variant", if_exists=True, with_all_data=True)
+    db.drop_table("project_user", if_exists=True, with_all_data=True)
     db.drop_table("user", if_exists=True, with_all_data=True)
+    db.drop_table("project", if_exists=True, with_all_data=True)
+
+    db.drop_table("assetcategory", if_exists=True, with_all_data=True)
+    db.drop_table("asset", if_exists=True, with_all_data=True)
+    db.drop_table("shot", if_exists=True, with_all_data=True)
+    db.drop_table("task", if_exists=True, with_all_data=True)
 
 
 @orm.db_session()
-def fill_datas(db):
+def seed_user():
+    return User.create_user("test", "test@mail.com", 2020, 2021)
 
+@orm.db_session()
+def seed_project():
+
+    # get user and assign it to the project
+
+    #project = Project.
+    pass
+
+@orm.db_session()
+def fill_datas(db):
     # create trigger on task
     TaskRepository.set_trigger_contraint_on_insert(db)
 

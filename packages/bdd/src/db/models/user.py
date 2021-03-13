@@ -10,7 +10,7 @@ class User(db.Entity):
     email = Required(str, unique=True)
     year_start = Required(int)
     year_end = Required(int)
-    projects = Set("Project")
+    projects = Set("Project", cascade_delete=False)
 
     createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="created_at")
     updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="updated_at")

@@ -26,7 +26,7 @@ def load_schema(db):
 
     create_structure(db)
 
-    seeder_basicschema.fill_datas()
+    #seeder_basicschema.fill_datas()
     seeder_pipeline.fill_datas(db)
 
 
