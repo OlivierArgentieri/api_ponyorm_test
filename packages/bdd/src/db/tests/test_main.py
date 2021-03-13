@@ -27,7 +27,8 @@ class TestMain(unittest.TestCase):
     def generate_structure():
         db.generate_mapping(create_tables=True)
 
-    def test_main(self):
+    @staticmethod
+    def test_main():
         # init ddb
         TestMain.generate_structure()
 
