@@ -5,7 +5,7 @@ import os
 conf = conf.get_config_file()
 db = orm.Database()
 
-if os.getenv("IS_UNIT_TEST", 0):
+if os.getenv("IS_UNIT_TEST", None):
     db.bind(provider=conf.get('db_driver_test', {}), user=conf.get('db_user_test', {}),
             password=conf.get('db_password_test', {}), host=conf.get('db_host_test', {}),
             database=conf.get('db_name_test', {}), port=conf.get('db_port_test', {}))
