@@ -5,6 +5,8 @@ import datetime
 
 
 class Project(db.Entity):
+    """Project Entity"""
+
     name = Required(str)
     short_name = Required(str)
     year_start = Required(int)
@@ -58,11 +60,11 @@ class Project(db.Entity):
         return _project, ""
 
     @staticmethod
-    def update_project_by_id(_project_id, _projectUpdated):
+    def update_project_by_id(_project_id, _project_updated):
         """Update project by id
 
         :param int _project_id: project_id
-        :param projectObject _projectUpdated: new value
+        :param projectObject _project_updated: new value
 
         :return: project object updated and string for potential error
         :rtype: (projectObject, str)
@@ -75,10 +77,11 @@ class Project(db.Entity):
         if _targetProject is None:
             return _targetProject, "Project Not Found !"
 
-        _targetProject.name = _projectUpdated.name
-        _targetProject.email = _projectUpdated.email
-        _targetProject.year_start = _projectUpdated.year_start
-        _targetProject.year_end = _projectUpdated.year_end
+        _targetProject.name = _project_updated.name
+        _targetProject.short_name = _project_updated.short_name
+        _targetProject.year_start = _project_updated.year_start
+        _targetProject.year_end = _project_updated.year_end
+        _targetProject.users = _project_updated.users
         _targetProject.updatedAt = datetime.datetime.utcnow()
 
         return _targetProject, ""
