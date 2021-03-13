@@ -7,6 +7,8 @@ from db.models.user import User
 
 
 class TestUser(unittest.TestCase):
+    """Test shot class"""
+
     user = None
 
     @staticmethod

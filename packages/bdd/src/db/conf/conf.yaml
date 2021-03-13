@@ -3,7 +3,7 @@
 db_host: 192.168.1.57
 db_user: postgres
 db_password: toor
-db_name: test
+db_name: db_dev
 db_port: 5432
 db_driver: postgres
 

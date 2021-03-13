@@ -9,6 +9,7 @@ from db.models.shot import Shot
 
 
 class TestShot(unittest.TestCase):
+    """Test shot class"""
 
     shot = None
     project = None
