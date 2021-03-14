@@ -96,6 +96,13 @@ def seed_variant():
     return Variant.create_variant("test_variant", _task)
 
 
+@orm.db_session()
+def seed_subtask():
+    # get task
+    _task = Task.find_all_tasks()[0]
+
+    return Subtask.create_subtask("test_subtask", _task)
+
 
 @orm.db_session()
 def fill_datas(db):
@@ -108,6 +115,7 @@ def fill_datas(db):
     _shot = seed_shot()
     _tasks = seed_tasks()
     _variant = seed_variant()
+    _subtask = seed_subtask()
 
 
 

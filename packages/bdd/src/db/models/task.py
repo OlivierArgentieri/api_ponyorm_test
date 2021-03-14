@@ -84,9 +84,9 @@ class Task(db.Entity):
             return _targetTask, "Task Not Found !"
 
         _targetTask.name = _task_updated.name
-        _targetTask.progress = _task_updated.short_name
-        _targetTask.shot = _task_updated.year_start
-        _targetTask.asset = _task_updated.year_end
+        _targetTask.progress = _task_updated.progress
+        _targetTask.shot = _task_updated.shot
+        _targetTask.asset = _task_updated.asset
         _targetTask.need = _task_updated.need
         _targetTask.updatedAt = datetime.datetime.utcnow()
 
