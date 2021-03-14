@@ -100,8 +100,14 @@ def seed_variant():
 def seed_subtask():
     # get task
     _task = Task.find_all_tasks()[0]
-
     return Subtask.create_subtask("test_subtask", _task)
+
+
+@orm.db_session()
+def seed_file():
+    # get subtask
+    _subtask = Subtask.find_all_subtasks()[0]
+    return File.create_file("test_file", _subtask)
 
 
 @orm.db_session()
