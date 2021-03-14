@@ -17,18 +17,19 @@ class Asset(db.Entity):
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
-    def create_asset(_name, _project, _asset_category):
+    def create_asset(_name, _project, _asset_category, _lod=0):
         """Register asset in db
 
         :param str _name: name
         :param str _project: project
         :param int _asset_category: asset_category
+        :param int _lod: lod
 
         :return: asset object created
         :rtype: assetObject
         """
 
-        return Asset(name=_name, project=_project, asset_category=_asset_category)
+        return Asset(name=_name, project=_project, asset_category=_asset_category, lod = _lod)
 
     @staticmethod
     def find_all_assets():
@@ -67,19 +68,19 @@ class Asset(db.Entity):
         """
 
         # get asset
-        _assetAsset = Asset.get(lambda s: s.id == _asset_id and s.deletedAt is None)
+        _targetAsset = Asset.get(lambda s: s.id == _asset_id and s.deletedAt is None)
 
         # asset exist?
-        if _assetAsset is None:
-            return _assetAsset, "Asset Not Found !"
+        if _targetAsset is None:
+            return _targetAsset, "Asset Not Found !"
 
-        _assetAsset.name = _asset_updated.name
-        _assetAsset.lod = _asset_updated.lod
-        _assetAsset.project = _asset_updated.project
-        _assetAsset.asset_category = _asset_updated.asset_category
-        _assetAsset.updatedAt = datetime.datetime.utcnow()
+        _targetAsset.name = _asset_updated.name
+        _targetAsset.lod = _asset_updated.lod
+        _targetAsset.project = _asset_updated.project
+        _targetAsset.asset_category = _asset_updated.asset_category
+        _targetAsset.updatedAt = datetime.datetime.utcnow()
 
-        return _assetAsset, ""
+        return _targetAsset, ""
 
     @staticmethod
     def remove_asset_by_id(_asset_id):

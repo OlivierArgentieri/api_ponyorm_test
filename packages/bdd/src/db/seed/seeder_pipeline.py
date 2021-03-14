@@ -51,6 +51,7 @@ def seed_project():
     _project.users += _user
     return _project
 
+
 @orm.db_session()
 def seed_asset():
     # get project
@@ -71,14 +72,34 @@ def seed_shot():
 
 
 @orm.db_session()
+def seed_tasks():
+    # get shot and asset (create 2 task)
+    _shot = Shot.find_all_shots()[0]
+    _asset = Asset.find_all_assets()[0]
+    print("aaa")
+    print(_shot)
+
+    _task_shot = Task.create_task(_name="shot_task_test", _shot=_shot)
+
+    # create a needed task
+    _neededTask = Task.create_task("needed_task", _asset=_asset)
+    _task_asset = Task.create_task("asset_task_test", _need=_neededTask, _asset=_asset)
+
+    return [_task_shot, _task_asset]
+
+
+@orm.db_session()
 def fill_datas(db):
     # create trigger on task
     TaskRepository.set_trigger_contraint_on_insert(db)
 
     _user = seed_user()
-    _seed_project = seed_project()
+    _project = seed_project()
+    _asset = seed_asset()
+    _shot = seed_shot()
+    _tasks = seed_tasks()
 
-    #
+
     # tag01 = TagFile(name="test_tag", description="test_tab_desc")
     #
     # ma = Extension(name=".ma", description="Maya ascii file")
@@ -101,7 +122,6 @@ def fill_datas(db):
     # file02 = File(name="scene002", ext=maya_ma, iteration=1,  tag=tag01, subtask=subtask01)
     # file03 = File(name="scene003", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01)
     # file04 = File(name="scene004", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01, references=[file01, file02])
-
 
     # todo : remove (test repositories):
     from db.repositories.tag_file_repository import TagFileRepository
