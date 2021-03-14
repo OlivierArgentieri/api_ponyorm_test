@@ -6,6 +6,8 @@ import datetime
 
 
 class Asset(db.Entity):
+    """Asset Entity class."""
+
     name = Required(str)
     lod = Optional(int)
     Task = Set("Task", cascade_delete=False)

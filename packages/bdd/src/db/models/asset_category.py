@@ -4,7 +4,7 @@ import datetime
 
 
 class AssetCategory(db.Entity):
-    """AssetCategory Entity"""
+    """AssetCategory Entity class."""
 
     name = Required(str)
     asset = Set("Asset", cascade_delete=False)

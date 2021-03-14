@@ -7,7 +7,7 @@ from db.models.shot import Shot
 
 
 class Task(db.Entity):
-    """Task Entity"""
+    """Task Entity class."""
 
     name = Required(str)
     progress = Optional(float)

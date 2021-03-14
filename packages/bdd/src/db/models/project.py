@@ -5,7 +5,7 @@ import datetime
 
 
 class Project(db.Entity):
-    """Project Entity"""
+    """Project Entity class."""
 
     name = Required(str)
     short_name = Required(str)
