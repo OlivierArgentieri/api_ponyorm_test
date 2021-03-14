@@ -33,6 +33,7 @@ def clear_structure(db):
     db.drop_table("assetcategory", if_exists=True, with_all_data=True)
     db.drop_table("asset", if_exists=True, with_all_data=True)
     db.drop_table("shot", if_exists=True, with_all_data=True)
+    db.drop_table("task_task", if_exists=True, with_all_data=True)
     db.drop_table("task", if_exists=True, with_all_data=True)
 
 
@@ -72,18 +73,18 @@ def seed_shot():
 
 
 @orm.db_session()
-def seed_tasks():
+def seed_tasks(db):
     # get shot and asset (create 2 task)
     _shot = Shot.find_all_shots()[0]
     _asset = Asset.find_all_assets()[0]
-    print("aaa")
-    print(_shot)
 
     _task_shot = Task.create_task(_name="shot_task_test", _shot=_shot)
 
     # create a needed task
     _neededTask = Task.create_task("needed_task", _asset=_asset)
-    _task_asset = Task.create_task("asset_task_test", _need=_neededTask, _asset=_asset)
+    _neededTask2 = Task.create_task("needed_task2", _asset=_asset)
+    _task_asset = Task.create_task("asset_task_test", _need=[_neededTask, _neededTask2], _asset=_asset)
+    db.commit() # to get id
 
     return [_task_shot, _task_asset]
 
@@ -97,7 +98,7 @@ def fill_datas(db):
     _project = seed_project()
     _asset = seed_asset()
     _shot = seed_shot()
-    _tasks = seed_tasks()
+    _tasks = seed_tasks(db)
 
 
     # tag01 = TagFile(name="test_tag", description="test_tab_desc")
