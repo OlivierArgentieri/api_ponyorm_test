@@ -23,22 +23,22 @@ class Task(db.Entity):
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
-    def create_task(_name, _progress=0, _asset=None, _shot=None, _need=None):
+    def create_task(name, progress=0, asset=None, shot=None, need=None):
         """Register task in db
 
-        :param str _name: name
-        :param str _progress: progress
-        :param int _asset: asset
-        :param int _shot: shot
-        :param taskObject _need: need
+        :param str name: name
+        :param str progress: progress (opt)
+        :param assetObject asset: asset (opt)
+        :param shotObject shot: shot (opt)
+        :param taskObject need: need (opt)
 
         :return: task  object created
         :rtype: taskObject
         """
 
-        if _need:
-            return Task(name=_name, progress=_progress, asset=_asset, shot=_shot, need=_need)
-        return Task(name=_name, progress=_progress, asset=_asset, shot=_shot)
+        if need:
+            return Task(name=name, progress=progress, asset=asset, shot=shot, need=need)
+        return Task(name=name, progress=progress, asset=asset, shot=shot)
 
     @staticmethod
     def find_all_tasks():
@@ -50,64 +50,64 @@ class Task(db.Entity):
         return Task.select(lambda s: s.deletedAt is None)[:]
 
     @staticmethod
-    def find_task_by_id(_task_id):
+    def find_task_by_id(task_id):
         """find task by id, without deleted entities
 
-        :param int _task_id: task_id
+        :param int task_id: task_id
 
         :return: task object found and string for potential error
         :rtype: (taskObject, str)
         """
 
-        _task = Task.get(lambda s: s.id == _task_id and s.deletedAt is None)
-        if _task is None:
-            return _task, "Task Not Found !"
+        task = Task.get(lambda s: s.id == task_id and s.deletedAt is None)
+        if task is None:
+            return task, "Task Not Found !"
 
-        return _task, ""
+        return task, ""
 
     @staticmethod
-    def update_task_by_id(_task_id, _task_updated):
+    def update_task_by_id(task_id, task_updated):
         """Update task by id
 
-        :param int _task_id: task_id
-        :param taskObject _task_updated: new value
+        :param int task_id: task_id
+        :param taskObject task_updated: new value
 
         :return: task object updated and string for potential error
         :rtype: (taskObject, str)
         """
 
         # get task
-        _targetTask = Task.get(lambda s: s.id == _task_id and s.deletedAt is None)
+        target_ask = Task.get(lambda s: s.id == task_id and s.deletedAt is None)
 
         # task exist?
-        if _targetTask is None:
-            return _targetTask, "Task Not Found !"
+        if target_ask is None:
+            return target_ask, "Task Not Found !"
 
-        _targetTask.name = _task_updated.name
-        _targetTask.progress = _task_updated.progress
-        _targetTask.shot = _task_updated.shot
-        _targetTask.asset = _task_updated.asset
-        _targetTask.need = _task_updated.need
-        _targetTask.updatedAt = datetime.datetime.utcnow()
+        target_ask.name = task_updated.name
+        target_ask.progress = task_updated.progress
+        target_ask.shot = task_updated.shot
+        target_ask.asset = task_updated.asset
+        target_ask.need = task_updated.need
+        target_ask.updatedAt = datetime.datetime.utcnow()
 
-        return _targetTask, ""
+        return target_ask, ""
 
     @staticmethod
-    def remove_task_by_id(_task_id):
+    def remove_task_by_id(task_id):
         """Delete a task
 
-        :param int _task_id: task_id
+        :param int task_id: task_id
         :return: id of task deleted and string for potential error
         :rtype: (int, str)
         """
 
         # get task
-        _targetTask = Task.get(lambda s: s.id == _task_id and s.deletedAt is None)
+        target_ask = Task.get(lambda s: s.id == task_id and s.deletedAt is None)
 
         # Task exist?
-        if _targetTask is None:
+        if target_ask is None:
             return 0, "Task Not Found !"
 
-        _targetTask.deletedAt = datetime.datetime.utcnow()
+        target_ask.deletedAt = datetime.datetime.utcnow()
 
-        return _targetTask.id, ""
+        return target_ask.id, ""

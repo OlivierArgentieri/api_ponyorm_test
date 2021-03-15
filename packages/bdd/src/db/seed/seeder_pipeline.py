@@ -78,12 +78,12 @@ def seed_tasks():
     _shot = Shot.find_all_shots()[0]
     _asset = Asset.find_all_assets()[0]
 
-    _task_shot = Task.create_task(_name="shot_task_test", _shot=_shot)
+    _task_shot = Task.create_task(name="shot_task_test", shot=_shot)
 
     # create a needed task
-    _neededTask = Task.create_task("needed_task", _asset=_asset)
-    _neededTask2 = Task.create_task("needed_task2", _asset=_asset)
-    _task_asset = Task.create_task("asset_task_test", _need=[_neededTask, _neededTask2], _asset=_asset)
+    _neededTask = Task.create_task("needed_task", asset=_asset)
+    _neededTask2 = Task.create_task("needed_task2", asset=_asset)
+    _task_asset = Task.create_task("asset_task_test", need=[_neededTask, _neededTask2], asset=_asset)
 
     return [_task_shot, _task_asset]
 
@@ -105,9 +105,29 @@ def seed_subtask():
 
 @orm.db_session()
 def seed_file():
+
+    # create extensions
+    ma = Extension(name=".ma", description="Maya ascii file")
+    mb = Extension(name=".mb", description="Maya binary file")
+
+    # create software
+    maya = Software(name="maya")
+
+    # link extensions and software
+    maya_ma = ExtensionSoftware(ma, maya)
+    maya_mb = ExtensionSoftware(mb, maya)
+
+    # create tag
+    tag = TagFile.create_tag_file("test_tag", "test_tag_desc")
+
     # get subtask
-    _subtask = Subtask.find_all_subtasks()[0]
-    return File.create_file("test_file", _subtask)
+    subtask = Subtask.find_all_subtasks()[0]
+
+    # create file
+    file1 = File.create_file("my_folder/test_file.ma", subtask, maya_ma, 0)
+    file2 = File.create_file("my_folder/test_file.mb", subtask, maya_mb, 0)
+
+    return
 
 
 @orm.db_session()
@@ -115,13 +135,13 @@ def fill_datas(db):
     # create trigger on task
     TaskRepository.set_trigger_contraint_on_insert(db)
 
-    _user = seed_user()
-    _project = seed_project()
-    _asset = seed_asset()
-    _shot = seed_shot()
-    _tasks = seed_tasks()
-    _variant = seed_variant()
-    _subtask = seed_subtask()
+    # _user = seed_user()
+    # _project = seed_project()
+    # _asset = seed_asset()
+    # _shot = seed_shot()
+    # _tasks = seed_tasks()
+    # _variant = seed_variant()
+    # _subtask = seed_subtask()
 
 
 

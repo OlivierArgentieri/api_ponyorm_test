@@ -28,12 +28,12 @@ class File(db.Entity):
         """Register file in db
 
         :param str name: name
-        :param int ext: file extension
+        :param extensionSoftwareObject ext: file extension
         :param int iteration: iteration
-        :param int tag: tag
-        :param int subtask: subtask
-        :param int state: state
-        :param int references: file references
+        :param tagFileObject tag: tag
+        :param subtaskObject subtask: subtask
+        :param str state: state (opt)
+        :param fileObject references: file references (opt)
 
         :return: file object created
         :rtype: fileObject
@@ -61,11 +61,11 @@ class File(db.Entity):
         :rtype: (fileObject, str)
         """
 
-        _file = File.get(lambda s: s.id == file_id and s.deletedAt is None)
-        if _file is None:
-            return _file, "File Not Found !"
+        file = File.get(lambda s: s.id == file_id and s.deletedAt is None)
+        if file is None:
+            return file, "File Not Found !"
 
-        return _file, ""
+        return file, ""
 
     @staticmethod
     def update_file_by_id(file_id, file_updated):
@@ -79,22 +79,22 @@ class File(db.Entity):
         """
 
         # get file
-        _targetFile = File.get(lambda s: s.id == file_id and s.deletedAt is None)
+        target_file = File.get(lambda s: s.id == file_id and s.deletedAt is None)
 
         # file exist?
-        if _targetFile is None:
-            return _targetFile, "File Not Found !"
+        if target_file is None:
+            return target_file, "File Not Found !"
 
-        _targetFile.name = file_updated.name
-        _targetFile.ext = file_updated.ext
-        _targetFile.state = file_updated.state
-        _targetFile.iteration = file_updated.iteration
-        _targetFile.tag = file_updated.tag
-        _targetFile.subtask = file_updated.subtask
-        _targetFile.references = file_updated.references
-        _targetFile.updatedAt = datetime.datetime.utcnow()
+        target_file.name = file_updated.name
+        target_file.ext = file_updated.ext
+        target_file.state = file_updated.state
+        target_file.iteration = file_updated.iteration
+        target_file.tag = file_updated.tag
+        target_file.subtask = file_updated.subtask
+        target_file.references = file_updated.references
+        target_file.updatedAt = datetime.datetime.utcnow()
 
-        return _targetFile, ""
+        return target_file, ""
 
     @staticmethod
     def remove_file_by_id(file_id):
@@ -106,12 +106,12 @@ class File(db.Entity):
         """
 
         # get file
-        _targetFile = File.get(lambda s: s.id == file_id and s.deletedAt is None)
+        target_file = File.get(lambda s: s.id == file_id and s.deletedAt is None)
 
         # File exist?
-        if _targetFile is None:
+        if target_file is None:
             return 0, "File Not Found !"
 
-        _targetFile.deletedAt = datetime.datetime.utcnow()
+        target_file.deletedAt = datetime.datetime.utcnow()
 
-        return _targetFile.id, ""
+        return target_file.id, ""

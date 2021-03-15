@@ -29,32 +29,21 @@ class Shot(db.Entity):
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
-    def create_shot(_duration, _project, _complexity=0, _value='', _render='', _task=''):
+    def create_shot(duration, project, complexity=0, value='', render='', task=''):
         """Register shot in db
 
-        :param _duration: duration
-        :type _duration: int
-
-        :param _project: project
-        :type _project: projectObject
-
-        :param _complexity: complexity
-        :type _complexity: int, (opt)
-
-        :param _value: value
-        :type _value: str, (opt)
-
-        :param _render: render
-        :type _render: str, (opt)
-
-        :param _task: task
-        :type _task: taskObject, (opt)
+        :param int duration: duration
+        :param projectObject project: project
+        :param int complexity: complexity (opt)
+        :param str value: value (opt)
+        :param str render: render (opt)
+        :param taskObject task: task (opt)
 
         :return: shot object created
         """
 
-        return Shot(duration=_duration, complexity=_complexity, value=_value, render=_render, task=_task,
-                    project=_project)
+        return Shot(duration=duration, complexity=complexity, value=value, render=render, task=task,
+                    project=project)
 
     @staticmethod
     def find_all_shots():
@@ -65,68 +54,63 @@ class Shot(db.Entity):
         return Shot.select(lambda s: s.deletedAt is None)[:]
 
     @staticmethod
-    def find_shot_by_id(_shot_id):
+    def find_shot_by_id(shot_id):
         """find shot by id, without deleted entities
 
-        :param _shot_id: shotId
-        :type _shot_id: int
+        :param int shot_id: shotId
 
         :return: (shot, string) shot object found and string for potential error
         """
 
-        _shot = Shot.get(lambda s: s.id == _shot_id and s.deletedAt is None)
-        if _shot is None:
-            return _shot, "Shot Not Found !"
+        shot = Shot.get(lambda s: s.id == shot_id and s.deletedAt is None)
+        if shot is None:
+            return shot, "Shot Not Found !"
 
-        return _shot, ""
+        return shot, ""
 
     @staticmethod
-    def update_shot_by_id(_shot_id, _shot_updated):
+    def update_shot_by_id(shot_id, shot_updated):
         """Update shot by id
 
-        :param _shot_id: id of shot target
-        :type _shot_id: int
-
-        :param _shot_updated: new value
-        :type _shot_updated: shotObject
+        :param int shot_id: id of shot target
+        :param shotObject shot_updated: new value
 
         :return: (shot, string) shot object updated and string for potential error
         """
 
         # get shot
-        _targetShot = Shot.get(lambda s: s.id == _shot_id and s.deletedAt is None)
+        target_shot = Shot.get(lambda s: s.id == shot_id and s.deletedAt is None)
 
         # shot exist?
-        if _targetShot is None:
-            return _targetShot, "Shot Not Found !"
+        if target_shot is None:
+            return target_shot, "Shot Not Found !"
 
-        _targetShot.duration = _shot_updated.duration
-        _targetShot.complexity = _shot_updated.complexity
-        _targetShot.value = _shot_updated.value
-        _targetShot.render = _shot_updated.render
-        _targetShot.task = _shot_updated.task
-        _targetShot.project = _shot_updated.project
-        _targetShot.updatedAt = datetime.datetime.utcnow()
+        target_shot.duration = shot_updated.duration
+        target_shot.complexity = shot_updated.complexity
+        target_shot.value = shot_updated.value
+        target_shot.render = shot_updated.render
+        target_shot.task = shot_updated.task
+        target_shot.project = shot_updated.project
+        target_shot.updatedAt = datetime.datetime.utcnow()
 
-        return _targetShot, ""
+        return target_shot, ""
 
     @staticmethod
-    def remove_shot_by_id(_shot_id):
+    def remove_shot_by_id(shot_id):
         """Delete a shot
 
-        :param _shot_id: id of shot
-        :type _shot_id: int
+        :param int shot_id: id of shot
 
         :return: (id, string) id of shot deleted and string for potential error
         """
 
         # get shot
-        _targetShot = Shot.get(lambda s: s.id == _shot_id and s.deletedAt is None)
+        target_shot = Shot.get(lambda s: s.id == shot_id and s.deletedAt is None)
 
         # shot exist?
-        if _targetShot is None:
+        if target_shot is None:
             return 0, "Shot Not Found !"
 
-        _targetShot.deletedAt = datetime.datetime.utcnow()
+        target_shot.deletedAt = datetime.datetime.utcnow()
 
-        return _targetShot.id, ""
+        return target_shot.id, ""

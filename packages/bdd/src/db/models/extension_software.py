@@ -19,10 +19,10 @@ class ExtensionSoftware(db.Entity):
 
     @staticmethod
     def create_extension_software(extension, software):
-        """Register extension_software in db
+        """Register extensionSoftware in db
 
         :param str extension: extension
-        :param int software: software
+        :param softwareObject software: software
 
         :return: extensionSoftware object created
         :rtype: extensionSoftwareObject
@@ -32,7 +32,7 @@ class ExtensionSoftware(db.Entity):
 
     @staticmethod
     def find_all_extension_softwares():
-        """find all extension_software, without deleted entities
+        """find all extensionSoftware, without deleted entities
 
         :return: list of extensionSoftware
         :rtype: extensionSoftwareObjects
@@ -41,7 +41,7 @@ class ExtensionSoftware(db.Entity):
 
     @staticmethod
     def find_extension_software_by_id(extension_software_id):
-        """find extension_software by id, without deleted entities
+        """find extensionSoftware by id, without deleted entities
 
         :param int extension_software_id: extension_software_id
 
@@ -49,38 +49,38 @@ class ExtensionSoftware(db.Entity):
         :rtype: (extensionSoftwareObject, str)
         """
 
-        _extensionSoftware = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
-        if _extensionSoftware is None:
-            return _extensionSoftware, "ExtensionSoftware Not Found !"
+        extension_software = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
+        if extension_software is None:
+            return extension_software, "ExtensionSoftware Not Found !"
 
-        return _extensionSoftware, ""
+        return extension_software, ""
 
     @staticmethod
     def update_extension_software_by_id(extension_software_id, extension_software_updated):
-        """Update extension_software by id
+        """Update extensionSoftware by id
 
         :param int extension_software_id: extension_software_id
-        :param extension_software_updated: new value
+        :param extensionSoftwareObject extension_software_updated: new value
 
         :return: extensionSoftware object updated and string for potential error
         :rtype: (extensionSoftwareObject, str)
         """
 
         # get targetExtension
-        _targetExtensionSoftware = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
+        target_extension_software = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
 
         # targetExtension exist?
-        if _targetExtensionSoftware is None:
-            return _targetExtensionSoftware, "ExtensionSoftware Not Found !"
+        if target_extension_software is None:
+            return target_extension_software, "ExtensionSoftware Not Found !"
 
-        _targetExtensionSoftware.extension = extension_software_updated.extension
-        _targetExtensionSoftware.software = extension_software_updated.software
+        target_extension_software.extension = extension_software_updated.extension
+        target_extension_software.software = extension_software_updated.software
 
-        return _targetExtensionSoftware, ""
+        return target_extension_software, ""
 
     @staticmethod
     def remove_extension_software_by_id(extension_software_id):
-        """Delete a extension_software
+        """Delete a extensionSoftware
 
         :param int extension_software_id: extension_software_id
         :return: id of extension_software deleted and string for potential error
@@ -88,12 +88,12 @@ class ExtensionSoftware(db.Entity):
         """
 
         # get targetExtension
-        _targetExtensionSoftware = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
+        target_extension_software = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
 
         # targetExtension exist?
-        if _targetExtensionSoftware is None:
+        if target_extension_software is None:
             return 0, "ExtensionSoftware Not Found !"
 
-        _targetExtensionSoftware.deletedAt = datetime.datetime.utcnow()
+        target_extension_software.deletedAt = datetime.datetime.utcnow()
 
         return extension_software_id, ""

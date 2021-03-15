@@ -12,16 +12,16 @@ class AssetCategory(db.Entity):
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
-    def create_asset_category(_name):
+    def create_asset_category(name):
         """Register assetCategory in db
 
-        :param str _name: name
+        :param str name: name
 
         :return: assetCategory object created
         :rtype: assetCategoryObject
         """
 
-        return AssetCategory(name=_name)
+        return AssetCategory(name=name)
 
     @staticmethod
     def find_all_asset_categories():
@@ -33,59 +33,59 @@ class AssetCategory(db.Entity):
         return AssetCategory.select(lambda s: s.deletedAt is None)[:]
 
     @staticmethod
-    def find_asset_category_by_id(_asset_category_id):
+    def find_asset_category_by_id(asset_category_id):
         """find assetCategory by id, without deleted entities
 
-        :param int _asset_category_id: asset_category_id
+        :param int asset_category_id: asset_category_id
 
         :return: assetCategory object found and string for potential error
         :rtype: (assetCategoryObject, str)
         """
 
-        _assetCategory = AssetCategory.get(lambda s: s.id == _asset_category_id and s.deletedAt is None)
-        if _assetCategory is None:
-            return _assetCategory, "AssetCategory Not Found !"
+        asset_category = AssetCategory.get(lambda s: s.id == asset_category_id and s.deletedAt is None)
+        if asset_category is None:
+            return asset_category, "AssetCategory Not Found !"
 
-        return _assetCategory, ""
+        return asset_category, ""
 
     @staticmethod
-    def update_asset_category_by_id(_asset_category_id, _asset_category_updated):
+    def update_asset_category_by_id(asset_category_id, asset_category_updated):
         """Update assetCategory by id
 
-        :param int _asset_category_id: asset_category_id
-        :param assetCategoryObject _asset_category_updated: new value
+        :param int asset_category_id: asset_category_id
+        :param assetCategoryObject asset_category_updated: new value
 
         :return: assetCategory object updated and string for potential error
         :rtype: (assetCategoryObject, str)
         """
 
         # get assetCategory
-        _targetAssetCategory = AssetCategory.get(lambda s: s.id == _asset_category_id and s.deletedAt is None)
+        target_asset_category = AssetCategory.get(lambda s: s.id == asset_category_id and s.deletedAt is None)
 
         # assetCategory exist?
-        if _targetAssetCategory is None:
-            return _targetAssetCategory, "AssetCategory Not Found !"
+        if target_asset_category is None:
+            return target_asset_category, "AssetCategory Not Found !"
 
-        _targetAssetCategory.name = _asset_category_updated.name
+        target_asset_category.name = asset_category_updated.name
 
-        return _targetAssetCategory, ""
+        return target_asset_category, ""
 
     @staticmethod
-    def remove_asset_category_by_id(_asset_category_id):
+    def remove_asset_category_by_id(asset_category_id):
         """Delete a assetCategory
 
-        :param int _asset_category_id: asset_category_id
+        :param int asset_category_id: asset_category_id
         :return: id of assetCategory deleted and string for potential error
         :rtype: (int, str)
         """
 
         # get assetCategory
-        _targetAssetCategory = AssetCategory.get(lambda s: s.id == _asset_category_id and s.deletedAt is None)
+        target_asset_category = AssetCategory.get(lambda s: s.id == asset_category_id and s.deletedAt is None)
 
         # assetCategory exist?
-        if _targetAssetCategory is None:
+        if target_asset_category is None:
             return 0, "AssetCategory Not Found !"
 
-        _targetAssetCategory.deletedAt = datetime.datetime.utcnow()
+        target_asset_category.deletedAt = datetime.datetime.utcnow()
 
-        return _targetAssetCategory.id, ""
+        return target_asset_category.id, ""

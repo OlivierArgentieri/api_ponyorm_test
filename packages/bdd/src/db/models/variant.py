@@ -16,18 +16,18 @@ class Variant(db.Entity):
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
-    def create_variant(_name, _task, _state=""):
+    def create_variant(name, task, state=""):
         """Register variant in db
 
-        :param str _name: name
-        :param int _state: asset
-        :param int _task: task
+        :param str name: name
+        :param taskObject task: task (opt)
+        :param str state: state
 
         :return: variant object created
         :rtype: variantObject
         """
 
-        return Variant(name=_name, task=_task, state=_state)
+        return Variant(name=name, task=task, state=state)
 
     @staticmethod
     def find_all_variants():
@@ -39,62 +39,62 @@ class Variant(db.Entity):
         return Variant.select(lambda s: s.deletedAt is None)[:]
 
     @staticmethod
-    def find_variant_by_id(_variant_id):
+    def find_variant_by_id(variant_id):
         """find variant by id, without deleted entities
 
-        :param int _variant_id: variant_id
+        :param int variant_id: variant_id
 
         :return: variant object found and string for potential error
         :rtype: (variantObject, str)
         """
 
-        _variant = Variant.get(lambda s: s.id == _variant_id and s.deletedAt is None)
-        if _variant is None:
-            return _variant, "Variant Not Found !"
+        variant = Variant.get(lambda s: s.id == variant_id and s.deletedAt is None)
+        if variant is None:
+            return variant, "Variant Not Found !"
 
-        return _variant, ""
+        return variant, ""
 
     @staticmethod
-    def update_variant_by_id(_variant_id, _variant_updated):
+    def update_variant_by_id(variant_id, variant_updated):
         """Update variant by id
 
-        :param int _variant_id: variant_id
-        :param variantObject _variant_updated: new value
+        :param int variant_id: variant_id
+        :param variantObject variant_updated: new value
 
         :return: variant object updated and string for potential error
         :rtype: (variantObject, str)
         """
 
         # get variant
-        _targetVariant = Variant.get(lambda s: s.id == _variant_id and s.deletedAt is None)
+        target_variant = Variant.get(lambda s: s.id == variant_id and s.deletedAt is None)
 
         # variant exist?
-        if _targetVariant is None:
-            return _targetVariant, "Variant Not Found !"
+        if target_variant is None:
+            return target_variant, "Variant Not Found !"
 
-        _targetVariant.name = _variant_updated.name
-        _targetVariant.state = _variant_updated.short_name
-        _targetVariant.task = _variant_updated.year_start
-        _targetVariant.updatedAt = datetime.datetime.utcnow()
+        target_variant.name = variant_updated.name
+        target_variant.state = variant_updated.short_name
+        target_variant.task = variant_updated.year_start
+        target_variant.updatedAt = datetime.datetime.utcnow()
 
-        return _targetVariant, ""
+        return target_variant, ""
 
     @staticmethod
-    def remove_variant_by_id(_variant_id):
+    def remove_variant_by_id(variant_id):
         """Delete a variant
 
-        :param int _variant_id: variant_id
+        :param int variant_id: variant_id
         :return: id of variant deleted and string for potential error
         :rtype: (int, str)
         """
 
         # get variant
-        _targetVariant = Variant.get(lambda s: s.id == _variant_id and s.deletedAt is None)
+        target_variant = Variant.get(lambda s: s.id == variant_id and s.deletedAt is None)
 
         # Variant exist?
-        if _targetVariant is None:
+        if target_variant is None:
             return 0, "Variant Not Found !"
 
-        _targetVariant.deletedAt = datetime.datetime.utcnow()
+        target_variant.deletedAt = datetime.datetime.utcnow()
 
-        return _targetVariant.id, ""
+        return target_variant.id, ""

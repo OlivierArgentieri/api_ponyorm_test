@@ -19,19 +19,19 @@ class Asset(db.Entity):
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
-    def create_asset(_name, _project, _asset_category, _lod=0):
+    def create_asset(name, project, asset_category, lod=0):
         """Register asset in db
 
-        :param str _name: name
-        :param str _project: project
-        :param int _asset_category: asset_category
-        :param int _lod: lod
+        :param str name: name
+        :param str project: project
+        :param int asset_category: asset_category
+        :param int lod: lod
 
         :return: asset object created
         :rtype: assetObject
         """
 
-        return Asset(name=_name, project=_project, asset_category=_asset_category, lod = _lod)
+        return Asset(name=name, project=project, asset_category=asset_category, lod=lod)
 
     @staticmethod
     def find_all_assets():
@@ -43,63 +43,63 @@ class Asset(db.Entity):
         return Asset.select(lambda s: s.deletedAt is None)[:]
 
     @staticmethod
-    def find_asset_by_id(_asset_id):
+    def find_asset_by_id(asset_id):
         """find asset by id, without deleted entities
 
-        :param int _asset_id: asset_id
+        :param int asset_id: asset_id
 
         :return: asset object found and string for potential error
         :rtype: (assetObject, str)
         """
 
-        _asset = Asset.get(lambda s: s.id == _asset_id and s.deletedAt is None)
-        if _asset is None:
-            return _asset, "Asset Not Found !"
+        asset = Asset.get(lambda s: s.id == asset_id and s.deletedAt is None)
+        if asset is None:
+            return asset, "Asset Not Found !"
 
-        return _asset, ""
+        return asset, ""
 
     @staticmethod
-    def update_asset_by_id(_asset_id, _asset_updated):
+    def update_asset_by_id(asset_id, asset_updated):
         """Update asset by id
 
-        :param int _asset_id: asset_id
-        :param assetObject _asset_updated: new value
+        :param int asset_id: asset_id
+        :param assetObject asset_updated: new value
 
         :return: asset object updated and string for potential error
         :rtype: (assetObject, str)
         """
 
         # get asset
-        _targetAsset = Asset.get(lambda s: s.id == _asset_id and s.deletedAt is None)
+        target_asset = Asset.get(lambda s: s.id == asset_id and s.deletedAt is None)
 
         # asset exist?
-        if _targetAsset is None:
-            return _targetAsset, "Asset Not Found !"
+        if target_asset is None:
+            return target_asset, "Asset Not Found !"
 
-        _targetAsset.name = _asset_updated.name
-        _targetAsset.lod = _asset_updated.lod
-        _targetAsset.project = _asset_updated.project
-        _targetAsset.asset_category = _asset_updated.asset_category
-        _targetAsset.updatedAt = datetime.datetime.utcnow()
+        target_asset.name = asset_updated.name
+        target_asset.lod = asset_updated.lod
+        target_asset.project = asset_updated.project
+        target_asset.asset_category = asset_updated.asset_category
+        target_asset.updatedAt = datetime.datetime.utcnow()
 
-        return _targetAsset, ""
+        return target_asset, ""
 
     @staticmethod
-    def remove_asset_by_id(_asset_id):
+    def remove_asset_by_id(asset_id):
         """Delete a asset
 
-        :param int _asset_id: asset_id
+        :param int asset_id: asset_id
         :return: id of asset deleted and string for potential error
         :rtype: (int, str)
         """
 
         # get asset
-        _targetAsset = Asset.get(lambda s: s.id == _asset_id and s.deletedAt is None)
+        target_asset = Asset.get(lambda s: s.id == asset_id and s.deletedAt is None)
 
         # Asset exist?
-        if _targetAsset is None:
+        if target_asset is None:
             return 0, "Asset Not Found !"
 
-        _targetAsset.deletedAt = datetime.datetime.utcnow()
+        target_asset.deletedAt = datetime.datetime.utcnow()
 
-        return _targetAsset.id, ""
+        return target_asset.id, ""
