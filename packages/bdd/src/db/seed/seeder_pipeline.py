@@ -107,15 +107,15 @@ def seed_subtask():
 def seed_file():
 
     # create extensions
-    ma = Extension(name=".ma", description="Maya ascii file")
-    mb = Extension(name=".mb", description="Maya binary file")
+    ma = Extension.create_extension(name=".ma", description="Maya ascii file")
+    mb = Extension.create_extension(name=".mb", description="Maya binary file")
 
     # create software
-    maya = Software(name="maya")
+    maya = Software.create_software(name="maya")
 
     # link extensions and software
-    maya_ma = ExtensionSoftware(ma, maya)
-    maya_mb = ExtensionSoftware(mb, maya)
+    maya_ma = ExtensionSoftware.create_extension_software(ma, maya)
+    maya_mb = ExtensionSoftware.create_extension_software(mb, maya)
 
     # create tag
     tag = TagFile.create_tag_file("test_tag", "test_tag_desc")
@@ -124,10 +124,10 @@ def seed_file():
     subtask = Subtask.find_all_subtasks()[0]
 
     # create file
-    file1 = File.create_file("my_folder/test_file.ma", subtask, maya_ma, 0)
-    file2 = File.create_file("my_folder/test_file.mb", subtask, maya_mb, 0)
+    file1 = File.create_file("my_folder/test_file.ma", maya_ma, 0, tag, subtask)
+    file2 = File.create_file("my_folder/test_file.mb", maya_mb, 0, tag, subtask)
 
-    return
+    return [file1, file2]
 
 
 @orm.db_session()
@@ -135,38 +135,14 @@ def fill_datas(db):
     # create trigger on task
     TaskRepository.set_trigger_contraint_on_insert(db)
 
-    _user = seed_user()
-    _project = seed_project()
-    _asset = seed_asset()
-    _shot = seed_shot()
-    _tasks = seed_tasks()
-    _variant = seed_variant()
-    _subtask = seed_subtask()
-
-
-
-    # tag01 = TagFile(name="test_tag", description="test_tab_desc")
-    #
-    # ma = Extension(name=".ma", description="Maya ascii file")
-    # mb = Extension(name=".mb", description="Maya binary file")
-    #
-    # maya = Software(name="maya")
-    #
-    # maya_ma = ExtensionSoftware(extension=ma, software=maya)
-    # maya_mb = ExtensionSoftware(extension=mb, software=maya)
-    #
-    # project01 = Project(name="tests", short_name="tests", year_start=0, year_end=0)
-    #
-    # shot01 = Shot.create_shot(100, project01)
-    #
-    # task01 = Task(name="task01", shot=shot01)
-    #
-    # subtask01 = Subtask(name="subtask01", task=task01)
-    #
-    # file01 = File(name="scene001", ext=maya_ma, iteration=1,  tag=tag01, subtask=subtask01)
-    # file02 = File(name="scene002", ext=maya_ma, iteration=1,  tag=tag01, subtask=subtask01)
-    # file03 = File(name="scene003", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01)
-    # file04 = File(name="scene004", ext=maya_mb, iteration=1,  tag=tag01, subtask=subtask01, references=[file01, file02])
+    seed_user()
+    seed_project()
+    seed_asset()
+    seed_shot()
+    seed_tasks()
+    seed_variant()
+    seed_subtask()
+    seed_file()
 
     # todo : remove (test repositories):
     from db.repositories.tag_file_repository import TagFileRepository
