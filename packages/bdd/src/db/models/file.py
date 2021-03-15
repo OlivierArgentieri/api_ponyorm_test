@@ -7,6 +7,8 @@ from db.models.substask import Subtask
 
 
 class File(db.Entity):
+    """File Entity class."""
+
     name = Required(str)
     ext = Required(ExtensionSoftware)
     state = Optional(str)
