@@ -135,13 +135,13 @@ def fill_datas(db):
     # create trigger on task
     TaskRepository.set_trigger_contraint_on_insert(db)
 
-    # _user = seed_user()
-    # _project = seed_project()
-    # _asset = seed_asset()
-    # _shot = seed_shot()
-    # _tasks = seed_tasks()
-    # _variant = seed_variant()
-    # _subtask = seed_subtask()
+    _user = seed_user()
+    _project = seed_project()
+    _asset = seed_asset()
+    _shot = seed_shot()
+    _tasks = seed_tasks()
+    _variant = seed_variant()
+    _subtask = seed_subtask()
 
 
 
