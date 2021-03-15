@@ -1,4 +1,3 @@
-from pony import orm
 from db.seed import seeder_basicschema, seeder_pipeline
 
 '''
