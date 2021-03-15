@@ -3,16 +3,6 @@ from pony.orm import Required, Set, Optional
 from db.models.project import Project
 import datetime
 
-"""
-.. module:: useful_1
-   :platform: Unix, Windows
-   :synopsis: A useful module indeed.
-
-.. moduleauthor:: Andrew Carter <andrew@invalid.com>
-
-
-"""
-
 
 class Shot(db.Entity):
     """Shot entity class."""

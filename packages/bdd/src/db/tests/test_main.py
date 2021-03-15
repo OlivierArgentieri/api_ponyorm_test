@@ -17,6 +17,7 @@ from db.repositories.task_repository import TaskRepository
 # END ENTITIES #
 
 from db.server.server import db
+from db.tests.project import TestProject
 from db.tests.user import TestUser
 from db.tests.shot import TestShot
 
@@ -37,3 +38,6 @@ class TestMain(unittest.TestCase):
 
         test_shot = TestShot()
         test_shot.main()
+
+        test_project = TestProject()
+        test_project.main()

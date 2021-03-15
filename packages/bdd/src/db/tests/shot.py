@@ -1,15 +1,12 @@
 from pony import orm
-
-import unittest
 from db.server.server import db
-
-
 from db.models.project import Project
 from db.models.shot import Shot
+import unittest
 
 
 class TestShot(unittest.TestCase):
-    """Test shot class"""
+    """TestShot UnitTest class."""
 
     shot = None
     project = None
