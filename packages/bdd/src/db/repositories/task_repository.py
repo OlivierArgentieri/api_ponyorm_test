@@ -1,7 +1,6 @@
 from pony import orm
 
 
-
 class TaskRepository:
 
     @staticmethod

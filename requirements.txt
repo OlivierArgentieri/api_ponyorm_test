@@ -1,0 +1,6 @@
+pony==0.7.14
+psycopg2==2.8.6
+PyYAML==5.4.1
+Sphinx==3.5.2
+sphinx_rtd_theme==0.5.1
+sphinx_markdown_builder==0.5.4
