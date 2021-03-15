@@ -71,7 +71,7 @@ class TestProject(unittest.TestCase):
     # Test CRUD
     def create_project(self):
         """
-        Test create_shot, CRUD method
+        Test create_project, CRUD method
         :return:
         """
         self.reset(db)
@@ -117,7 +117,7 @@ class TestProject(unittest.TestCase):
         """
         self.reset(db)
         with orm.db_session:
-            # 1. find shot from db
+            # 1. find project from db
             temp_project, _ = Project.find_project_by_id(self.project.id)
 
             temp_project.name = "updated_test_project"  # auto update to but not updatedAt datetime in this way
@@ -132,6 +132,26 @@ class TestProject(unittest.TestCase):
             self.assertEqual(2021, temp_project.year_start)
             self.assertEqual(2022, temp_project.year_end)
 
+    def remove_project(self):
+        """
+        Test remove_project, CRUD method
+        :return:
+        """
+        self.reset(db)
+        with orm.db_session:
+            # 1. find project from db
+            temp_project, _ = Project.find_project_by_id(self.project.id)
+
+            # 2. remove
+            Project.remove_project_by_id(temp_project.id)
+
+            # 3. re-get
+            temp_project, err = Project.find_project_by_id(self.project.id)
+
+            # 4. assert
+            self.assertEqual(temp_project, None)
+            self.assertEqual("Project Not Found !", err)
+
     def main(self):
         """
         Entry point
@@ -140,4 +160,4 @@ class TestProject(unittest.TestCase):
         self.create_project()
         self.find_project()
         self.update_project()
-        # self.remove_project()
+        self.remove_project()
