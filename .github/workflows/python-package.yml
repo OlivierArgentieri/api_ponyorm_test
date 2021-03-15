@@ -39,11 +39,3 @@ jobs:
         pip install flake8
         pip install pytest
         pip install -r ./requirements.txt
-    - name: run python command
-      run: |
-        python ./packages/bdd/src/bdd.py
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest
