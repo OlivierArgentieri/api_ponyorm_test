@@ -5,6 +5,8 @@ import datetime
 
 
 class Subtask(db.Entity):
+    """Entity Subtask class."""
+
     name = Required(str)
     file = Set("File")
     task = Required(Task)

@@ -100,4 +100,4 @@ class User(db.Entity):
 
         target_user.deletedAt = datetime.datetime.utcnow()
 
-        return _targetUser.id, ""
+        return target_user.id, ""

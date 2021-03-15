@@ -5,7 +5,7 @@ from db.models.extension import Extension
 from db.models.software import Software
 from db.models.extension_software import ExtensionSoftware
 from db.models.task import Task
-from db.models.substask import Subtask
+from db.models.subtask import Subtask
 from db.models.variant import Variant
 from db.models.asset import Asset
 from db.models.shot import Shot
