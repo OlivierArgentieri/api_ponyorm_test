@@ -110,6 +110,28 @@ class TestProject(unittest.TestCase):
             self.assertEqual(len(temp_projects), 1)
             self.assert_value(temp_projects[0])
 
+    def update_project(self):
+        """
+        Test update_project, CRUD method
+        :return:
+        """
+        self.reset(db)
+        with orm.db_session:
+            # 1. find shot from db
+            temp_project, _ = Project.find_project_by_id(self.project.id)
+
+            temp_project.name = "updated_test_project"  # auto update to but not updatedAt datetime in this way
+            temp_project.short_name = "updated_test"
+            temp_project.year_start += 1
+            temp_project.year_end += 1
+            temp_project, _ = Project.update_project_by_id(temp_project.id, temp_project)
+
+            # 2. assert
+            self.assertEqual("updated_test_project", temp_project.name)
+            self.assertEqual("updated_test", temp_project.short_name)
+            self.assertEqual(2021, temp_project.year_start)
+            self.assertEqual(2022, temp_project.year_end)
+
     def main(self):
         """
         Entry point
@@ -117,5 +139,5 @@ class TestProject(unittest.TestCase):
         """
         self.create_project()
         self.find_project()
-        # self.update_project()
+        self.update_project()
         # self.remove_project()
