@@ -64,7 +64,8 @@ class Subtask(db.Entity):
         """
 
         # get subtask
-        target_subtask = Subtask.get(lambda s: s.id == subtask_id and s.deletedAt is None)
+        target_subtask = Subtask.get(
+            lambda s: s.id == subtask_id and s.deletedAt is None)
 
         # subtask exist?
         if target_subtask is None:

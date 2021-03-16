@@ -48,10 +48,14 @@ class TestTask(unittest.TestCase):
         :param dbObject dbo: dbo
         :return:
         """
-        self.project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
+        self.project = Project(name="test_project", short_name="test",
+                               year_start=2020, year_end=2021)
+
         self.shot = Shot(duration=1, project=self.project)
         self.asset_category = AssetCategory(name="test_category")
-        self.asset = Asset(name="test_asset", project=self.project, asset_category=self.asset_category, lod=10)
+
+        self.asset = Asset(name="test_asset", project=self.project,
+                           asset_category=self.asset_category, lod=10)
 
         # xor on asset and shot
         TaskRepository.set_trigger_constraint_on_insert(dbo)
@@ -97,10 +101,14 @@ class TestTask(unittest.TestCase):
 
             # try:
             #     # 3. test xor on asset/shot
-            #     project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
+            #     project = Project(name="test_project", short_name="test",
+            #                       year_start=2020, year_end=2021)
+
             #     shot = Shot(duration=1, project=project)
             #     asset_category = AssetCategory(name="test_category")
-            #     asset = Asset(name="test_asset", project=project, asset_category=asset_category, lod=10)
+            
+            #     asset = Asset(name="test_asset", project=project,
+            #                   asset_category=asset_category, lod=10)
             #
             #     test = Task.create_task("test_task", 10, asset, shot)
             #
@@ -147,7 +155,8 @@ class TestTask(unittest.TestCase):
             # 1. find task from db
             temp_task, _ = Task.find_task_by_id(self.task.id)
 
-            temp_task.name = "updated_test_task"  # auto update to but not updatedAt datetime in this way
+            # auto update to but not updatedAt datetime in this way
+            temp_task.name = "updated_test_task"
             temp_task.progress = 100
             temp_task, _ = Task.update_task_by_id(temp_task.id, temp_task)
 

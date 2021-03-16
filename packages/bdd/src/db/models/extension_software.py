@@ -67,7 +67,8 @@ class ExtensionSoftware(db.Entity):
         """
 
         # get targetExtension
-        target_extension_software = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
+        target_extension_software = ExtensionSoftware.get(
+            lambda s: s.id == extension_software_id and s.deletedAt is None)
 
         # targetExtension exist?
         if target_extension_software is None:
@@ -88,7 +89,8 @@ class ExtensionSoftware(db.Entity):
         """
 
         # get targetExtension
-        target_extension_software = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
+        target_extension_software = ExtensionSoftware.get(
+            lambda s: s.id == extension_software_id and s.deletedAt is None)
 
         # targetExtension exist?
         if target_extension_software is None:

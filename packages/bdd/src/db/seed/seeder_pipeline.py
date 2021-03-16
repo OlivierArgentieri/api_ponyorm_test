@@ -83,7 +83,9 @@ def seed_tasks():
     # create a needed task
     _neededTask = Task.create_task("needed_task", asset=_asset)
     _neededTask2 = Task.create_task("needed_task2", asset=_asset)
-    _task_asset = Task.create_task("asset_task_test", need=[_neededTask, _neededTask2], asset=_asset)
+
+    _task_asset = Task.create_task("asset_task_test",
+                                   need=[_neededTask, _neededTask2], asset=_asset)
 
     return [_task_shot, _task_asset]
 

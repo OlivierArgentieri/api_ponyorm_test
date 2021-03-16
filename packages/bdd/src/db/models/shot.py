@@ -32,7 +32,8 @@ class Shot(db.Entity):
         :return: shot object created
         """
 
-        return Shot(duration=duration, complexity=complexity, value=value, render=render, task=task,
+        return Shot(duration=duration, complexity=complexity,
+                    value=value, render=render, task=task,
                     project=project)
 
     @staticmethod

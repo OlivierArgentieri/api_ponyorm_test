@@ -11,7 +11,9 @@ class Task(db.Entity):
     name = Required(str)
     progress = Optional(float)
     need = Set("Task", reverse="need_by")
-    need_by = Set("Task", reverse="need")  # property is used to break reverse : [1,2; 2,1]
+
+    # property is used to break reverse : [1,2; 2,1]
+    need_by = Set("Task", reverse="need")
     subtask = Set("Subtask", cascade_delete=False)
     variant = Set("Variant", cascade_delete=False)
     asset = Optional(Asset)

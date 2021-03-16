@@ -50,10 +50,15 @@ class TestSubtask(unittest.TestCase):
         :param dbObject dbo: dbo
         :return:
         """
-        self.project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
+        self.project = Project(name="test_project", short_name="test",
+                               year_start=2020, year_end=2021)
+
         self.shot = Shot(duration=1, project=self.project)
         self.asset_category = AssetCategory(name="test_category")
-        self.asset = Asset(name="test_asset", project=self.project, asset_category=self.asset_category, lod=10)
+
+        self.asset = Asset(name="test_asset", project=self.project,
+                           asset_category=self.asset_category, lod=10)
+
         self.task = Task.create_task("test_task", 10, self.asset)
         # xor on asset and shot
         TaskRepository.set_trigger_constraint_on_insert(dbo)

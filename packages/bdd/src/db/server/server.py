@@ -19,5 +19,6 @@ orm.set_sql_debug(True)  # to debug request
 
 
 def run():
-    from db.seed import seeder  # to avoid circular include in entites->db>seeder->enties->db->seeder ...
+    # to avoid circular include in entities->db>seeder->entities->db->seeder ...
+    from db.seed import seeder
     seeder.load(db)

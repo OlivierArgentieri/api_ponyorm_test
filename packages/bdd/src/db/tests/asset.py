@@ -42,7 +42,8 @@ class TestAsset(unittest.TestCase):
         self.asset_category = AssetCategory.create_asset_category("test_asset")
         self.project = Project.create_project("test_project", "test", 2020, 2021)
 
-        self.asset = Asset.create_asset("test_asset", self.project, self.asset_category, 10)
+        self.asset = Asset.create_asset("test_asset", self.project,
+                                        self.asset_category, 10)
 
     def reset(self, dbo):
         """

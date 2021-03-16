@@ -84,7 +84,8 @@ class TestAssetCategory(unittest.TestCase):
 
         # 1. find asset_category from db
         with orm.db_session:
-            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(self.asset_category.id)
+            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(
+                self.asset_category.id)
 
             # 2. test value
             self.assert_value(temp_asset_category)
@@ -111,11 +112,13 @@ class TestAssetCategory(unittest.TestCase):
         self.reset(dbo)
         with orm.db_session:
             # 1. find update_asset_category from db
-            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(self.asset_category.id)
+            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(
+                self.asset_category.id)
 
             temp_asset_category.name = "updated_name"
 
-            temp_asset_category, _ = AssetCategory.update_asset_category_by_id(temp_asset_category.id, temp_asset_category)
+            temp_asset_category, _ = AssetCategory.update_asset_category_by_id(
+                temp_asset_category.id, temp_asset_category)
 
             # 2. assert
             self.assertEqual("updated_name", temp_asset_category.name)
@@ -129,13 +132,15 @@ class TestAssetCategory(unittest.TestCase):
         self.reset(dbo)
         with orm.db_session:
             # 1. find asset_category from db
-            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(self.asset_category.id)
+            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(
+                self.asset_category.id)
 
             # 2. remove
             AssetCategory.remove_asset_category_by_id(temp_asset_category.id)
 
             # 3. re-get
-            temp_asset_category, err = AssetCategory.find_asset_category_by_id(self.asset_category.id)
+            temp_asset_category, err = AssetCategory.find_asset_category_by_id(
+                self.asset_category.id)
 
             # 4. assert
             self.assertEqual(temp_asset_category, None)

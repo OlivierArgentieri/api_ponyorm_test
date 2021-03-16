@@ -89,7 +89,8 @@ class Variant(db.Entity):
         """
 
         # get variant
-        target_variant = Variant.get(lambda s: s.id == variant_id and s.deletedAt is None)
+        target_variant = Variant.get(
+            lambda s: s.id == variant_id and s.deletedAt is None)
 
         # Variant exist?
         if target_variant is None:

@@ -36,7 +36,9 @@ class TestShot(unittest.TestCase):
         Fill tables with test data
         :return:
         """
-        self.project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
+        self.project = Project(name="test_project", short_name="test",
+                               year_start=2020, year_end=2021)
+
         self.shot = Shot.create_shot(10, self.project)
 
     def reset(self, dbo):
@@ -120,7 +122,8 @@ class TestShot(unittest.TestCase):
             # 1. find shot from db
             temp_shot, _ = Shot.find_shot_by_id(self.shot.id)
 
-            temp_shot.duration += 20  # auto update to but not updatedAt datetime in this way
+            # auto update to but not updatedAt datetime in this way
+            temp_shot.duration += 20
             temp_shot, _ = Shot.update_shot_by_id(temp_shot.id, temp_shot)
 
             # 2. assert

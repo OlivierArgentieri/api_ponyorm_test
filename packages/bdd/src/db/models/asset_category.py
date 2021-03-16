@@ -42,7 +42,9 @@ class AssetCategory(db.Entity):
         :rtype: (assetCategoryObject, str)
         """
 
-        asset_category = AssetCategory.get(lambda s: s.id == asset_category_id and s.deletedAt is None)
+        asset_category = AssetCategory.get(
+            lambda s: s.id == asset_category_id and s.deletedAt is None)
+
         if asset_category is None:
             return asset_category, "AssetCategory Not Found !"
 
@@ -60,7 +62,8 @@ class AssetCategory(db.Entity):
         """
 
         # get assetCategory
-        target_asset_category = AssetCategory.get(lambda s: s.id == asset_category_id and s.deletedAt is None)
+        target_asset_category = AssetCategory.get(
+            lambda s: s.id == asset_category_id and s.deletedAt is None)
 
         # assetCategory exist?
         if target_asset_category is None:
@@ -80,7 +83,8 @@ class AssetCategory(db.Entity):
         """
 
         # get assetCategory
-        target_asset_category = AssetCategory.get(lambda s: s.id == asset_category_id and s.deletedAt is None)
+        target_asset_category = AssetCategory.get(
+            lambda s: s.id == asset_category_id and s.deletedAt is None)
 
         # assetCategory exist?
         if target_asset_category is None:

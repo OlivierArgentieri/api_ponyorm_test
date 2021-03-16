@@ -39,8 +39,11 @@ class File(db.Entity):
         :rtype: fileObject
         """
         if references:
-            return File(name=name, ext=ext, iteration=iteration, tag=tag, subtask=subtask, state=state, references=references)
-        return File(name=name, ext=ext, iteration=iteration, tag=tag, subtask=subtask, state=state)
+            return File(name=name, ext=ext, iteration=iteration,
+                        tag=tag, subtask=subtask, state=state, references=references)
+
+        return File(name=name, ext=ext, iteration=iteration,
+                    tag=tag, subtask=subtask, state=state)
 
     @staticmethod
     def find_all_files():

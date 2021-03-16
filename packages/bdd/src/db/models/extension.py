@@ -44,7 +44,8 @@ class Extension(db.Entity):
         :rtype: (extensionObject, str)
         """
 
-        extension = Extension.get(lambda s: s.id == extension_id and s.deletedAt is None)
+        extension = Extension.get(
+            lambda s: s.id == extension_id and s.deletedAt is None)
         if extension is None:
             return extension, "Extension Not Found !"
 
@@ -62,7 +63,8 @@ class Extension(db.Entity):
         """
 
         # get targetExtension
-        target_extension = Extension.get(lambda s: s.id == extension_id and s.deletedAt is None)
+        target_extension = Extension.get(
+            lambda s: s.id == extension_id and s.deletedAt is None)
 
         # targetExtension exist?
         if target_extension is None:

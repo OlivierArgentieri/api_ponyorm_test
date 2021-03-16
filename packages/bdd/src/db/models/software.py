@@ -62,7 +62,8 @@ class Software(db.Entity):
         """
 
         # get software
-        target_software = Software.get(lambda s: s.id == software_id and s.deletedAt is None)
+        target_software = Software.get(
+            lambda s: s.id == software_id and s.deletedAt is None)
 
         # Software exist?
         if target_software is None:
@@ -82,7 +83,8 @@ class Software(db.Entity):
         """
 
         # get software
-        target_software = Software.get(lambda s: s.id == software_id and s.deletedAt is None)
+        target_software = Software.get(
+            lambda s: s.id == software_id and s.deletedAt is None)
 
         # Software exist?
         if target_software is None:

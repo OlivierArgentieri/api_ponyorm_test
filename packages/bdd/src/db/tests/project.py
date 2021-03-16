@@ -37,7 +37,8 @@ class TestProject(unittest.TestCase):
         :return:
         """
         self.project = Project.create_project("test_project", "test", 2020, 2021)
-        self.shots = [Shot(duration=10, project=self.project), Shot(duration=80, project=self.project)]
+        self.shots = [Shot(duration=10, project=self.project),
+                      Shot(duration=80, project=self.project)]
 
     def reset(self, dbo):
         """
@@ -121,11 +122,13 @@ class TestProject(unittest.TestCase):
             # 1. find project from db
             temp_project, _ = Project.find_project_by_id(self.project.id)
 
-            temp_project.name = "updated_test_project"  # auto update to but not updatedAt datetime in this way
+            # auto update to but not updatedAt datetime in this way
+            temp_project.name = "updated_test_project"
             temp_project.short_name = "updated_test"
             temp_project.year_start += 1
             temp_project.year_end += 1
-            temp_project, _ = Project.update_project_by_id(temp_project.id, temp_project)
+            temp_project, _ = Project.update_project_by_id(
+                temp_project.id, temp_project)
 
             # 2. assert
             self.assertEqual("updated_test_project", temp_project.name)

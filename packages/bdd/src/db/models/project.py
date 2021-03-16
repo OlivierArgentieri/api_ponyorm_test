@@ -32,7 +32,8 @@ class Project(db.Entity):
         :rtype: projectObject
         """
 
-        return Project(name=_name, short_name=_short_name, year_start=_year_start, year_end=_year_end)
+        return Project(name=_name, short_name=_short_name,
+                       year_start=_year_start, year_end=_year_end)
 
     @staticmethod
     def find_all_projects():
