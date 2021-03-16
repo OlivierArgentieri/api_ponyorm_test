@@ -94,7 +94,7 @@ class TestTask(unittest.TestCase):
 
             # 2. assert on default value and getted value
             self.assert_value(temp_task)
-            
+
             # try:
             #     # 3. test xor on asset/shot
             #     project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
@@ -108,12 +108,40 @@ class TestTask(unittest.TestCase):
             #     self.assertEqual("InternalError: Shot NOR Asset is REQUIRED", e)
             # todo see : https://github.com/ponyorm/pony/issues/592
 
+    def find_task(self, dbo):
+        """
+        test find_task, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+
+        # 1. find task from db
+        with orm.db_session:
+            temp_task, _ = Task.find_task_by_id(self.task.id)
+
+            # 2. test value
+            self.assert_value(temp_task)
+
+            temp_task, err = Task.find_task_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "Task Not Found !")
+            self.assertEqual(temp_task, None)
+
+            # 4. find_all task from db
+            temp_task = Task.find_all_tasks()
+
+            # 5. test value
+            self.assertEqual(len(temp_task), 1)
+            self.assert_value(temp_task[0])
+
     def main(self):
         """
         Entry point
         :return:
         """
         self.create_task(db)
-        # self.find_asset(db)
+        self.find_task(db)
         # self.update_asset(db)
         # self.remove_asset(db)
