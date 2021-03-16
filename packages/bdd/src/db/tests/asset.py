@@ -83,14 +83,40 @@ class TestAsset(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_asset)
 
+    def find_asset(self, dbo):
+        """
+        Test find_asset, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+
+        # 1. find find_asset from db
+        with orm.db_session:
+            temp_asset, _ = Asset.find_asset_by_id(self.asset.id)
+
+            # 2. test value
+            self.assert_value(temp_asset)
+
+            temp_asset, err = Asset.find_asset_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "Asset Not Found !")
+            self.assertEqual(temp_asset, None)
+
+            # 4. find_all asset from db
+            temp_assets = Asset.find_all_assets()
+
+            # 5. test value
+            self.assertEqual(len(temp_assets), 1)
+            self.assert_value(temp_assets[0])
+
     def main(self):
         """
         Entry point
         :return:
         """
-        print("bbb")
-
         self.create_asset(db)
-        # self.find_project(db)
+        self.find_asset(db)
         # self.update_project(db)
         # self.remove_project(db)

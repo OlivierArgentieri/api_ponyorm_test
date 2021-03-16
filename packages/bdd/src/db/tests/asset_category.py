@@ -146,7 +146,6 @@ class TestAssetCategory(unittest.TestCase):
         Entry point
         :return:
         """
-        print("ccc")
         self.create_asset_category(db)
         self.find_asset_category(db)
         self.update_asset_category(db)
