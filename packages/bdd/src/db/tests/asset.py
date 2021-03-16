@@ -111,6 +111,47 @@ class TestAsset(unittest.TestCase):
             self.assertEqual(len(temp_assets), 1)
             self.assert_value(temp_assets[0])
 
+    def update_asset(self, dbo):
+        """
+        Test update_asset, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find update_asset from db
+            temp_asset, _ = Asset.find_asset_by_id(self.asset.id)
+
+            temp_asset.name = "updated_name"
+            temp_asset.lod = 100
+
+            temp_asset, _ = Asset.update_asset_by_id(temp_asset.id, temp_asset)
+
+            # 2. assert
+            self.assertEqual("updated_name", temp_asset.name)
+            self.assertEqual(100, temp_asset.lod)
+
+    def remove_asset(self, dbo):
+        """
+        Test remove_asset, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find asset from db
+            temp_asset, _ = Asset.find_asset_by_id(self.asset.id)
+
+            # 2. remove
+            Asset.remove_asset_by_id(temp_asset.id)
+
+            # 3. re-get
+            temp_asset, err = Asset.find_asset_by_id(self.asset.id)
+
+            # 4. assert
+            self.assertEqual(temp_asset, None)
+            self.assertEqual("Asset Not Found !", err)
+
     def main(self):
         """
         Entry point
@@ -118,5 +159,5 @@ class TestAsset(unittest.TestCase):
         """
         self.create_asset(db)
         self.find_asset(db)
-        # self.update_project(db)
-        # self.remove_project(db)
+        self.update_asset(db)
+        self.remove_asset(db)
