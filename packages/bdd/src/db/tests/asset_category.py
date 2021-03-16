@@ -115,6 +115,26 @@ class TestAssetCategory(unittest.TestCase):
             # 2. assert
             self.assertEqual("updated_name", temp_asset_category.name)
 
+    def remove_asset_category(self):
+        """
+        Test remove_asset_category, CRUD method
+        :return:
+        """
+        self.reset(db)
+        with orm.db_session:
+            # 1. find asset_category from db
+            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(self.asset_category.id)
+
+            # 2. remove
+            AssetCategory.remove_asset_category_by_id(temp_asset_category.id)
+
+            # 3. re-get
+            temp_asset_category, err = AssetCategory.find_asset_category_by_id(self.asset_category.id)
+
+            # 4. assert
+            self.assertEqual(temp_asset_category, None)
+            self.assertEqual("AssetCategory Not Found !", err)
+
     def main(self):
         """
         Entry point
@@ -123,4 +143,4 @@ class TestAssetCategory(unittest.TestCase):
         self.create_asset_category()
         self.find_asset_category()
         self.update_asset_category()
-        # self.remove_asset_category()
+        self.remove_asset_category()
