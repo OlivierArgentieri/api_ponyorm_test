@@ -12,23 +12,23 @@ class TestShot(unittest.TestCase):
     project = None
 
     @staticmethod
-    def clear_structure(_db):
+    def clear_structure(dbo):
         """
         Drop each needed entities tables
-        :param _db: db object
+        :param dbObject dbo: dbo
         :return:
         """
-        _db.drop_table("project", if_exists=True, with_all_data=True)
-        _db.drop_table("shot", if_exists=True, with_all_data=True)
+        dbo.drop_table("project", if_exists=True, with_all_data=True)
+        dbo.drop_table("shot", if_exists=True, with_all_data=True)
 
     @staticmethod
-    def generate_structure(_db):
+    def generate_structure(dbo):
         """
         Create each needed entities tables
-        :param _db: db object
+        :param dbObject dbo: dbo
         :return:
         """
-        _db.create_tables()
+        dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
@@ -39,20 +39,20 @@ class TestShot(unittest.TestCase):
         self.project = Project(name="test_project", short_name="test", year_start=2020, year_end=2021)
         self.shot = Shot.create_shot(10, self.project)
 
-    def reset(self, _db):
+    def reset(self, dbo):
         """
         Execute: clear, generate_structure and fill_data
-        :param _db: db object
+        :param dbObject dbo: dbo
         :return:
         """
-        TestShot.clear_structure(_db)
-        TestShot.generate_structure(_db)
+        TestShot.clear_structure(dbo)
+        TestShot.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, shot_test):
         """
         Asserts with test value
-        :param shot_test: shot object
+        :param shotObject shot_test: shot_test
         :return:
         """
         self.assertTrue(shot_test)
@@ -66,12 +66,13 @@ class TestShot(unittest.TestCase):
         self.assertEqual(self.project.id, shot_test.project.id)
 
     # Test CRUD
-    def create_shot(self):
+    def create_shot(self, dbo):
         """
         Test create_shot, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)  # create default object in fill_datas function
+        self.reset(dbo)  # create default object in fill_datas function
 
         # 1. get object in db with ponyorm function (get will be tested lately)
         with orm.db_session:
@@ -80,12 +81,13 @@ class TestShot(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_shot)
 
-    def find_shot(self):
+    def find_shot(self, dbo):
         """
         Test find_shot, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
 
         # 1. find shot from db
         with orm.db_session:
@@ -107,12 +109,13 @@ class TestShot(unittest.TestCase):
             self.assertEqual(len(temp_shots), 1)
             self.assert_value(temp_shots[0])
 
-    def update_shot(self):
+    def update_shot(self, dbo):
         """
         Test update_shot, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
         with orm.db_session:
             # 1. find shot from db
             temp_shot, _ = Shot.find_shot_by_id(self.shot.id)
@@ -134,12 +137,13 @@ class TestShot(unittest.TestCase):
             self.assertEqual(err, "Shot Not Found !")
             self.assertEqual(temp_shot, None)
 
-    def remove_shot(self):
+    def remove_shot(self, dbo):
         """
         Test remove_shot, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
         with orm.db_session:
             # 1. find shot from db
             temp_shot, _ = Shot.find_shot_by_id(self.shot.id)
@@ -159,7 +163,7 @@ class TestShot(unittest.TestCase):
         Entry point
         :return:
         """
-        self.create_shot()
-        self.find_shot()
-        self.update_shot()
-        self.remove_shot()
+        self.create_shot(db)
+        self.find_shot(db)
+        self.update_shot(db)
+        self.remove_shot(db)

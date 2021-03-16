@@ -1,5 +1,4 @@
 from pony import orm
-
 from db.models.project import Project
 from db.models.shot import Shot
 from db.server.server import db
@@ -13,23 +12,23 @@ class TestProject(unittest.TestCase):
     shots = None
 
     @staticmethod
-    def clear_structure(db):
+    def clear_structure(dbo):
         """
         Drop each needed entities tables
-        :param db: db object
+        :param dbObject dbo : db
         :return:
         """
-        db.drop_table("project", if_exists=True, with_all_data=True)
-        db.drop_table("shot", if_exists=True, with_all_data=True)
+        dbo.drop_table("project", if_exists=True, with_all_data=True)
+        dbo.drop_table("shot", if_exists=True, with_all_data=True)
 
     @staticmethod
-    def generate_structure(db):
+    def generate_structure(dbo):
         """
         Create each needed entities tables
-        :param db: db object
+        :param dbObject dbo : db
         :return:
         """
-        db.create_tables()
+        dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
@@ -40,10 +39,10 @@ class TestProject(unittest.TestCase):
         self.project = Project.create_project("test_project", "test", 2020, 2021)
         self.shots = [Shot(duration=10, project=self.project), Shot(duration=80, project=self.project)]
 
-    def reset(self, db):
+    def reset(self, dbo):
         """
         Execute: clear, generate_structure and fill_data
-        :param db:
+        :param dbObject dbo: dbo
         :return:
         """
         TestProject.clear_structure(db)
@@ -68,12 +67,13 @@ class TestProject(unittest.TestCase):
         self.assertEqual(80, self.shots[1].duration)
 
     # Test CRUD
-    def create_project(self):
+    def create_project(self, dbo):
         """
         Test create_project, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
 
         # 1. get object in db with ponyorm function (get will be tested lately)
         with orm.db_session:
@@ -82,12 +82,13 @@ class TestProject(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_project)
 
-    def find_project(self):
+    def find_project(self, dbo):
         """
         Test find_project, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
 
         # 1. find project from db
         with orm.db_session:
@@ -109,12 +110,13 @@ class TestProject(unittest.TestCase):
             self.assertEqual(len(temp_projects), 1)
             self.assert_value(temp_projects[0])
 
-    def update_project(self):
+    def update_project(self, dbo):
         """
         Test update_project, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
         with orm.db_session:
             # 1. find project from db
             temp_project, _ = Project.find_project_by_id(self.project.id)
@@ -131,12 +133,13 @@ class TestProject(unittest.TestCase):
             self.assertEqual(2021, temp_project.year_start)
             self.assertEqual(2022, temp_project.year_end)
 
-    def remove_project(self):
+    def remove_project(self, dbo):
         """
         Test remove_project, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
         with orm.db_session:
             # 1. find project from db
             temp_project, _ = Project.find_project_by_id(self.project.id)
@@ -156,7 +159,7 @@ class TestProject(unittest.TestCase):
         Entry point
         :return:
         """
-        self.create_project()
-        self.find_project()
-        self.update_project()
-        self.remove_project()
+        self.create_project(db)
+        self.find_project(db)
+        self.update_project(db)
+        self.remove_project(db)

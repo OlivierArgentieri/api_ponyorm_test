@@ -1,5 +1,4 @@
 from pony import orm
-
 from db.models.asset_category import AssetCategory
 from db.server.server import db
 import unittest
@@ -11,22 +10,22 @@ class TestAssetCategory(unittest.TestCase):
     asset_category = None
 
     @staticmethod
-    def clear_structure(db):
+    def clear_structure(dbo):
         """
         Drop each needed entities tables
-        :param db: db object
+        :param dbObject dbo: dbo
         :return:
         """
-        db.drop_table("assetcategory", if_exists=True, with_all_data=True)
+        dbo.drop_table("assetcategory", if_exists=True, with_all_data=True)
 
     @staticmethod
-    def generate_structure(db):
+    def generate_structure(dbo):
         """
         Create each needed entities tables
-        :param db: db object
+        :param dbObject dbo: dbo
         :return:
         """
-        db.create_tables()
+        dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
@@ -36,14 +35,14 @@ class TestAssetCategory(unittest.TestCase):
         """
         self.asset_category = AssetCategory.create_asset_category("test_asset_category")
 
-    def reset(self, db):
+    def reset(self, dbo):
         """
         Execute: clear, generate_structure and fill_data
-        :param db:
+        :param dbObject dbo: dbo
         :return:
         """
-        TestAssetCategory.clear_structure(db)
-        TestAssetCategory.generate_structure(db)
+        TestAssetCategory.clear_structure(dbo)
+        TestAssetCategory.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, asset_category_test):
@@ -57,12 +56,13 @@ class TestAssetCategory(unittest.TestCase):
         self.assertEqual("test_asset_category", asset_category_test.name)
 
     # Test CRUD
-    def create_asset_category(self):
+    def create_asset_category(self, dbo):
         """
         Test create_asset_category, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
 
         # 1. get object in db with ponyorm function (get will be tested lately)
         with orm.db_session:
@@ -71,12 +71,13 @@ class TestAssetCategory(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_asset_category)
 
-    def find_asset_category(self):
+    def find_asset_category(self, dbo):
         """
         test find asset_category, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
 
         # 1. find asset_category from db
         with orm.db_session:
@@ -98,12 +99,13 @@ class TestAssetCategory(unittest.TestCase):
             self.assertEqual(len(temp_asset_categories), 1)
             self.assert_value(temp_asset_categories[0])
 
-    def update_asset_category(self):
+    def update_asset_category(self, dbo):
         """
         Test update_asset_category, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
         with orm.db_session:
             # 1. find update_asset_category from db
             temp_asset_category, _ = AssetCategory.find_asset_category_by_id(self.asset_category.id)
@@ -115,12 +117,13 @@ class TestAssetCategory(unittest.TestCase):
             # 2. assert
             self.assertEqual("updated_name", temp_asset_category.name)
 
-    def remove_asset_category(self):
+    def remove_asset_category(self, dbo):
         """
         Test remove_asset_category, CRUD method
+        :param dbObject dbo: dbo
         :return:
         """
-        self.reset(db)
+        self.reset(dbo)
         with orm.db_session:
             # 1. find asset_category from db
             temp_asset_category, _ = AssetCategory.find_asset_category_by_id(self.asset_category.id)
@@ -140,7 +143,7 @@ class TestAssetCategory(unittest.TestCase):
         Entry point
         :return:
         """
-        self.create_asset_category()
-        self.find_asset_category()
-        self.update_asset_category()
-        self.remove_asset_category()
+        self.create_asset_category(db)
+        self.find_asset_category(db)
+        self.update_asset_category(db)
+        self.remove_asset_category(db)
