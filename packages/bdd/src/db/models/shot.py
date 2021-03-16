@@ -1,6 +1,6 @@
 from db.server.server import db
-from pony.orm import Required, Set, Optional
 from db.models.project import Project
+from pony.orm import Required, Set, Optional
 import datetime
 
 

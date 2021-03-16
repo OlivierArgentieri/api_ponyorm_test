@@ -28,8 +28,8 @@ author = 'TD Gang'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    #"rinoh.frontend.sphinx",
-    #"sphinx.ext.autodoc"
+    # "rinoh.frontend.sphinx",
+    # "sphinx.ext.autodoc"
     "sphinx.ext.napoleon",
     "recommonmark",
     'sphinx_markdown_builder'

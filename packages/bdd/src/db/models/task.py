@@ -1,9 +1,8 @@
 from db.server.server import db
-from pony.orm import Required, Set, Optional
-import datetime
-
 from db.models.asset import Asset
 from db.models.shot import Shot
+from pony.orm import Required, Set, Optional
+import datetime
 
 
 class Task(db.Entity):

@@ -1,7 +1,7 @@
 from db.server.server import db
-from pony.orm import Required, PrimaryKey, Set, Optional
 from db.models.extension import Extension
 from db.models.software import Software
+from pony.orm import Required, PrimaryKey, Set, Optional
 import datetime
 
 

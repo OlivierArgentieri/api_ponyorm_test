@@ -133,7 +133,7 @@ def seed_file():
 @orm.db_session()
 def fill_datas(db):
     # create trigger on task
-    TaskRepository.set_trigger_contraint_on_insert(db)
+    TaskRepository.set_trigger_constraint_on_insert(db)
 
     seed_user()
     seed_project()

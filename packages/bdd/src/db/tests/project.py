@@ -22,7 +22,6 @@ class TestProject(unittest.TestCase):
         db.drop_table("project", if_exists=True, with_all_data=True)
         db.drop_table("shot", if_exists=True, with_all_data=True)
 
-
     @staticmethod
     def generate_structure(db):
         """

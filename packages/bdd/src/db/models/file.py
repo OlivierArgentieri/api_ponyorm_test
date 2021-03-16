@@ -1,9 +1,9 @@
 from db.server.server import db
-from pony.orm import Required, Set, Optional
-import datetime
 from db.models.tag_file import TagFile
 from db.models.extension_software import ExtensionSoftware
 from db.models.subtask import Subtask
+from pony.orm import Required, Set, Optional
+import datetime
 
 
 class File(db.Entity):
