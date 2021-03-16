@@ -1,18 +1,18 @@
 import unittest
 
 # ENTITIES #
+from db.models.user import User
+from db.models.project import Project
+from db.models.asset import Asset
+from db.models.shot import Shot
+from db.models.task import Task
+from db.models.variant import Variant
+from db.models.subtask import Subtask
 from db.models.file import File
-from db.models.tag_file import TagFile
 from db.models.extension import Extension
 from db.models.software import Software
 from db.models.extension_software import ExtensionSoftware
-from db.models.task import Task
-from db.models.subtask import Subtask
-from db.models.variant import Variant
-from db.models.asset import Asset
-from db.models.shot import Shot
-from db.models.project import Project
-from db.models.user import User
+from db.models.tag_file import TagFile
 from db.repositories.task_repository import TaskRepository
 # END ENTITIES #
 
@@ -21,9 +21,32 @@ from db.tests.asset_category import TestAssetCategory
 from db.tests.project import TestProject
 from db.tests.user import TestUser
 from db.tests.shot import TestShot
+from db.tests.asset import TestAsset
 
 
 class TestMain(unittest.TestCase):
+
+    @staticmethod
+    def clear_structure():
+        db.drop_table("tagfile", if_exists=True, with_all_data=True)
+        db.drop_table("file_references", if_exists=True, with_all_data=True)
+        db.drop_table("extension_software", if_exists=True, with_all_data=True)
+        db.drop_table("extension", if_exists=True, with_all_data=True)
+        db.drop_table("software", if_exists=True, with_all_data=True)
+        db.drop_table("subtask", if_exists=True, with_all_data=True)
+        db.drop_table("file", if_exists=True, with_all_data=True)
+
+        db.drop_table("task_need", if_exists=True, with_all_data=True)
+        db.drop_table("variant", if_exists=True, with_all_data=True)
+        db.drop_table("project_user", if_exists=True, with_all_data=True)
+        db.drop_table("user", if_exists=True, with_all_data=True)
+        db.drop_table("project", if_exists=True, with_all_data=True)
+
+        db.drop_table("assetcategory", if_exists=True, with_all_data=True)
+        db.drop_table("asset", if_exists=True, with_all_data=True)
+        db.drop_table("shot", if_exists=True, with_all_data=True)
+        db.drop_table("task_task", if_exists=True, with_all_data=True)
+        db.drop_table("task", if_exists=True, with_all_data=True)
 
     @staticmethod
     def generate_structure():
@@ -32,16 +55,11 @@ class TestMain(unittest.TestCase):
     @staticmethod
     def test_main():
         # init ddb
+        TestMain.clear_structure()
         TestMain.generate_structure()
 
-        test_user = TestUser()
-        test_user.main()
-
-        test_shot = TestShot()
-        test_shot.main()
-
-        test_project = TestProject()
-        test_project.main()
-
-        test_asset_category = TestAssetCategory()
-        test_asset_category.main()
+        TestUser().main()
+        TestShot().main()
+        TestProject().main()
+        TestAssetCategory().main()
+        TestAsset().main()

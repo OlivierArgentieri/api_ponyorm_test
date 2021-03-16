@@ -75,4 +75,5 @@ class TestUser(unittest.TestCase):
             self.assert_value(temp_shot)
 
     def main(self):
+        print("aaa")
         self.create_user(db)

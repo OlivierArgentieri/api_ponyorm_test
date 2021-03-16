@@ -45,8 +45,8 @@ class TestProject(unittest.TestCase):
         :param dbObject dbo: dbo
         :return:
         """
-        TestProject.clear_structure(db)
-        TestProject.generate_structure(db)
+        TestProject.clear_structure(dbo)
+        TestProject.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, project_test):

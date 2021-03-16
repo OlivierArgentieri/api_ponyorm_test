@@ -17,6 +17,9 @@ class TestAssetCategory(unittest.TestCase):
         :return:
         """
         dbo.drop_table("assetcategory", if_exists=True, with_all_data=True)
+        dbo.drop_table("project", if_exists=True, with_all_data=True)
+        dbo.drop_table("shot", if_exists=True, with_all_data=True)
+        dbo.drop_table("asset", if_exists=True, with_all_data=True)
 
     @staticmethod
     def generate_structure(dbo):
@@ -143,6 +146,7 @@ class TestAssetCategory(unittest.TestCase):
         Entry point
         :return:
         """
+        print("ccc")
         self.create_asset_category(db)
         self.find_asset_category(db)
         self.update_asset_category(db)
