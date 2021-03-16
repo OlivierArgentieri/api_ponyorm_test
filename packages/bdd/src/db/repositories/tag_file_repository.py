@@ -12,5 +12,3 @@ class TagFileRepository:
         :return int: number of tagFile
         """
         return orm.select(c.id for c in TagFile).sum()
-
-

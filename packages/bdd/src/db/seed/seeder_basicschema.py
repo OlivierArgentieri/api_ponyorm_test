@@ -21,4 +21,3 @@ def fill_datas():
     c1 = Car(make='Toyota', model='Prius', owner=p2)
     c2 = Car(make='Ford', model='Explorer', owner=p3)
 
-
