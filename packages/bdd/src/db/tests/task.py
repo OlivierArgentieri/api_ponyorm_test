@@ -136,6 +136,46 @@ class TestTask(unittest.TestCase):
             self.assertEqual(len(temp_task), 1)
             self.assert_value(temp_task[0])
 
+    def update_task(self, dbo):
+        """
+        Test update_task, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find task from db
+            temp_task, _ = Task.find_task_by_id(self.task.id)
+
+            temp_task.name = "updated_test_task"  # auto update to but not updatedAt datetime in this way
+            temp_task.progress = 100
+            temp_task, _ = Task.update_task_by_id(temp_task.id, temp_task)
+
+            # 2. assert
+            self.assertEqual("updated_test_task", temp_task.name)
+            self.assertEqual(100, temp_task.progress)
+
+    def remove_task(self, dbo):
+        """
+        Test remove_task, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find task from db
+            temp_task, _ = Task.find_task_by_id(self.task.id)
+
+            # 2. remove
+            Task.remove_task_by_id(temp_task.id)
+
+            # 3. re-get
+            temp_task, err = Task.find_task_by_id(self.task.id)
+
+            # 4. assert
+            self.assertEqual(temp_task, None)
+            self.assertEqual("Task Not Found !", err)
+
     def main(self):
         """
         Entry point
@@ -143,5 +183,5 @@ class TestTask(unittest.TestCase):
         """
         self.create_task(db)
         self.find_task(db)
-        # self.update_asset(db)
-        # self.remove_asset(db)
+        self.update_task(db)
+        self.remove_task(db)
