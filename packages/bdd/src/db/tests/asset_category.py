@@ -17,7 +17,7 @@ class TestAssetCategory(unittest.TestCase):
         :param db: db object
         :return:
         """
-        db.drop_table("asset_category", if_exists=True, with_all_data=True)
+        db.drop_table("assetcategory", if_exists=True, with_all_data=True)
 
     @staticmethod
     def generate_structure(db):
@@ -71,12 +71,39 @@ class TestAssetCategory(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_asset_category)
 
+    def find_asset_category(self):
+        """
+        test find asset_category, CRUD method
+        :return:
+        """
+        self.reset(db)
+
+        # 1. find asset_category from db
+        with orm.db_session:
+            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(self.asset_category.id)
+
+            # 2. test value
+            self.assert_value(temp_asset_category)
+
+            temp_asset_category, err = AssetCategory.find_asset_category_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "AssetCategory Not Found !")
+            self.assertEqual(temp_asset_category, None)
+
+            # 4. find_all asset_category from db
+            temp_asset_categories = AssetCategory.find_all_asset_categories()
+
+            # 5. test value
+            self.assertEqual(len(temp_asset_categories), 1)
+            self.assert_value(temp_asset_categories[0])
+
     def main(self):
         """
         Entry point
         :return:
         """
         self.create_asset_category()
-        # self.find_asset_category()
+        self.find_asset_category()
         # self.update_asset_category()
         # self.remove_asset_category()
