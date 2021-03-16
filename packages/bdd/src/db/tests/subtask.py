@@ -97,13 +97,81 @@ class TestSubtask(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_subtask)
 
+    def find_subtask(self, dbo):
+        """
+        test find_subtask, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+
+        # 1. find subtask from db
+        with orm.db_session:
+            temp_subtask, _ = Subtask.find_subtask_by_id(self.subtask.id)
+
+            # 2. test value
+            self.assert_value(temp_subtask)
+
+            temp_subtask, err = Subtask.find_subtask_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "Subtask Not Found !")
+            self.assertEqual(temp_subtask, None)
+
+            # 4. find_all subtask from db
+            temp_subtasks = Subtask.find_all_subtasks()
+
+            # 5. test value
+            self.assertEqual(len(temp_subtasks), 1)
+            self.assert_value(temp_subtasks[0])
+
+    def update_subtask(self, dbo):
+        """
+        Test update_subtask, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find subtask from db
+            temp_subtask, _ = Subtask.find_subtask_by_id(self.task.id)
+
+            # auto update to but not updatedAt datetime in this way
+            temp_subtask.name = "updated_test_subtask"
+            temp_subtask.progress = 100
+            temp_task, _ = Subtask.update_subtask_by_id(temp_subtask.id, temp_subtask)
+
+            # 2. assert
+            self.assertEqual("updated_test_subtask", temp_task.name)
+            self.assertEqual(100, temp_task.progress)
+
+    def remove_subtask(self, dbo):
+        """
+        Test remove_subtask, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find subtask from db
+            temp_subtask, _ = Subtask.find_subtask_by_id(self.task.id)
+
+            # 2. remove
+            Subtask.remove_subtask_by_id(temp_subtask.id)
+
+            # 3. re-get
+            temp_subtask, err = Subtask.find_subtask_by_id(self.task.id)
+
+            # 4. assert
+            self.assertEqual(temp_subtask, None)
+            self.assertEqual("Subtask Not Found !", err)
+
     def main(self):
         """
         Entry point
         :return:
         """
         self.create_subtask(db)
-        # self.find_subtask(db)
-        # self.update_subtask(db)
-        # self.remove_subtask(db)
-        # self.remove_subtask(db)
+        self.find_subtask(db)
+        self.update_subtask(db)
+        self.remove_subtask(db)
