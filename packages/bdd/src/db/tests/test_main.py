@@ -23,6 +23,7 @@ from db.tests.user import TestUser
 from db.tests.shot import TestShot
 from db.tests.asset import TestAsset
 from db.tests.task import TestTask
+from db.tests.subtask import TestSubtask
 
 
 class TestMain(unittest.TestCase):
@@ -65,3 +66,4 @@ class TestMain(unittest.TestCase):
         TestAssetCategory().main()
         TestAsset().main()
         TestTask().main()
+        TestSubtask().main()
