@@ -18,6 +18,7 @@ class TaskRepository:
             IF (new.shot IS NULL AND new.asset IS NULL ) THEN
                 RAISE 'Shot NOR Asset is REQUIRED';
             end if;
+            
             IF (new.shot IS NOT NULL AND new.asset IS NOT NULL ) THEN
                 raise 'Shot NOR Asset is REQUIRED';
             end if;

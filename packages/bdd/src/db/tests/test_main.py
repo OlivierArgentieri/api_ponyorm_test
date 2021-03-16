@@ -22,6 +22,7 @@ from db.tests.project import TestProject
 from db.tests.user import TestUser
 from db.tests.shot import TestShot
 from db.tests.asset import TestAsset
+from db.tests.task import TestTask
 
 
 class TestMain(unittest.TestCase):
@@ -63,3 +64,4 @@ class TestMain(unittest.TestCase):
         TestProject().main()
         TestAssetCategory().main()
         TestAsset().main()
+        TestTask().main()

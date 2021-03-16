@@ -26,7 +26,7 @@ class Task(db.Entity):
         """Register task in db
 
         :param str name: name
-        :param str progress: progress (opt)
+        :param float progress: progress (opt)
         :param assetObject asset: asset (opt)
         :param shotObject shot: shot (opt)
         :param taskObject need: need (opt)
