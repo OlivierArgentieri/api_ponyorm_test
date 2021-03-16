@@ -98,6 +98,23 @@ class TestAssetCategory(unittest.TestCase):
             self.assertEqual(len(temp_asset_categories), 1)
             self.assert_value(temp_asset_categories[0])
 
+    def update_asset_category(self):
+        """
+        Test update_asset_category, CRUD method
+        :return:
+        """
+        self.reset(db)
+        with orm.db_session:
+            # 1. find update_asset_category from db
+            temp_asset_category, _ = AssetCategory.find_asset_category_by_id(self.asset_category.id)
+
+            temp_asset_category.name = "updated_name"
+
+            temp_asset_category, _ = AssetCategory.update_asset_category_by_id(temp_asset_category.id, temp_asset_category)
+
+            # 2. assert
+            self.assertEqual("updated_name", temp_asset_category.name)
+
     def main(self):
         """
         Entry point
@@ -105,5 +122,5 @@ class TestAssetCategory(unittest.TestCase):
         """
         self.create_asset_category()
         self.find_asset_category()
-        # self.update_asset_category()
+        self.update_asset_category()
         # self.remove_asset_category()
