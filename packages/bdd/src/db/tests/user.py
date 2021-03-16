@@ -74,5 +74,81 @@ class TestUser(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_shot)
 
+    def find_user(self, dbo):
+        """
+        test find user, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+
+        # 1. find user from db
+        with orm.db_session:
+            temp_user, _ = User.find_user_by_id(self.user.id)
+
+            # 2. test value
+            self.assert_value(temp_user)
+
+            temp_user, err = User.find_user_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "User Not Found !")
+            self.assertEqual(temp_user, None)
+
+            # 4. find_all user from db
+            temp_users = User.find_all_users()
+
+            # 5. test value
+            self.assertEqual(len(temp_users), 1)
+            self.assert_value(temp_users[0])
+
+    def update_user(self, dbo):
+        """
+        Test update_user, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find update_user from db
+            temp_user, _ = User.find_user_by_id(self.user.id)
+
+            temp_user.name = "updated_name"
+            temp_user.email = "updated_test@mail.com"
+            temp_user.year_start = 2021
+            temp_user.year_end = 2022
+
+            temp_user, _ = User.update_user_by_id(temp_user.id, temp_user)
+
+            # 2. assert
+            self.assertEqual("updated_name", temp_user.name)
+            self.assertEqual("updated_test@mail.com", temp_user.email)
+            self.assertEqual(2021, temp_user.year_start)
+            self.assertEqual(2022, temp_user.year_end)
+
+    def remove_user(self, dbo):
+        """
+        Test remove_user, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find user from db
+            temp_user, _ = User.find_user_by_id(self.user.id)
+
+            # 2. remove
+            User.remove_user_by_id(temp_user.id)
+
+            # 3. re-get
+            temp_user, err = User.find_user_by_id(self.user.id)
+
+            # 4. assert
+            self.assertEqual(temp_user, None)
+            self.assertEqual("User Not Found !", err)
+
     def main(self):
         self.create_user(db)
+        self.find_user(db)
+        self.update_user(db)
+        self.remove_user(db)
