@@ -12,9 +12,10 @@ class ExtensionSoftware(db.Entity):
 
     extension = Required(Extension)
     software = Required(Software)
-    PrimaryKey(extension, software)
-    file = Set("File", cascade_delete=False)
 
+    PrimaryKey(extension, software)
+
+    file = Set("File", cascade_delete=False)
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod

@@ -58,7 +58,7 @@ class TestTagFile(unittest.TestCase):
         self.assertEqual("tag_file_test", tag_file_test.name)
         self.assertEqual("tag_name_desc", tag_file_test.description)
 
-        # Test CRUD
+    # Test CRUD
     def create_tag_file(self, dbo):
         """
         Test create_tag_file, CRUD method
