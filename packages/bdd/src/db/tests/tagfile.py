@@ -8,7 +8,7 @@ import unittest
 class TestTagFile(unittest.TestCase):
     """TestTagFile UnitTest class."""
 
-    tagfile = None
+    tag_file = None
 
     @staticmethod
     def clear_structure(dbo):
@@ -36,7 +36,7 @@ class TestTagFile(unittest.TestCase):
         :param dbObject dbo: dbo
         :return:
         """
-        self.tagfile = TagFile.create_tag_file("tag_file_test", "tag_name_desc")
+        self.tag_file = TagFile.create_tag_file("tag_file_test", "tag_name_desc")
 
     def reset(self, dbo):
         """
@@ -70,10 +70,39 @@ class TestTagFile(unittest.TestCase):
 
         with orm.db_session:
             # 1. get object in db with ponyorm function (get will be tested lately)
-            temp_tag_file = TagFile[self.tagfile.id]
+            temp_tag_file = TagFile[self.tag_file.id]
 
             # 2. assert on default value and getted value
             self.assert_value(temp_tag_file)
+
+    def find_tag_file(self, dbo):
+        """
+        test find tag_file, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+
+        # 1. find tag_file from db
+        with orm.db_session:
+            temp_tag_file, _ = TagFile.find_tag_file_by_id(
+                self.tag_file.id)
+
+            # 2. test value
+            self.assert_value(temp_tag_file)
+
+            temp_tag_file, err = TagFile.find_tag_file_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "TagFile Not Found !")
+            self.assertEqual(temp_tag_file, None)
+
+            # 4. find_all tag_file from db
+            temp_tag_files = TagFile.find_all_tag_files()
+
+            # 5. test value
+            self.assertEqual(len(temp_tag_files), 1)
+            self.assert_value(temp_tag_files[0])
 
     def main(self):
         """
@@ -81,6 +110,6 @@ class TestTagFile(unittest.TestCase):
         :return:
         """
         self.create_tag_file(db)
-        # self.find_tag_file(db)
+        self.find_tag_file(db)
         # self.find_tag_file(db)
         # self.find_tag_file(db)

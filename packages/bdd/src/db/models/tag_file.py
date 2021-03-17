@@ -1,5 +1,5 @@
 from db.server.server import db
-from pony.orm import Required, Set
+from pony.orm import Required, Set, Optional
 import datetime
 
 
@@ -9,6 +9,8 @@ class TagFile(db.Entity):
     name = Required(str)
     description = Required(str)
     file = Set("File")
+
+    deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
     def create_tag_file(name, description):
