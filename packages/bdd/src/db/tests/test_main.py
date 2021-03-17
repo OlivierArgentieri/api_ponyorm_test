@@ -25,6 +25,7 @@ from db.tests.asset import TestAsset
 from db.tests.task import TestTask
 from db.tests.subtask import TestSubtask
 from db.tests.variant import TestVariant
+from db.tests.tagfile import TestTagFile
 
 
 class TestMain(unittest.TestCase):
@@ -69,3 +70,4 @@ class TestMain(unittest.TestCase):
         TestTask().main()
         TestSubtask().main()
         TestVariant().main()
+        TestTagFile().main()
