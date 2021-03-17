@@ -132,6 +132,27 @@ class TestVariant(unittest.TestCase):
             self.assertEqual("test_variant_updated", temp_variant.name)
             self.assertEqual("test_state_updated", temp_variant.state)
 
+    def remove_variant(self, dbo):
+        """
+        Test remove_variant, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find variant from db
+            temp_variant, _ = Variant.find_variant_by_id(self.variant.id)
+
+            # 2. remove
+            Variant.remove_variant_by_id(temp_variant.id)
+
+            # 3. re-get
+            temp_variant, err = Variant.find_variant_by_id(self.variant.id)
+
+            # 4. assert
+            self.assertEqual(temp_variant, None)
+            self.assertEqual("Variant Not Found !", err)
+
     def main(self):
         """
         Entry point
@@ -140,4 +161,4 @@ class TestVariant(unittest.TestCase):
         self.create_variant(db)
         self.find_variant(db)
         self.update_variant(db)
-        # self.remove_variant(db)
+        self.remove_variant(db)
