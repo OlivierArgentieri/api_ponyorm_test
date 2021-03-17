@@ -124,6 +124,27 @@ class TestTagFile(unittest.TestCase):
             self.assertEqual("test_tag_file_updated", temp_tag_file.name)
             self.assertEqual("tag_file_updated", temp_tag_file.description)
 
+    def remove_tag_file(self, dbo):
+        """
+        Test remove_tag_file, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find tag_file from db
+            temp_tag_file, _ = TagFile.find_tag_file_by_id(self.tag_file.id)
+
+            # 2. remove
+            TagFile.remove_tag_file_by_id(temp_tag_file.id)
+
+            # 3. re-get
+            temp_tag_file, err = TagFile.find_tag_file_by_id(self.tag_file.id)
+
+            # 4. assert
+            self.assertEqual(temp_tag_file, None)
+            self.assertEqual("TagFile Not Found !", err)
+
     def main(self):
         """
         Entry point
@@ -132,4 +153,4 @@ class TestTagFile(unittest.TestCase):
         self.create_tag_file(db)
         self.find_tag_file(db)
         self.update_tag_file(db)
-        # self.find_tag_file(db)
+        self.remove_tag_file(db)
