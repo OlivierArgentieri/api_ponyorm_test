@@ -1,6 +1,5 @@
 from pony import orm
 from db.server.server import db
-from db.models.variant import Variant
 from db.models.tag_file import TagFile
 import unittest
 
