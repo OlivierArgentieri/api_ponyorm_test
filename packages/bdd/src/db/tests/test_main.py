@@ -27,6 +27,7 @@ from db.tests.subtask import TestSubtask
 from db.tests.variant import TestVariant
 from db.tests.tagfile import TestTagFile
 from db.tests.file import TestFile
+from db.tests.extension import TestExtension
 
 
 class TestMain(unittest.TestCase):
@@ -73,3 +74,4 @@ class TestMain(unittest.TestCase):
         TestVariant().main()
         TestTagFile().main()
         TestFile().main()
+        TestExtension().main()

@@ -70,8 +70,8 @@ class Extension(db.Entity):
         if target_extension is None:
             return target_extension, "Extension Not Found !"
 
-        target_extension.extension = extension_updated.extension
-        target_extension.software = extension_updated.software
+        target_extension.name = extension_updated.name
+        target_extension.description = extension_updated.description
 
         return target_extension, ""
 
