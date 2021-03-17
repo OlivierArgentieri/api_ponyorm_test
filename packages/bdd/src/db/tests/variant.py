@@ -90,6 +90,6 @@ class TestVariant(unittest.TestCase):
         :return:
         """
         self.create_variant(db)
-        # self.find_asset(db)
-        # self.update_asset(db)
-        # self.remove_asset(db)
+        # self.find_variant(db)
+        # self.update_variant(db)
+        # self.remove_variant(db)
