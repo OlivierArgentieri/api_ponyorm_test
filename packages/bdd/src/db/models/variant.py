@@ -73,8 +73,8 @@ class Variant(db.Entity):
             return target_variant, "Variant Not Found !"
 
         target_variant.name = variant_updated.name
-        target_variant.state = variant_updated.short_name
-        target_variant.task = variant_updated.year_start
+        target_variant.state = variant_updated.state
+        target_variant.task = variant_updated.task
         target_variant.updatedAt = datetime.datetime.utcnow()
 
         return target_variant, ""

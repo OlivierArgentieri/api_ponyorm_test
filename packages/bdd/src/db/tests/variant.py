@@ -112,6 +112,26 @@ class TestVariant(unittest.TestCase):
             self.assertEqual(len(temp_variants), 1)
             self.assert_value(temp_variants[0])
 
+    def update_variant(self, dbo):
+        """
+        Test update_variant, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find update_variant from db
+            temp_variant, _ = Variant.find_variant_by_id(self.variant.id)
+
+            temp_variant.name = "test_variant_updated"
+            temp_variant.state = "test_state_updated"
+
+            temp_variant, _ = Variant.update_variant_by_id(temp_variant.id, temp_variant)
+
+            # 2. assert
+            self.assertEqual("test_variant_updated", temp_variant.name)
+            self.assertEqual("test_state_updated", temp_variant.state)
+
     def main(self):
         """
         Entry point
@@ -119,5 +139,5 @@ class TestVariant(unittest.TestCase):
         """
         self.create_variant(db)
         self.find_variant(db)
-        # self.update_variant(db)
+        self.update_variant(db)
         # self.remove_variant(db)
