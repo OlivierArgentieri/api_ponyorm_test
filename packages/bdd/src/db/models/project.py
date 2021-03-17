@@ -72,7 +72,8 @@ class Project(db.Entity):
         """
 
         # get project
-        _targetProject = Project.get(lambda s: s.id == _project_id and s.deletedAt is None)
+        _targetProject = Project.get(
+            lambda s: s.id == _project_id and s.deletedAt is None)
 
         # project exist?
         if _targetProject is None:
@@ -97,7 +98,8 @@ class Project(db.Entity):
         """
 
         # get project
-        _targetProject = Project.get(lambda s: s.id == _project_id and s.deletedAt is None)
+        _targetProject = Project.get(
+            lambda s: s.id == _project_id and s.deletedAt is None)
 
         # Project exist?
         if _targetProject is None:

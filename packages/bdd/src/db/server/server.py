@@ -11,9 +11,10 @@ if os.getenv("IS_UNIT_TEST", None):
             database=conf.get('db_name_test', {}), port=conf.get('db_port_test', {}))
 
 else:
-    db.bind(provider=conf.get('db_driver', {}), user=conf.get('db_user', {}),
-            password=conf.get('db_password', {}), host=conf.get('db_host', {}),
-            database=conf.get('db_name', {}), port=conf.get('db_port', {}))
+    db.bind(
+        provider=conf.get('db_driver', {}), user=conf.get('db_user', {}),
+        password=conf.get('db_password', {}), host=conf.get('db_host', {}),
+        database=conf.get('db_name', {}), port=conf.get('db_port', {}))
 
 orm.set_sql_debug(True)  # to debug request
 

@@ -11,8 +11,12 @@ class Variant(db.Entity):
     state = Optional(str)
     task = Required(Task)
 
-    createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="created_at")
-    updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow, column="updated_at")
+    createdAt = Required(datetime.datetime, default=datetime.datetime.utcnow,
+                         column="created_at")
+
+    updatedAt = Required(datetime.datetime, default=datetime.datetime.utcnow,
+                         column="updated_at")
+
     deletedAt = Optional(datetime.datetime, nullable=True, column="deleted_at")
 
     @staticmethod
@@ -66,7 +70,8 @@ class Variant(db.Entity):
         """
 
         # get variant
-        target_variant = Variant.get(lambda s: s.id == variant_id and s.deletedAt is None)
+        target_variant = Variant.get(
+            lambda s: s.id == variant_id and s.deletedAt is None)
 
         # variant exist?
         if target_variant is None:

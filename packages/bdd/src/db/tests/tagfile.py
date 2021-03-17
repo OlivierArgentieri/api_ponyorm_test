@@ -117,7 +117,8 @@ class TestTagFile(unittest.TestCase):
             temp_tag_file.name = "test_tag_file_updated"
             temp_tag_file.description = "tag_file_updated"
 
-            temp_tag_file, _ = TagFile.update_tag_file_by_id(temp_tag_file.id, temp_tag_file)
+            temp_tag_file, _ = TagFile.update_tag_file_by_id(
+                temp_tag_file.id, temp_tag_file)
 
             # 2. assert
             self.assertEqual("test_tag_file_updated", temp_tag_file.name)

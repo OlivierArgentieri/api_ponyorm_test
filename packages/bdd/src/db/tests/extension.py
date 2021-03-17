@@ -120,7 +120,8 @@ class TestExtension(unittest.TestCase):
             temp_extension.name = "test_extension_updated"
             temp_extension.description = "test_desc_updated"
 
-            temp_extension, _ = Extension.update_extension_by_id(temp_extension.id, temp_extension)
+            temp_extension, _ = Extension.update_extension_by_id(
+                temp_extension.id, temp_extension)
 
             # 2. assert
             self.assertEqual("test_extension_updated", temp_extension.name)
@@ -135,13 +136,13 @@ class TestExtension(unittest.TestCase):
         self.reset(dbo)
         with orm.db_session:
             # 1. find extension from db
-            temp_extension, _ = Extension.find_file_by_id(self.extension.id)
+            temp_extension, _ = Extension.find_extension_by_id(self.extension.id)
 
             # 2. remove
             Extension.remove_extension_by_id(temp_extension.id)
 
             # 3. re-get
-            temp_extension, err = Extension.find_file_by_id(self.extension.id)
+            temp_extension, err = Extension.find_extension_by_id(self.extension.id)
 
             # 4. assert
             self.assertEqual(temp_extension, None)

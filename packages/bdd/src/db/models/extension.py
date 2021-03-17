@@ -52,7 +52,9 @@ class Extension(db.Entity):
         return extension, ""
 
     @staticmethod
-    def update_extension_by_id(extension_id, extension_updated):
+    def update_extension_by_id(extension_id,
+                               extension_updated):
+        
         """Update extension by id
 
         :param int extension_id: extension_id
@@ -85,7 +87,8 @@ class Extension(db.Entity):
         """
 
         # get targetExtension
-        target_extension = Extension.get(lambda s: s.id == extension_id and s.deletedAt is None)
+        target_extension = Extension.get(
+            lambda s: s.id == extension_id and s.deletedAt is None)
 
         # targetExtension exist?
         if target_extension is None:

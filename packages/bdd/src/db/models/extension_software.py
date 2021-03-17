@@ -50,7 +50,9 @@ class ExtensionSoftware(db.Entity):
         :rtype: (extensionSoftwareObject, str)
         """
 
-        extension_software = ExtensionSoftware.get(lambda s: s.id == extension_software_id and s.deletedAt is None)
+        extension_software = ExtensionSoftware.get(
+            lambda s: s.id == extension_software_id and s.deletedAt is None)
+
         if extension_software is None:
             return extension_software, "ExtensionSoftware Not Found !"
 

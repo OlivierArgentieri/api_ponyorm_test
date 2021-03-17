@@ -78,9 +78,14 @@ class TestFile(unittest.TestCase):
 
         self.software = Software(name="test_software")
         self.extension = Extension(name="test_software", description="test_description")
-        self.extension_software = ExtensionSoftware(extension=self.extension, software=self.software)
+
+        self.extension_software = ExtensionSoftware(extension=self.extension,
+                                                    software=self.software)
+
         self.tag_file = TagFile(name="test_tag", description="test_tag_desc")
-        self.file = File.create_file("test_file", self.extension_software, 1, self.tag_file, self.subtask)
+
+        self.file = File.create_file("test_file", self.extension_software,
+                                     1, self.tag_file, self.subtask)
 
     def reset(self, dbo):
         """

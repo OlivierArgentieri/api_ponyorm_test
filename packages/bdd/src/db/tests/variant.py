@@ -126,7 +126,8 @@ class TestVariant(unittest.TestCase):
             temp_variant.name = "test_variant_updated"
             temp_variant.state = "test_state_updated"
 
-            temp_variant, _ = Variant.update_variant_by_id(temp_variant.id, temp_variant)
+            temp_variant, _ = Variant.update_variant_by_id(
+                temp_variant.id, temp_variant)
 
             # 2. assert
             self.assertEqual("test_variant_updated", temp_variant.name)

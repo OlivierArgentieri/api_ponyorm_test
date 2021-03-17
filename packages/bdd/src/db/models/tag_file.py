@@ -62,7 +62,8 @@ class TagFile(db.Entity):
         """
 
         # get targetTagFile
-        target_tag_file = TagFile.get(lambda s: s.id == tag_file_id and s.deletedAt is None)
+        target_tag_file = TagFile.get(
+            lambda s: s.id == tag_file_id and s.deletedAt is None)
 
         # targetTagFile exist?
         if target_tag_file is None:
