@@ -104,6 +104,26 @@ class TestTagFile(unittest.TestCase):
             self.assertEqual(len(temp_tag_files), 1)
             self.assert_value(temp_tag_files[0])
 
+    def update_tag_file(self, dbo):
+        """
+        Test update_tag_file, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find update_tag_file from db
+            temp_tag_file, _ = TagFile.find_tag_file_by_id(self.tag_file.id)
+
+            temp_tag_file.name = "test_tag_file_updated"
+            temp_tag_file.description = "tag_file_updated"
+
+            temp_tag_file, _ = TagFile.update_tag_file_by_id(temp_tag_file.id, temp_tag_file)
+
+            # 2. assert
+            self.assertEqual("test_tag_file_updated", temp_tag_file.name)
+            self.assertEqual("tag_file_updated", temp_tag_file.description)
+
     def main(self):
         """
         Entry point
@@ -111,5 +131,5 @@ class TestTagFile(unittest.TestCase):
         """
         self.create_tag_file(db)
         self.find_tag_file(db)
-        # self.find_tag_file(db)
+        self.update_tag_file(db)
         # self.find_tag_file(db)
