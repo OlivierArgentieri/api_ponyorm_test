@@ -84,12 +84,40 @@ class TestVariant(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_variant)
 
+    def find_variant(self, dbo):
+        """
+        Test find_variant, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+
+        # 1. find temp_variant from db
+        with orm.db_session:
+            temp_variant, _ = Variant.find_variant_by_id(self.variant.id)
+
+            # 2. test value
+            self.assert_value(temp_variant)
+
+            temp_variant, err = Variant.find_variant_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "Variant Not Found !")
+            self.assertEqual(temp_variant, None)
+
+            # 4. find_all variant from db
+            temp_variants = Variant.find_all_variants()
+
+            # 5. test value
+            self.assertEqual(len(temp_variants), 1)
+            self.assert_value(temp_variants[0])
+
     def main(self):
         """
         Entry point
         :return:
         """
         self.create_variant(db)
-        # self.find_variant(db)
+        self.find_variant(db)
         # self.update_variant(db)
         # self.remove_variant(db)
