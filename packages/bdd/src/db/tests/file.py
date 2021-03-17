@@ -121,12 +121,82 @@ class TestFile(unittest.TestCase):
             # 2. assert on default value and getted value
             self.assert_value(temp_file)
 
+    def find_file(self, dbo):
+        """
+        test find file, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+
+        # 1. find tag_file from db
+        with orm.db_session:
+            temp_file, _ = File.find_file_by_id(
+                self.file.id)
+
+            # 2. test value
+            self.assert_value(temp_file)
+
+            temp_file, err = File.find_file_by_id(-1)
+
+            # 3. assert on error
+            self.assertEqual(err, "File Not Found !")
+            self.assertEqual(temp_file, None)
+
+            # 4. find_all temp_file from db
+            temp_files = File.find_all_files()
+
+            # 5. test value
+            self.assertEqual(len(temp_files), 1)
+            self.assert_value(temp_files[0])
+
+    def update_file(self, dbo):
+        """
+        Test update_file, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find update_file from db
+            temp_file, _ = File.find_file_by_id(self.file.id)
+
+            temp_file.name = "test_file_updated"
+            temp_file.iteration = 2
+
+            temp_file, _ = File.update_file_by_id(temp_file.id, temp_file)
+
+            # 2. assert
+            self.assertEqual("test_file_updated", temp_file.name)
+            self.assertEqual(2, temp_file.iteration)
+
+    def remove_file(self, dbo):
+        """
+        Test remove_file, CRUD method
+        :param dbObject dbo: dbo
+        :return:
+        """
+        self.reset(dbo)
+        with orm.db_session:
+            # 1. find file from db
+            temp_file, _ = File.find_file_by_id(self.file.id)
+
+            # 2. remove
+            File.remove_file_by_id(temp_file.id)
+
+            # 3. re-get
+            temp_file, err = File.find_file_by_id(self.file.id)
+
+            # 4. assert
+            self.assertEqual(temp_file, None)
+            self.assertEqual("File Not Found !", err)
+
     def main(self):
         """
         Entry point
         :return:
         """
         self.create_file(db)
-        # self.find_tag_file(db)
-        # self.update_tag_file(db)
-        # self.remove_tag_file(db)
+        self.find_file(db)
+        self.update_file(db)
+        self.remove_file(db)
