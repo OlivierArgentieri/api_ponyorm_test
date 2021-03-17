@@ -28,6 +28,7 @@ from db.tests.variant import TestVariant
 from db.tests.tagfile import TestTagFile
 from db.tests.file import TestFile
 from db.tests.extension import TestExtension
+from db.tests.software import TestSoftware
 
 
 class TestMain(unittest.TestCase):
@@ -75,3 +76,4 @@ class TestMain(unittest.TestCase):
         TestTagFile().main()
         TestFile().main()
         TestExtension().main()
+        TestSoftware().main()
