@@ -22,10 +22,9 @@ class TestSubtask(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.drop_table("variant", if_exists=True, with_all_data=True)
         dbo.drop_table("asset", if_exists=True, with_all_data=True)
@@ -36,19 +35,17 @@ class TestSubtask(unittest.TestCase):
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self, dbo):
-        """
-        Fill tables with test data
+        """Fill tables with test data
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.project = Project(name="test_project", short_name="test",
                                year_start=2020, year_end=2021)
@@ -66,20 +63,18 @@ class TestSubtask(unittest.TestCase):
         self.subtask = Subtask.create_subtask("test_subtask", self.task)
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestSubtask.clear_structure(dbo)
         TestSubtask.generate_structure(dbo)
         self.fill_datas(dbo)
 
     def assert_value(self, subtask_test):
-        """
-        Asserts with test value
+        """Asserts with test value
+
         :param subtaskObject subtask_test: subtask_test
-        :return:
         """
         self.assertTrue(subtask_test)
 
@@ -88,10 +83,9 @@ class TestSubtask(unittest.TestCase):
 
     # Test CRUD
     def create_subtask(self, dbo):
-        """
-        Test create_subtask, CRUD method
+        """Test create_subtask, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)  # create default object in fill_datas function
 
@@ -103,10 +97,9 @@ class TestSubtask(unittest.TestCase):
             self.assert_value(temp_subtask)
 
     def find_subtask(self, dbo):
-        """
-        test find_subtask, CRUD method
+        """test find_subtask, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -131,10 +124,9 @@ class TestSubtask(unittest.TestCase):
             self.assert_value(temp_subtasks[0])
 
     def update_subtask(self, dbo):
-        """
-        Test update_subtask, CRUD method
+        """Test update_subtask, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -151,10 +143,9 @@ class TestSubtask(unittest.TestCase):
             self.assertEqual(100, temp_task.progress)
 
     def remove_subtask(self, dbo):
-        """
-        Test remove_subtask, CRUD method
+        """Test remove_subtask, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -172,10 +163,8 @@ class TestSubtask(unittest.TestCase):
             self.assertEqual("Subtask Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_subtask(db)
         self.find_subtask(db)
         self.update_subtask(db)

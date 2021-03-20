@@ -11,47 +11,42 @@ class TestTagFile(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
 
         dbo.drop_table("tagfile", if_exists=True, with_all_data=True)
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
-        """
-        Fill tables with test data
+        """Fill tables with test data
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.tag_file = TagFile.create_tag_file("tag_file_test", "tag_name_desc")
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestTagFile.clear_structure(dbo)
         TestTagFile.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, tag_file_test):
-        """
-        Asserts with test value
+        """Asserts with test value
+
         :param tagFileObject tag_file_test: task_test
-        :return:
         """
         self.assertTrue(tag_file_test)
 
@@ -60,10 +55,9 @@ class TestTagFile(unittest.TestCase):
 
     # Test CRUD
     def create_tag_file(self, dbo):
-        """
-        Test create_tag_file, CRUD method
+        """Test create_tag_file, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)  # create default object in fill_datas function
 
@@ -75,10 +69,9 @@ class TestTagFile(unittest.TestCase):
             self.assert_value(temp_tag_file)
 
     def find_tag_file(self, dbo):
-        """
-        test find tag_file, CRUD method
+        """test find tag_file, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -104,10 +97,9 @@ class TestTagFile(unittest.TestCase):
             self.assert_value(temp_tag_files[0])
 
     def update_tag_file(self, dbo):
-        """
-        Test update_tag_file, CRUD method
+        """Test update_tag_file, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -125,10 +117,9 @@ class TestTagFile(unittest.TestCase):
             self.assertEqual("tag_file_updated", temp_tag_file.description)
 
     def remove_tag_file(self, dbo):
-        """
-        Test remove_tag_file, CRUD method
+        """Test remove_tag_file, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -146,10 +137,8 @@ class TestTagFile(unittest.TestCase):
             self.assertEqual("TagFile Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_tag_file(db)
         self.find_tag_file(db)
         self.update_tag_file(db)

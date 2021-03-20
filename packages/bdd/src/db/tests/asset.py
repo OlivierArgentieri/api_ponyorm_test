@@ -15,10 +15,9 @@ class TestAsset(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.drop_table("assetcategory", if_exists=True, with_all_data=True)
         dbo.drop_table("project", if_exists=True, with_all_data=True)
@@ -26,17 +25,16 @@ class TestAsset(unittest.TestCase):
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
-        """
-        fill tables with test datas
+        """fill tables with test datas
+
         :return:
         """
         self.asset_category = AssetCategory.create_asset_category("test_asset")
@@ -46,20 +44,18 @@ class TestAsset(unittest.TestCase):
                                         self.asset_category, 10)
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestAsset.clear_structure(dbo)
         TestAsset.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, asset_test):
-        """
-        Assert with test value
-        :param assetTestObject asset_test:
-        :return:
+        """Assert with test value
+
+        :param assetTestObject asset_test: assetTest
         """
         self.assertTrue(asset_test)
 
@@ -70,10 +66,9 @@ class TestAsset(unittest.TestCase):
 
     # Test CRUD
     def create_asset(self, dbo):
-        """
-        Test create_asset, CRUD method
+        """Test create_asset, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -85,10 +80,9 @@ class TestAsset(unittest.TestCase):
             self.assert_value(temp_asset)
 
     def find_asset(self, dbo):
-        """
-        Test find_asset, CRUD method
+        """Test find_asset, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -113,10 +107,9 @@ class TestAsset(unittest.TestCase):
             self.assert_value(temp_assets[0])
 
     def update_asset(self, dbo):
-        """
-        Test update_asset, CRUD method
+        """Test update_asset, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -133,10 +126,9 @@ class TestAsset(unittest.TestCase):
             self.assertEqual(100, temp_asset.lod)
 
     def remove_asset(self, dbo):
-        """
-        Test remove_asset, CRUD method
+        """Test remove_asset, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -154,10 +146,8 @@ class TestAsset(unittest.TestCase):
             self.assertEqual("Asset Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_asset(db)
         self.find_asset(db)
         self.update_asset(db)

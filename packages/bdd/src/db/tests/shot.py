@@ -13,49 +13,43 @@ class TestShot(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.drop_table("project", if_exists=True, with_all_data=True)
         dbo.drop_table("shot", if_exists=True, with_all_data=True)
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
-        """
-        Fill tables with test data
-        :return:
-        """
+        """Fill tables with test data"""
+
         self.project = Project(name="test_project", short_name="test",
                                year_start=2020, year_end=2021)
 
         self.shot = Shot.create_shot(10, self.project)
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestShot.clear_structure(dbo)
         TestShot.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, shot_test):
-        """
-        Asserts with test value
+        """Asserts with test value
+
         :param shotObject shot_test: shot_test
-        :return:
         """
         self.assertTrue(shot_test)
 
@@ -69,10 +63,9 @@ class TestShot(unittest.TestCase):
 
     # Test CRUD
     def create_shot(self, dbo):
-        """
-        Test create_shot, CRUD method
+        """Test create_shot, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)  # create default object in fill_datas function
 
@@ -84,10 +77,9 @@ class TestShot(unittest.TestCase):
             self.assert_value(temp_shot)
 
     def find_shot(self, dbo):
-        """
-        Test find_shot, CRUD method
+        """Test find_shot, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -112,10 +104,9 @@ class TestShot(unittest.TestCase):
             self.assert_value(temp_shots[0])
 
     def update_shot(self, dbo):
-        """
-        Test update_shot, CRUD method
+        """Test update_shot, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -141,10 +132,9 @@ class TestShot(unittest.TestCase):
             self.assertEqual(temp_shot, None)
 
     def remove_shot(self, dbo):
-        """
-        Test remove_shot, CRUD method
+        """Test remove_shot, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -162,10 +152,8 @@ class TestShot(unittest.TestCase):
             self.assertEqual("Shot Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_shot(db)
         self.find_shot(db)
         self.update_shot(db)

@@ -11,10 +11,9 @@ class TestExtension(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
 
         db.drop_table("file", if_exists=True, with_all_data=True)
@@ -24,37 +23,32 @@ class TestExtension(unittest.TestCase):
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
-        """
-        fill tables with test datas
-        :return:
-        """
+        """fill tables with test datas"""
+
         # xor on asset and shot
         self.extension = Extension(name="test_ext", description="test_desc")
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestExtension.clear_structure(dbo)
         TestExtension.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, extension_test):
-        """
-        Asserts with test value
+        """Asserts with test value
+
         :param extensionObject extension_test: extension_test
-        :return:
         """
         self.assertTrue(extension_test)
 
@@ -63,10 +57,9 @@ class TestExtension(unittest.TestCase):
 
     # Test CRUD
     def create_extension(self, dbo):
-        """
-        Test create_extension, CRUD method
+        """Test create_extension, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)  # create default object in fill_datas function
 
@@ -78,10 +71,9 @@ class TestExtension(unittest.TestCase):
             self.assert_value(temp_extension)
 
     def find_extension(self, dbo):
-        """
-        test find extension, CRUD method
+        """test find extension, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -107,10 +99,9 @@ class TestExtension(unittest.TestCase):
             self.assert_value(temp_extension[0])
 
     def update_extension(self, dbo):
-        """
-        Test update_extension, CRUD method
+        """Test update_extension, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -128,10 +119,9 @@ class TestExtension(unittest.TestCase):
             self.assertEqual("test_desc_updated", temp_extension.description)
 
     def remove_extension(self, dbo):
-        """
-        Test remove_extension, CRUD method
+        """Test remove_extension, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -149,10 +139,8 @@ class TestExtension(unittest.TestCase):
             self.assertEqual("Extension Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_extension(db)
         self.find_extension(db)
         self.update_extension(db)

@@ -13,10 +13,9 @@ class TestVariant(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.drop_table("variant", if_exists=True, with_all_data=True)
         dbo.drop_table("asset", if_exists=True, with_all_data=True)
@@ -30,37 +29,32 @@ class TestVariant(unittest.TestCase):
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
-        """
-        fill tables with test datas
-        :return:
-        """
+        """fill tables with test datas"""
+
         self.task = Task(name="test_task")
         self.variant = Variant.create_variant("test_variant", self.task, "test_state")
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestVariant.clear_structure(dbo)
         TestVariant.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, variant_test):
-        """
-        Assert with test value
+        """Assert with test value
+
         :param variantTestObject variant_test:
-        :return:
         """
         self.assertTrue(variant_test)
 
@@ -70,10 +64,9 @@ class TestVariant(unittest.TestCase):
 
     # Test CRUD
     def create_variant(self, dbo):
-        """
-        Test create_variant, CRUD method
+        """Test create_variant, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -85,10 +78,9 @@ class TestVariant(unittest.TestCase):
             self.assert_value(temp_variant)
 
     def find_variant(self, dbo):
-        """
-        Test find_variant, CRUD method
+        """Test find_variant, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -113,10 +105,9 @@ class TestVariant(unittest.TestCase):
             self.assert_value(temp_variants[0])
 
     def update_variant(self, dbo):
-        """
-        Test update_variant, CRUD method
+        """Test update_variant, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -134,10 +125,9 @@ class TestVariant(unittest.TestCase):
             self.assertEqual("test_state_updated", temp_variant.state)
 
     def remove_variant(self, dbo):
-        """
-        Test remove_variant, CRUD method
+        """Test remove_variant, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -155,10 +145,8 @@ class TestVariant(unittest.TestCase):
             self.assertEqual("Variant Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_variant(db)
         self.find_variant(db)
         self.update_variant(db)

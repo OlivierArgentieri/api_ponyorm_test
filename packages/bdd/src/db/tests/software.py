@@ -11,10 +11,9 @@ class TestSoftware(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
 
         db.drop_table("file", if_exists=True, with_all_data=True)
@@ -24,37 +23,31 @@ class TestSoftware(unittest.TestCase):
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
-        """
-        fill tables with test datas
-        :return:
-        """
+        """fill tables with test datas"""
         # xor on asset and shot
         self.software = Software(name="test_software")
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestSoftware.clear_structure(dbo)
         TestSoftware.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, software_test):
-        """
-        Asserts with test value
+        """Asserts with test value
+
         :param softwareObject software_test: software_test
-        :return:
         """
         self.assertTrue(software_test)
 
@@ -62,10 +55,9 @@ class TestSoftware(unittest.TestCase):
 
     # Test CRUD
     def create_software(self, dbo):
-        """
-        Test create_software, CRUD method
+        """Test create_software, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)  # create default object in fill_datas function
 
@@ -77,10 +69,9 @@ class TestSoftware(unittest.TestCase):
             self.assert_value(create_software)
 
     def find_software(self, dbo):
-        """
-        test find software, CRUD method
+        """test find software, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -106,10 +97,9 @@ class TestSoftware(unittest.TestCase):
             self.assert_value(temp_software[0])
 
     def update_software(self, dbo):
-        """
-        Test update_software, CRUD method
+        """Test update_software, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -125,10 +115,9 @@ class TestSoftware(unittest.TestCase):
             self.assertEqual("test_software_updated", temp_software.name)
 
     def remove_software(self, dbo):
-        """
-        Test remove_software, CRUD method
+        """Test remove_software, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -146,10 +135,8 @@ class TestSoftware(unittest.TestCase):
             self.assertEqual("Software Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_software(db)
         self.find_software(db)
         self.update_software(db)

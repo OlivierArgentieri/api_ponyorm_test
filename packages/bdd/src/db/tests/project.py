@@ -13,48 +13,42 @@ class TestProject(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo : db
-        :return:
         """
         dbo.drop_table("project", if_exists=True, with_all_data=True)
         dbo.drop_table("shot", if_exists=True, with_all_data=True)
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo : db
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self):
-        """
-        fill tables with test data
-        :return:
-        """
+        """fill tables with test data"""
+
         self.project = Project.create_project("test_project", "test", 2020, 2021)
         self.shots = [Shot(duration=10, project=self.project),
                       Shot(duration=80, project=self.project)]
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestProject.clear_structure(dbo)
         TestProject.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, project_test):
-        """
-        Assert with test value
+        """Assert with test value
+
         :param projectTestObject project_test:
-        :return:
         """
         self.assertTrue(project_test)
 
@@ -69,10 +63,9 @@ class TestProject(unittest.TestCase):
 
     # Test CRUD
     def create_project(self, dbo):
-        """
-        Test create_project, CRUD method
+        """Test create_project, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -84,10 +77,9 @@ class TestProject(unittest.TestCase):
             self.assert_value(temp_project)
 
     def find_project(self, dbo):
-        """
-        Test find_project, CRUD method
+        """Test find_project, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -112,10 +104,9 @@ class TestProject(unittest.TestCase):
             self.assert_value(temp_projects[0])
 
     def update_project(self, dbo):
-        """
-        Test update_project, CRUD method
+        """Test update_project, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -137,10 +128,9 @@ class TestProject(unittest.TestCase):
             self.assertEqual(2022, temp_project.year_end)
 
     def remove_project(self, dbo):
-        """
-        Test remove_project, CRUD method
+        """Test remove_project, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -158,10 +148,8 @@ class TestProject(unittest.TestCase):
             self.assertEqual("Project Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_project(db)
         self.find_project(db)
         self.update_project(db)

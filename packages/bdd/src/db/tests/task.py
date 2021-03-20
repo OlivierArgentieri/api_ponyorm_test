@@ -21,10 +21,9 @@ class TestTask(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.drop_table("variant", if_exists=True, with_all_data=True)
         dbo.drop_table("asset", if_exists=True, with_all_data=True)
@@ -34,19 +33,17 @@ class TestTask(unittest.TestCase):
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self, dbo):
-        """
-        Fill tables with test data
+        """Fill tables with test data
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.project = Project(name="test_project", short_name="test",
                                year_start=2020, year_end=2021)
@@ -62,20 +59,17 @@ class TestTask(unittest.TestCase):
         self.task = Task.create_task("test_task", 10, self.asset)
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestTask.clear_structure(dbo)
         TestTask.generate_structure(dbo)
         self.fill_datas(dbo)
 
     def assert_value(self, task_test):
-        """
-        Asserts with test value
+        """Asserts with test value
         :param taskObject task_test: task_test
-        :return:
         """
         self.assertTrue(task_test)
 
@@ -85,10 +79,9 @@ class TestTask(unittest.TestCase):
 
     # Test CRUD
     def create_task(self, dbo):
-        """
-        Test create_task, CRUD method
+        """Test create_task, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)  # create default object in fill_datas function
 
@@ -117,10 +110,9 @@ class TestTask(unittest.TestCase):
             # todo see : https://github.com/ponyorm/pony/issues/592
 
     def find_task(self, dbo):
-        """
-        test find_task, CRUD method
+        """test find_task, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -145,10 +137,9 @@ class TestTask(unittest.TestCase):
             self.assert_value(temp_task[0])
 
     def update_task(self, dbo):
-        """
-        Test update_task, CRUD method
+        """Test update_task, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -165,10 +156,9 @@ class TestTask(unittest.TestCase):
             self.assertEqual(100, temp_task.progress)
 
     def remove_task(self, dbo):
-        """
-        Test remove_task, CRUD method
+        """Test remove_task, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -186,10 +176,8 @@ class TestTask(unittest.TestCase):
             self.assertEqual("Task Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+        
         self.create_task(db)
         self.find_task(db)
         self.update_task(db)

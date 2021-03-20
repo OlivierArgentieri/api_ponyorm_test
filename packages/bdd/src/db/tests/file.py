@@ -33,10 +33,9 @@ class TestFile(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.drop_table("variant", if_exists=True, with_all_data=True)
         dbo.drop_table("asset", if_exists=True, with_all_data=True)
@@ -48,18 +47,17 @@ class TestFile(unittest.TestCase):
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session
     def fill_datas(self, dbo):
-        """
-        fill tables with test datas
-        :return:
+        """fill tables with test datas
+
+        :param dbObject dbo: dbo
         """
         self.project = Project(name="test_project", short_name="test",
                                year_start=2020, year_end=2021)
@@ -88,20 +86,18 @@ class TestFile(unittest.TestCase):
                                      1, self.tag_file, self.subtask)
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestFile.clear_structure(dbo)
         TestFile.generate_structure(dbo)
         self.fill_datas(dbo)
 
     def assert_value(self, file_test):
-        """
-        Asserts with test value
+        """Asserts with test value
+
         :param fileObject file_test: file_test
-        :return:
         """
         self.assertTrue(file_test)
 
@@ -112,10 +108,9 @@ class TestFile(unittest.TestCase):
 
     # Test CRUD
     def create_file(self, dbo):
-        """
-        Test create_file, CRUD method
+        """Test create_file, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)  # create default object in fill_datas function
 
@@ -127,10 +122,9 @@ class TestFile(unittest.TestCase):
             self.assert_value(temp_file)
 
     def find_file(self, dbo):
-        """
-        test find file, CRUD method
+        """test find file, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -156,10 +150,9 @@ class TestFile(unittest.TestCase):
             self.assert_value(temp_files[0])
 
     def update_file(self, dbo):
-        """
-        Test update_file, CRUD method
+        """Test update_file, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -176,10 +169,9 @@ class TestFile(unittest.TestCase):
             self.assertEqual(2, temp_file.iteration)
 
     def remove_file(self, dbo):
-        """
-        Test remove_file, CRUD method
+        """Test remove_file, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -197,10 +189,8 @@ class TestFile(unittest.TestCase):
             self.assertEqual("File Not Found !", err)
 
     def main(self):
-        """
-        Entry point
-        :return:
-        """
+        """Entry point"""
+
         self.create_file(db)
         self.find_file(db)
         self.update_file(db)

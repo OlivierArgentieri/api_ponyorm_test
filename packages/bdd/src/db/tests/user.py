@@ -11,45 +11,39 @@ class TestUser(unittest.TestCase):
 
     @staticmethod
     def clear_structure(dbo):
-        """
-        Drop each needed entities tables
+        """Drop each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.drop_table("user", if_exists=True, with_all_data=True)
 
     @staticmethod
     def generate_structure(dbo):
-        """
-        Create each needed entities tables
+        """Create each needed entities tables
+
         :param dbObject dbo: dbo
-        :return:
         """
         dbo.create_tables()
 
     @orm.db_session()
     def fill_datas(self):
-        """
-        Fill tables with test data
-        :return:
-        """
+        """Fill tables with test data"""
+
         self.user = User.create_user("test", "test@mail.com", 2020, 2021)
 
     def reset(self, dbo):
-        """
-        Execute: clear, generate_structure and fill_data
+        """Execute: clear, generate_structure and fill_data
+
         :param dbObject dbo: dbo
-        :return:
         """
         TestUser.clear_structure(dbo)
         TestUser.generate_structure(dbo)
         self.fill_datas()
 
     def assert_value(self, user_test):
-        """
-        Asserts with test value
+        """Asserts with test value
+
         :param user_test: user object
-        :return:
         """
         self.assertTrue(user_test)
 
@@ -60,10 +54,9 @@ class TestUser(unittest.TestCase):
 
     # Test CRUD
     def create_user(self, dbo):
-        """
-        Test create_user, CRUD method
+        """Test create_user, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)  # create default object in fill_datas function
 
@@ -75,10 +68,9 @@ class TestUser(unittest.TestCase):
             self.assert_value(temp_shot)
 
     def find_user(self, dbo):
-        """
-        test find user, CRUD method
+        """test find user, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
 
@@ -103,10 +95,9 @@ class TestUser(unittest.TestCase):
             self.assert_value(temp_users[0])
 
     def update_user(self, dbo):
-        """
-        Test update_user, CRUD method
+        """Test update_user, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -127,10 +118,9 @@ class TestUser(unittest.TestCase):
             self.assertEqual(2022, temp_user.year_end)
 
     def remove_user(self, dbo):
-        """
-        Test remove_user, CRUD method
+        """Test remove_user, CRUD method
+
         :param dbObject dbo: dbo
-        :return:
         """
         self.reset(dbo)
         with orm.db_session:
@@ -148,6 +138,8 @@ class TestUser(unittest.TestCase):
             self.assertEqual("User Not Found !", err)
 
     def main(self):
+        """Entry point"""
+
         self.create_user(db)
         self.find_user(db)
         self.update_user(db)
