@@ -1,8 +1,8 @@
 #Postgres Live
 # Postgres Dev
-db_host: localhost
+db_host: 192.168.1.57
 db_user: postgres
-db_password: password
+db_password: toor
 db_name: db_dev
 db_port: 5432
 db_driver: postgres

@@ -19,7 +19,7 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-   
+
 PackageBdd models
 ===================
 
@@ -27,12 +27,12 @@ Entity asset
 """""""""""""
 .. automodule:: db.models.asset
    :members:
-  
+
 Entity assetCategory
 """"""""""""""""""""""
 .. automodule:: db.models.asset_category
    :members:
-   
+
 Entity extension
 """""""""""""""""
 .. automodule:: db.models.extension
@@ -42,7 +42,7 @@ Entity extensionSoftware
 """"""""""""""""""""""""""
 .. automodule:: db.models.extension_software
    :members:
-  
+
 Entity file
 """"""""""""
 .. automodule:: db.models.file
@@ -57,22 +57,22 @@ Entity shot
 """"""""""""
 .. automodule:: db.models.shot
    :members:
-   
+
 Entity software
 """"""""""""""""
 .. automodule:: db.models.software
    :members:
-   
+
 Entity subtask
 """"""""""""""
 .. automodule:: db.models.subtask
    :members:
-     
+
 Entity tagFile
 """""""""""""""
 .. automodule:: db.models.tag_file
    :members:
-   
+
 Entity task
 """"""""""""
 .. automodule:: db.models.task
@@ -82,14 +82,75 @@ Entity user
 """"""""""""
 .. automodule:: db.models.user
    :members:
-   
+
 Entity variant
 """""""""""""""
 .. automodule:: db.models.variant
    :members:
-   
 
-PackageBdd test
+
+PackageBdd UnitTest
 ===================
 .. automodule:: db.tests
    :members:
+
+UnitTest asset
+"""""""""""""""
+.. automodule:: db.tests.asset
+   :members:
+
+UnitTest assetCategory
+""""""""""""""""""""""
+.. automodule:: db.tests.asset_category
+   :members:
+
+UnitTest extension
+"""""""""""""""""""
+.. automodule:: db.tests.extension
+   :members:
+
+UnitTest file
+""""""""""""""
+.. automodule:: db.tests.file
+   :members:
+
+UnitTest project
+""""""""""""""""
+.. automodule:: db.tests.project
+   :members:
+
+UnitTest shot
+"""""""""""""
+.. automodule:: db.tests.shot
+   :members:
+
+UnitTest software
+"""""""""""""""""
+.. automodule:: db.tests.software
+   :members:
+
+UnitTest subtask
+"""""""""""""""""
+.. automodule:: db.tests.subtask
+   :members:
+
+UnitTest tagFile
+""""""""""""""""""
+.. automodule:: db.tests.tagfile
+   :members:
+
+UnitTest task
+""""""""""""""
+.. automodule:: db.tests.task
+   :members:
+
+UnitTest user
+""""""""""""""
+.. automodule:: db.tests.user
+   :members:
+
+UnitTest variant
+""""""""""""""""""
+.. automodule:: db.tests.variant
+   :members:
+

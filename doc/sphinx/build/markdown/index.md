@@ -1215,7 +1215,7 @@ Register task in db
     * **name** (*str*) – name
 
 
-    * **progress** (*str*) – progress (opt)
+    * **progress** (*float*) – progress (opt)
 
 
     * **asset** (*assetObject*) – asset (opt)
@@ -1570,4 +1570,770 @@ Update variant by id
     (variantObject, str)
 
 
-# PackageBdd test
+# PackageBdd UnitTest
+
+## UnitTest asset
+
+
+### class db.tests.asset.TestAsset(methodName='runTest')
+TestAsset unitTest class.
+
+
+#### assert_value(asset_test)
+Assert with test value
+:param assetTestObject asset_test:
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_asset(dbo)
+Test create_asset, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+fill tables with test datas
+:return:
+
+
+#### find_asset(dbo)
+Test find_asset, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_asset(dbo)
+Test remove_asset, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_asset(dbo)
+Test update_asset, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest assetCategory
+
+
+### class db.tests.asset_category.TestAssetCategory(methodName='runTest')
+TestAssetCategory unitTest class.
+
+
+#### assert_value(asset_category_test)
+Assert with test value
+:param assetCategoryTestObject asset_category_test:
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_asset_category(dbo)
+Test create_asset_category, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+fill tables with test datas
+:return:
+
+
+#### find_asset_category(dbo)
+test find asset_category, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_asset_category(dbo)
+Test remove_asset_category, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_asset_category(dbo)
+Test update_asset_category, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest extension
+
+
+### class db.tests.extension.TestExtension(methodName='runTest')
+TestExtension unitTest class.
+
+
+#### assert_value(extension_test)
+Asserts with test value
+:param extensionObject extension_test: extension_test
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_extension(dbo)
+Test create_extension, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+fill tables with test datas
+:return:
+
+
+#### find_extension(dbo)
+test find extension, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_extension(dbo)
+Test remove_extension, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_extension(dbo)
+Test update_extension, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest file
+
+
+### class db.tests.file.TestFile(methodName='runTest')
+TestFile unitTest class.
+
+
+#### assert_value(file_test)
+Asserts with test value
+:param fileObject file_test: file_test
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_file(dbo)
+Test create_file, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas(dbo)
+fill tables with test datas
+:return:
+
+
+#### find_file(dbo)
+test find file, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_file(dbo)
+Test remove_file, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_file(dbo)
+Test update_file, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest project
+
+
+### class db.tests.project.TestProject(methodName='runTest')
+TestProject unitTest class.
+
+
+#### assert_value(project_test)
+Assert with test value
+:param projectTestObject project_test:
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo : db
+:return:
+
+
+#### create_project(dbo)
+Test create_project, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+fill tables with test data
+:return:
+
+
+#### find_project(dbo)
+Test find_project, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo : db
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_project(dbo)
+Test remove_project, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_project(dbo)
+Test update_project, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest shot
+
+
+### class db.tests.shot.TestShot(methodName='runTest')
+TestShot UnitTest class.
+
+
+#### assert_value(shot_test)
+Asserts with test value
+:param shotObject shot_test: shot_test
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_shot(dbo)
+Test create_shot, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+Fill tables with test data
+:return:
+
+
+#### find_shot(dbo)
+Test find_shot, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_shot(dbo)
+Test remove_shot, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_shot(dbo)
+Test update_shot, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest software
+
+
+### class db.tests.software.TestSoftware(methodName='runTest')
+TestSoftware unitTest class.
+
+
+#### assert_value(software_test)
+Asserts with test value
+:param softwareObject software_test: software_test
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_software(dbo)
+Test create_software, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+fill tables with test datas
+:return:
+
+
+#### find_software(dbo)
+test find software, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_software(dbo)
+Test remove_software, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_software(dbo)
+Test update_software, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest subtask
+
+
+### class db.tests.subtask.TestSubtask(methodName='runTest')
+TestSubTask unitTest class.
+
+
+#### assert_value(subtask_test)
+Asserts with test value
+:param subtaskObject subtask_test: subtask_test
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_subtask(dbo)
+Test create_subtask, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas(dbo)
+Fill tables with test data
+:param dbObject dbo: dbo
+:return:
+
+
+#### find_subtask(dbo)
+test find_subtask, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_subtask(dbo)
+Test remove_subtask, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_subtask(dbo)
+Test update_subtask, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest tagFile
+
+
+### class db.tests.tagfile.TestTagFile(methodName='runTest')
+TestTagFile UnitTest class.
+
+
+#### assert_value(tag_file_test)
+Asserts with test value
+:param tagFileObject tag_file_test: task_test
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_tag_file(dbo)
+Test create_tag_file, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+Fill tables with test data
+:param dbObject dbo: dbo
+:return:
+
+
+#### find_tag_file(dbo)
+test find tag_file, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_tag_file(dbo)
+Test remove_tag_file, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_tag_file(dbo)
+Test update_tag_file, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest task
+
+
+### class db.tests.task.TestTask(methodName='runTest')
+TestTask UnitTest class.
+
+
+#### assert_value(task_test)
+Asserts with test value
+:param taskObject task_test: task_test
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_task(dbo)
+Test create_task, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas(dbo)
+Fill tables with test data
+:param dbObject dbo: dbo
+:return:
+
+
+#### find_task(dbo)
+test find_task, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_task(dbo)
+Test remove_task, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_task(dbo)
+Test update_task, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest user
+
+
+### class db.tests.user.TestUser(methodName='runTest')
+Test shot class
+
+
+#### assert_value(user_test)
+Asserts with test value
+:param user_test: user object
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_user(dbo)
+Test create_user, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+Fill tables with test data
+:return:
+
+
+#### find_user(dbo)
+test find user, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### remove_user(dbo)
+Test remove_user, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_user(dbo)
+Test update_user, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+## UnitTest variant
+
+
+### class db.tests.variant.TestVariant(methodName='runTest')
+TestVariant unitTest class.
+
+
+#### assert_value(variant_test)
+Assert with test value
+:param variantTestObject variant_test:
+:return:
+
+
+#### static clear_structure(dbo)
+Drop each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### create_variant(dbo)
+Test create_variant, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### fill_datas()
+fill tables with test datas
+:return:
+
+
+#### find_variant(dbo)
+Test find_variant, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### static generate_structure(dbo)
+Create each needed entities tables
+:param dbObject dbo: dbo
+:return:
+
+
+#### main()
+Entry point
+:return:
+
+
+#### remove_variant(dbo)
+Test remove_variant, CRUD method
+:param dbObject dbo: dbo
+:return:
+
+
+#### reset(dbo)
+Execute: clear, generate_structure and fill_data
+:param dbObject dbo: dbo
+:return:
+
+
+#### update_variant(dbo)
+Test update_variant, CRUD method
+:param dbObject dbo: dbo
+:return:

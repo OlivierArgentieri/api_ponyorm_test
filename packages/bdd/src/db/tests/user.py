@@ -38,7 +38,7 @@ class TestUser(unittest.TestCase):
     def reset(self, dbo):
         """
         Execute: clear, generate_structure and fill_data
-       :param dbObject dbo: dbo
+        :param dbObject dbo: dbo
         :return:
         """
         TestUser.clear_structure(dbo)
