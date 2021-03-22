@@ -39,3 +39,6 @@ jobs:
         pip install flake8
         pip install pytest
         pip install -r ./requirements.txt
+    - name: run python command
+      run: |
+        python ./packages/bdd/src/bdd.py
