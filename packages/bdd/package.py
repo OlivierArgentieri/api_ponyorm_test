@@ -10,7 +10,7 @@ description = \
 
 requires = [
     "python-3.7.7",
-    "pony",
+    "pony-0.7.14",
     "psycopg2",
     "PyYAML-5.4.1",
     "os",
